@@ -10,7 +10,7 @@ const routeGuard = require('../middleware/route-guard');
 const router = new Router();
 
 router.get('/checkToken', routeGuard, (req, res, next) => {
-  const token = req.headers['x-access-token'];
+  const token = req.headers['access-token'];
   if (token) {
     res.status(200);
     res.json({ type: 'success', data: { foo: 'bar' } });
