@@ -1,6 +1,7 @@
 # personal-tourguide-app
 
-Description...
+basic page with routed modals & jsonwebtoken auth.
+.env included for testing purposes
 
 ## Server
 
