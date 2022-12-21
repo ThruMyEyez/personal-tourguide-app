@@ -1,9 +1,9 @@
 const Main = () => {
   return (
-    <>
-      <h2 style={{ backgroundColor: "cadetblue" }}>main page</h2>
+    <div style={{ backgroundColor: "cadetblue" }} className="text-gray-500">
+      <h2>main page</h2>
       ______
-    </>
+    </div>
   );
 };
 

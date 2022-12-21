@@ -13,7 +13,7 @@ const logger = require('morgan');
 const serveFavicon = require('serve-favicon');
 const mongoose = require('mongoose');
 /* middleware folder */
-const authenticationDeserializer = require('./middleware/authentication-deserializer.js');
+//const authenticationDeserializer = require('./middleware/authentication-deserializer.js');
 /* routes folder */
 const baseRouter = require('./routes/base');
 const authenticationRouter = require('./routes/authentication');
@@ -36,7 +36,6 @@ app.use(express.json()); // rest req.body with json
 
 app.use(
   expressSession({
-    // great chances that this gets obsolete
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
@@ -56,7 +55,7 @@ app.use(
 );
 
 /* init custom */
-app.use(authenticationDeserializer);
+//app.use(authenticationDeserializer);
 
 /* Routes path config */
 app.use('/', baseRouter);

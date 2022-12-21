@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import { createNewUser } from "../services/auth";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-const SignUp = props => {
+import { useNavigate } from "react-router-dom";
+import { signup ,storeAuthToken } from "../services/authentication";
+
+const SignUp = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,10 +18,13 @@ const SignUp = props => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    //If Registration success => Redirect to Login page.
-    createNewUser(formData)
-      .then(res => navigate("/login"))
+    // => provide client also a token
+    signup(formData)
+      .then(res => {
+        console.log(res)
+        storeAuthToken(res.authToken);
+        navigate("/login");
+      })
       .catch(error => console.log(error.msg));
   };
 

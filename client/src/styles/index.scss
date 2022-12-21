@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 //Coloring
 $base-color: #00aaff;
 $tone-color: #aaa;
@@ -61,5 +65,11 @@ code {
     border: 1px solid black;
     background-color: white;
     border-radius: 5px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-500 text-white font-bold py-2 my-4 px-4 rounded;
   }
 }

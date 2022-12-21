@@ -24,6 +24,7 @@ const Navbar = () => {
           </li>
         </ul>
         <div>
+          {/* set the the background state for the modals */}
           <Link to="/signup" state={{ background: location }}>
             Sign up
           </Link>

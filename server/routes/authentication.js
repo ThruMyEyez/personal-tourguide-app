@@ -1,85 +1,76 @@
 'use strict';
 
-const { Router } = require('express');
-
+const express = require('express');
+const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const User = require('./../models/user');
 const jwt = require('jsonwebtoken');
-const routeGuard = require('../middleware/route-guard');
+const { routeGuard } = require('../middleware/route-guard');
 
-const router = new Router();
-
-router.get('/checkToken', routeGuard, (req, res, next) => {
-  const token = req.headers['access-token'];
-  if (token) {
-    res.status(200);
-    res.json({ type: 'success', data: { foo: 'bar' } });
-  } else {
-    res.status(401);
-    res.json({ type: 'error', error: { message: 'NO_AuthToken' } });
-  }
-});
-
-router.post('/sign-up', (req, res, next) => {
+//? Registration route
+router.post('/signup', (req, res, next) => {
   const { name, email, password } = req.body;
-  bcryptjs
-    .hash(password, 10)
-    .then((hash) => {
-      return User.create({
-        name,
-        email,
-        passwordHashAndSalt: hash
-      });
-    })
-    .then((user) => {
-      req.session.userId = user._id;
-      res.json({ user });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
-
-router.post('/sign-in', (req, res, next) => {
-  let user;
-  const { email, password } = req.body;
+  console.log(name, email, password);
 
   User.findOne({ email })
-    .then((document) => {
-      if (!document) {
-        return Promise.reject(new Error("There's no user with that email."));
-      } else {
-        user = document;
-        return bcryptjs.compare(password, user.passwordHashAndSalt);
+    .then((user) => {
+      if (user) {
+        res.status(400).json({ message: 'This user already exist' });
       }
+      const salt = bcryptjs.genSaltSync(10);
+      const passwordHashAndSalt = bcryptjs.hashSync(password, salt);
+      return User.create({ email, passwordHashAndSalt, name });
     })
-    .then((result) => {
-      if (result) {
-        console.log('result: ', result, user);
-        //req.session.userId = user._id;
-        const token = jwt.sign(
-          { id: user._id, name: user.name, email: user.email },
-          process.env.JWT_SECRET,
-          { algorithm: 'HS256', expiresIn: '4h' }
-        );
-        res.json({ authToken: token });
-      } else {
-        return Promise.reject(new Error('Wrong password.'));
-      }
+    .then((user) => {
+      const { _id, email, name } = user;
+      const payload = { _id, email, name };
+      const authToken = jwt.sign(payload, process.env.JWT_SECRET, {
+        algorithm: 'HS256',
+        expiresIn: '24h'
+      });
+      console.log(authToken);
+      res.json({ authToken: authToken });
     })
-    .catch((error) => {
-      next(error);
-    });
+    .catch((error) => next(error));
 });
 
-router.post('/sign-out', (req, res, next) => {
-  req.session.destroy();
+//? Login route
+router.post('/login', (req, res, next) => {
+  const { email, password, stayLoggedInFlag } = req.body; // provide user a boolean to stay logged in
+
+  User.findOne({ email })
+    .then((user) => {
+      if (!user) {
+        res.status(401).json({ message: 'invalid credentials.' });
+
+      }
+      const passwordCorrect = bcryptjs.compareSync(
+        password,
+        user.passwordHashAndSalt
+      );
+      if (passwordCorrect) {
+        const { _id, email, name } = user;
+        const payload = { _id, email, name };
+        const authToken = jwt.sign(payload, process.env.JWT_SECRET, {
+          algorithm: 'HS256',
+          expiresIn: 60 * 60 * 24
+        });
+        console.log(authToken);
+        res.json({ authToken: authToken });
+      } else {
+        res.status(401).json({ message: 'invalid credentials.' });
+      }
+    })
+    .catch((error) => next(error));
+});
+
+router.post('/logout', (req, res, next) => {
   res.json({});
 });
 
-router.get('/me', routeGuard, (req, res, next) => {
-  console.log('req.headerAuth: ', req.headers['x-access-token']);
-  res.json({ user: req.user });
+router.get('/verify', routeGuard, (req, res, next) => {
+  console.log('payload: ', req.payload);
+  res.json(req.payload);
 });
 
 module.exports = router;

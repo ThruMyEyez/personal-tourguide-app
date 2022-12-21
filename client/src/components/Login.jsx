@@ -1,49 +1,36 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "../services/auth";
-import { LoginContext } from "../context/Context";
+import { login, storeAuthToken, verify } from "../services/authentication";
 
 const Login = props => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
-
   const [formData, setFormData] = useState({
     /*  name: "", */
     email: "",
     password: "",
+    stayLoggedInFlag: false,
   });
   const navigate = useNavigate();
 
   const handleInput = e => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log(isLoggedIn);
   };
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    // If login success => redirect to Main page.
-    signIn(formData)
+    login(formData)
       .then(res => {
-        console.log(res.authToken);
-        localStorage.setItem("AuthToken", res.authToken);
-        setIsLoggedIn(true);
+        storeAuthToken(res.authToken);
         navigate("/dashboard");
-        /*if (res.authToken) {
-        setIsLoggedIn(false);
-        //show error
-      } else {
-      }*/
       })
-      .catch(error => console.log(error.msg));
+      .catch(error => console.log(error));
   };
 
   return (
     <div className="modalContainer">
-      <div className="Modal">
+      <div className="container mx-auto">
         <h1>Login</h1>
-        <button onClick={() => setIsLoggedIn(!isLoggedIn)}>test login useContext</button>
-        {(isLoggedIn && <h3>you are logged in </h3>) || <h3>not logged in</h3>}
-        <button onClick={() => navigate(-1)}>Close / Schließen</button>
+        <button onClick={() => navigate("/")}>X close X</button>
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="login-name">Email</label>
           <input id="login-name" type="email" name="email" value={formData.email} onChange={handleInput} />
