@@ -1,0 +1,17 @@
+.preview {
+    z-index: 1000;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    right: -100%;
+  }
+  
+  .preview--active {
+    right: 0;
+  }
+     
+  @media only screen and (min-width: 768px) {
+    .preview {
+      top: auto;
+    }
+  }
