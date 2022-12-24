@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { TourMapProviderWrapper } from "../context/tourmapping"
-import PreviewPlace from "../components/TourMap/PreviewPlace";
-import TourMap from "../components/TourMap/TourMap";
 import  Tour  from "../components/Tour";
 
 const PublicTours = () => {
