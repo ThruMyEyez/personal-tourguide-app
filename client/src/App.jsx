@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import "./styles/App.css";
 import Main from "./pages/Main";
 import Navbar from "./components/Navbar";
 import PublicTours from "./pages/PublicTours";
@@ -23,7 +22,7 @@ const App = () => {
     <div className="App">
       <Routes location={background || location}>
         <Route path="/" element={<Navbar />}>
-          <Route path="/main" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/public-tours" element={<PublicTours />} />
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />

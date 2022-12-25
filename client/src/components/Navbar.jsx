@@ -10,10 +10,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav>
+      <nav className="bg-clip-pink-violet">
         <ul>
           <li>
-            <Link to="/main">Main</Link>
+            <Link to="/">Main</Link>
           </li>
           <li>
             <Link to="/public-tours">Öffentliche Führungen</Link>
