@@ -17,7 +17,8 @@ const schema = new mongoose.Schema({
     unique: true
   },
   passwordHashAndSalt: {
-    type: String
+    type: String,
+    required: true
   }
 });
 

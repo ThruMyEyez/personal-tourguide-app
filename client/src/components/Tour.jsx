@@ -1,25 +1,27 @@
 import { useState, useContext } from "react";
 import { TourMapContext } from "../context/tourmapping";
+
 import PreviewPlace from "../components/TourMap/PreviewPlace";
 import TourMap from "../components/TourMap/TourMap";
 
-
 const Tour = () => {
-  const [startPlace, setStartPlace ] = useState([52.51, 13.38]) // Berlin coordinates // can be removed later
-  const {  showPreview, closePreview, places, previewPlace, setNewPreviewPlace, togglePreview } = useContext(TourMapContext);
+  const [startPlace, setStartPlace] = useState([52.51, 13.38]); // Berlin coordinates // can be removed later
+  const { places, previewPlace } = useContext(TourMapContext);
 
   return (
     <div>
-      <h2>Berlin Tour #1 -tour title-</h2>
+      <h2> Berlin/City Tour Title</h2>
       <ul className="flex-col ">
-        {places.map(({title}) => <li key={title}>Tour Station: {title} </li>)}
+        {places.map(({ title }) => (
+          <li key={title}>Tour Station: {title} </li>
+        ))}
       </ul>
       <div className="flex">
-        <TourMap startPlace={ startPlace } places={places} showPreview={showPreview} previewPlace={previewPlace} togglePreview={togglePreview} setNewPreviewPlace={setNewPreviewPlace} />
-        <PreviewPlace closePreview={closePreview} showPreview={showPreview} place={previewPlace} />
+        <TourMap startPlace={startPlace} />
+        <PreviewPlace place={previewPlace} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Tour
+export default Tour;

@@ -8,14 +8,16 @@ import IndividualProgram from "./pages/IndividualProgram";
 import Calender from "./pages/Calender";
 import Dashboard from "./pages/Dashboard";
 
-import Login from "./components/Login";
-import PrivRoutes from "./components/PrivRoute";
-import SignUp from "./components/SignUp";
+import Login from "./components/AuthComponents/Login";
+import SignUp from "./components/AuthComponents/SignUp";
+import IsPrivate from "./components/AuthComponents/IsPrivate";
+import IsAnon from "./components/AuthComponents/IsAnon";
 
 const App = () => {
-  /* helper vars for modal route logic */
   const location = useLocation();
+  // initialize route as location background backdrop, default location.state: null
   const background = location.state && location.state.background;
+  console.log(location);
 
   return (
     <div className="App">
@@ -30,9 +32,15 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
 
-          <Route element={<PrivRoutes />}>
-            <Route path="/dashboard" element={<Dashboard />} exact />
-          </Route>
+          <Route
+            path="/dashboard"
+            element={
+              <IsPrivate>
+                <Dashboard />
+              </IsPrivate>
+            }
+            exact
+          />
         </Route>
       </Routes>
       {/* if we have a background object when we click on the modal routes =>
@@ -40,8 +48,22 @@ const App = () => {
          then the pages by <Outlet /> will be shown  */}
       {background && (
         <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/signup"
+            element={
+              <IsAnon>
+                <SignUp />
+              </IsAnon>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <IsAnon>
+                <Login />
+              </IsAnon>
+            }
+          />
         </Routes>
       )}
     </div>

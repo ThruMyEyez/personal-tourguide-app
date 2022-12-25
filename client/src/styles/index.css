@@ -26,28 +26,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.modalContainer {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  background-color: #42494f66;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/*
+.modal-container {
 }
-
-.Modal {
-  width: auto;
-  height: auto;
-  padding: 2rem;
-  border: 1px solid black;
-  background-color: white;
-  border-radius: 5px;
-}
+ */
 
 @layer components {
+  .error-message {
+    @apply bg-gradient-to-tr from-yellow-300 to-red-200 rounded py-1 px-6 my-2 text-base text-yellow-800 inline-flex justify-center items-center w-8/12;
+  }
+  .fullscreen-modal-container {
+    @apply w-full h-full absolute top-0 bg-gray-900/50 backdrop-blur-sm flex justify-center items-center;
+  }
   .btn-primary {
     @apply bg-blue-500 text-white font-bold py-2 my-4 px-4 rounded;
+  }
+  .bg-clip-pink-violet { /* a test */
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500;
   }
 }

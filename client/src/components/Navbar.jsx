@@ -1,8 +1,13 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/authentication";
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
   const location = useLocation();
+
   return (
     <>
       <nav>
@@ -24,14 +29,24 @@ const Navbar = () => {
           </li>
         </ul>
         <div>
-          {/* set the the background state for the modals */}
-          <Link to="/signup" state={{ background: location }}>
-            Sign up
-          </Link>
-          <Link to="/login" state={{ background: location }}>
-            Log in
-          </Link>
-          {/*TODO: If user logged in hide auth buttons and show Profile/Dashboard && and a nested Logout */}
+          {isLoggedIn && (
+            <>
+              <span>{user && user.name}</span>
+              <Link to="/dashboard">Dashboard</Link>
+              <button onClick={logOutUser}>Log Out</button>
+            </>
+          )}
+          {!isLoggedIn && (
+            <>
+              {/* set the background state for the modals with current router location as background backdrop */}
+              <Link to="/signup" state={{ background: location }}>
+                Sign up
+              </Link>
+              <Link to="/login" state={{ background: location }}>
+                Log in
+              </Link>
+            </>
+          )}
         </div>
       </nav>
       <Outlet />
