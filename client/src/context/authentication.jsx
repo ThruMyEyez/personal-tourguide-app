@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-//import { useJwt } from "react-jwt";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { verify } from "../services/authentication";
 
 const AuthContext = createContext();
@@ -73,11 +73,13 @@ const AuthProviderWrapper = ({ children }) => {
   //}, []);
 
   return (
-    <AuthContext.Provider
-      value={{ isLoggedIn, isLoading, user, authenticateUser, storeToken, logOutUser }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
+      <AuthContext.Provider
+        value={{ isLoggedIn, isLoading, user, authenticateUser, storeToken, logOutUser }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </GoogleOAuthProvider>
   );
 };
 

@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../services/authentication";
+import { login, loginGoogle } from "../../services/authentication";
 import { AuthContext } from "../../context/authentication";
+import GoogleAuth from "./GoogleAuth";
 
 const Login = (props) => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -34,12 +35,22 @@ const Login = (props) => {
       });
   };
 
+  const onGoogleLoginSuccess = (response) => {
+    loginGoogle(response.credential).then((response) => {
+      console.log(response.data.authToken);
+      storeToken(response.data.authToken);
+      authenticateUser();
+      navigate("/dashboard");
+    });
+  };
+
   return (
     <div className="fullscreen-modal-container">
       <div className="container mx-auto">
         <h1>Login</h1>
 
         <button onClick={() => navigate("/")}>X close X</button>
+        <GoogleAuth authSuccessCallback={onGoogleLoginSuccess} />
 
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="login-email">Email:</label>

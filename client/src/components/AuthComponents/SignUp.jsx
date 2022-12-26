@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authentication";
-import { signup } from "../../services/authentication";
+import { signup, signupGoogle } from "../../services/authentication";
+import GoogleAuth from "./GoogleAuth";
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -34,25 +35,21 @@ const SignUp = () => {
       });
   };
 
+  const onGoogleSignupSuccess = (response) => {
+    signupGoogle(response.credential).then((response) => {
+      storeToken(response.data.authToken);
+      authenticateUser();
+      navigate("/");
+    });
+  };
+
   return (
     <div className="fullscreen-modal-container">
       <div className="container mx-auto">
         <h6 className="text-blueGray-500 text-sm font-bold">Sign up with</h6>
 
         <button onClick={() => navigate(-1)}>X</button>
-        <div className="text-center">
-          <button
-            className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-            type="button"
-          >
-            <img
-              alt="Google Icon"
-              className="w-5 mr-1"
-              src={require("../../assets/google.svg").default}
-            />
-            Google
-          </button>
-        </div>
+        <GoogleAuth authSuccessCallback={onGoogleSignupSuccess} />
         <hr className="mt-6 border-b-1 border-blueGray-300" />
 
         <form onSubmit={handleFormSubmit}>

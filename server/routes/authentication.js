@@ -4,10 +4,123 @@ const express = require('express');
 const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const User = require('./../models/user');
-const jwt = require('jsonwebtoken');
 const { routeGuard } = require('../middleware/route-guard');
+const { signNewJWT, verifyGoogleToken } = require('../middleware/auth-utils');
+
+//Login by Google account
+router.post('/google/login', (req, res, next) => {
+  if (!req.body.googleAccessToken) {
+    res.status(401).json({ message: 'Could not get Google Auth Token' });
+  }
+  let payload;
+  verifyGoogleToken(req.body.googleAccessToken)
+    .then((response) => {
+      const { email, email_verified, name, picture, given_name, family_name } =
+        response.payload;
+      payload = {
+        email,
+        name,
+        profilePicture: picture,
+        email_verified,
+        firstName: given_name,
+        lastName: family_name
+      };
+      return User.findOne({ email });
+    })
+    .then((user) => {
+      if (!user) {
+        return User.create(payload);
+      }
+
+      const { _id, email, name, firstName, lastName, profilePicture, role } =
+        user;
+      const authToken = signNewJWT({
+        _id,
+        email,
+        name,
+        firstName,
+        lastName,
+        profilePicture,
+        role
+      });
+      res.status(201).json({
+        authToken: authToken,
+        message: 'Login with google successful'
+      });
+    })
+    .then((newUser) => {
+      const { _id, email, name, firstName, lastName, profilePicture, role } =
+        newUser;
+      const authToken = signNewJWT({
+        _id,
+        email,
+        name,
+        firstName,
+        lastName,
+        profilePicture,
+        role
+      });
+      console.log(authToken);
+      res.status(201).json({
+        authToken: authToken,
+        message: 'signing up with google successful'
+      });
+    });
+});
+
+//SignUp by Google account
+router.post('/google/signup', (req, res, next) => {
+  if (!req.body.googleAccessToken) {
+    res.status(401).json({ message: 'Could not get Google Auth Token' });
+  }
+  let payload;
+  verifyGoogleToken(req.body.googleAccessToken)
+    .then((response) => {
+      const { email, email_verified, name, picture, given_name, family_name } =
+        response.payload;
+      payload = {
+        email,
+        name,
+        profilePicture: picture,
+        email_verified,
+        firstName: given_name,
+        lastName: family_name
+      };
+      return User.findOne({ email });
+    })
+    .then((user) => {
+      if (user) {
+        res.status(401).json({ message: 'User already exist' });
+      }
+      return User.create(payload);
+    })
+    .then((user) => {
+      const { _id, email, name, firstName, lastName, profilePicture, role } =
+        user;
+      const authToken = signNewJWT({
+        _id,
+        email,
+        name,
+        firstName,
+        lastName,
+        profilePicture,
+        role
+      });
+      console.log(authToken);
+      res.status(201).json({
+        authToken: authToken,
+        message: 'signing up with google successful'
+      });
+    })
+    .catch((error) => {
+      error.message =
+        'An error occurred while registering new user with google';
+      next(error);
+    });
+});
 
 router.post('/signup', (req, res, next) => {
+  //SignUp by Mail
   const { name, email, password } = req.body;
 
   if (email === '' || password === '' || name === '') {
@@ -46,12 +159,12 @@ router.post('/signup', (req, res, next) => {
     .then((user) => {
       const { _id, email, name } = user;
       const payload = { _id, email, name };
-      const authToken = jwt.sign(payload, process.env.JWT_SECRET, {
-        algorithm: 'HS256',
-        expiresIn: '24h'
-      });
+      const authToken = signNewJWT(payload);
       console.log(authToken);
-      res.status(200).json({ authToken: authToken });
+      res.status(200).json({
+        authToken: authToken,
+        message: 'signing up with email successful'
+      });
     })
     .catch((error) => next(error));
 });
@@ -77,11 +190,11 @@ router.post('/login', (req, res, next) => {
       if (passwordCorrect) {
         const { _id, email, name } = user;
         const payload = { _id, email, name };
-        const authToken = jwt.sign(payload, process.env.JWT_SECRET, {
-          algorithm: 'HS256',
-          expiresIn: 60 * 60 * 24
-        });
-        res.status(200).json({ authToken: authToken });
+        const authToken = signNewJWT(payload);
+        console.log('TRUEE', authToken);
+        res
+          .status(200)
+          .json({ authToken: authToken, message: 'Login successful' });
       } else {
         res.status(401).json({ message: 'invalid credentials.' });
       }

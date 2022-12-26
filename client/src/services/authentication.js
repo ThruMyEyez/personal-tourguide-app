@@ -8,3 +8,9 @@ export const verify = (token) =>
   api.get("/authentication/verify", { headers: { Authorization: `Bearer ${token}` } });
 
 export const passwordReset = (email) => api.post("/authentication/password-reset", { email });
+
+export const signupGoogle = (googleToken) =>
+  api.post("/authentication/google/signup", { googleAccessToken: googleToken });
+
+export const loginGoogle = (googleToken) =>
+  api.post("/authentication/google/login", { googleAccessToken: googleToken });

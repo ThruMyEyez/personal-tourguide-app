@@ -17,9 +17,14 @@ const schema = new mongoose.Schema({
     unique: true
   },
   passwordHashAndSalt: {
-    type: String,
-    required: true
-  }
+    type: String
+  },
+  firstName: { type: String },
+  lastName: { type: String },
+  profilePicture: { type: String },
+  //role: { type: [String], default: ['user'] },
+  role: { type: String, default: 'user' },
+  email_verified: { type: Boolean, default: false }
 });
 
 const User = mongoose.model('User', schema);
