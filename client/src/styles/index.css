@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply max-h-screen antialiased;
+  }
+
+  body {
+    @apply p-0 m-0;
+  }
+}
 
 * {
   box-sizing: border-box;
   font-size: 20px;
 }
+
 
 html,
 body {
