@@ -10,22 +10,21 @@ const { signNewJWT, verifyGoogleToken } = require('../middleware/auth-utils');
 //Login by Google account
 router.post('/google/login', (req, res, next) => {
   if (!req.body.googleAccessToken) {
-    res.status(401).json({ message: 'Could not get Google Auth Token' });
+    res.status(203).json({ message: 'Could not recive Google Auth Token' });
   }
   let payload;
   verifyGoogleToken(req.body.googleAccessToken)
     .then((response) => {
-      const { email, email_verified, name, picture, given_name, family_name } =
-        response.payload;
+      const { payload: data } = response;
       payload = {
-        email,
-        name,
-        profilePicture: picture,
-        email_verified,
-        firstName: given_name,
-        lastName: family_name
+        email: data?.email,
+        name: data?.name,
+        profilePicture: data?.picture,
+        email_verified: data?.email_verified,
+        firstName: data?.given_name,
+        lastName: data?.family_name
       };
-      return User.findOne({ email });
+      return User.findOne({ email: payload.email });
     })
     .then((user) => {
       if (!user) {
@@ -65,6 +64,9 @@ router.post('/google/login', (req, res, next) => {
         authToken: authToken,
         message: 'signing up with google successful'
       });
+    })
+    .catch((error) => {
+      next(error);
     });
 });
 
