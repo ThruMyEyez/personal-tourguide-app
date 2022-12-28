@@ -4,8 +4,16 @@ const express = require('express');
 const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const User = require('./../models/user');
+
+const SecureToken = require('../models/secureToken');
+
 const { routeGuard } = require('../middleware/route-guard');
-const { signNewJWT, verifyGoogleToken } = require('../middleware/auth-utils');
+const {
+  signNewJWT,
+  verifyGoogleToken,
+  createSecureToken
+} = require('../middleware/auth-utils');
+const { sendEmail } = require('../utils/sendEmail');
 
 //Login by Google account
 router.post('/google/login', (req, res, next) => {
@@ -162,7 +170,6 @@ router.post('/signup', (req, res, next) => {
       const { _id, email, name } = user;
       const payload = { _id, email, name };
       const authToken = signNewJWT(payload);
-      console.log(authToken);
       res.status(200).json({
         authToken: authToken,
         message: 'signing up with email successful'
@@ -209,16 +216,85 @@ router.get('/verify', routeGuard, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
-//ToDo
+//get PW reset-url Email route
 router.post('/password-reset', (req, res, next) => {
-  const { email } = req.body;
-  User.findOne({ email }).then((user) => {
-    if (!user) {
+  let user;
+  User.findOne({ email: req.body.email })
+    .then((foundUser) => {
+      if (!foundUser) {
+        res
+          .status(409)
+          .json({ message: 'User with with this email does not exist!' });
+      }
+      user = foundUser;
+      return createSecureToken(user._id, 1800);
+    })
+    .then((newSecureToken) => {
+      const resetUrl = `http://localhost:3000/lost-password/${user.id}/${newSecureToken.token}`;
+      sendEmail(req.body.email, 'password reset email', resetUrl);
       res
-        .status(409)
-        .json({ message: 'User with given email does not exist!' });
-    }
-  });
+        .status(200)
+        .json({ message: 'Email with Password reset-link sent successfully' });
+    })
+    .catch((error) => next(error));
+});
+
+router.get('/password-reset/:id/:token', (req, res, next) => {
+  User.findOne({ _id: req.params.id })
+    .then((user) => {
+      if (!user) return res.status(400).json({ message: 'invalid URL' });
+      return SecureToken.findOne({ userId: user._id, token: req.params.token });
+    })
+    .then((token) => {
+      if (!token)
+        return res.status(400).json({ message: 'Invalid reset SecureToken' });
+      res.status(200).json({ message: 'Valid reset SecureToken' });
+    })
+    .catch((error) => next(error));
+});
+
+router.put('/password-reset/:id/:token', (req, res, next) => {
+  const { password } = req.body;
+  const { id, token } = req.params;
+
+  //regex validate the password format
+  const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!passwordRegex.test(password)) {
+    res.status(400).json({
+      message:
+        'Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.'
+    });
+    return;
+  }
+
+  let passwordHashAndSalt;
+  User.findOne({ id })
+    .then((foundUser) => {
+      if (!foundUser)
+        return res.status(400).json({ message: 'Invalid user ID' });
+      return SecureToken.findOne({ userId: id, token });
+    })
+    .then((token) => {
+      if (!token)
+        return res
+          .status(400)
+          .json({ message: 'SecurityToken not found or expired' });
+
+      const salt = bcryptjs.genSaltSync(10);
+      passwordHashAndSalt = bcryptjs.hashSync(password, salt);
+      return User.findByIdAndUpdate(
+        id,
+        { passwordHashAndSalt, $inc: { __v: 1 } },
+        { new: true }
+      );
+    })
+    .then((user) => {
+      res
+        .status(200)
+        .json({ message: `Password change successfully for ${user.name}` });
+      return SecureToken.findOneAndRemove({ token: token });
+    })
+    .catch((error) => next(error));
 });
 
 module.exports = router;

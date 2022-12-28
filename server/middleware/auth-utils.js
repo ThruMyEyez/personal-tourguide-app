@@ -2,13 +2,10 @@
 
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
+const SecureToken = require('../models/secureToken');
+const crypto = require('crypto');
 
-const {
-  JWT_SECRET,
-  GOOGLE_OAUTH_CLIENT_ID,
-  GOOGLE_OAUTH_CLIENT_SECRET,
-  GOOGLE_OAUTH_REDIRECT_URL
-} = process.env;
+const { JWT_SECRET, GOOGLE_OAUTH_CLIENT_ID } = process.env;
 
 const signNewJWT = (payload) => {
   return jwt.sign(payload, JWT_SECRET, {
@@ -25,4 +22,18 @@ const verifyGoogleToken = (googleAccessToken) => {
   });
 };
 
-module.exports = { signNewJWT, verifyGoogleToken };
+const createSecureToken = (userId, expirationSeconds) => {
+  return SecureToken.findOne({ userId }).then((token) => {
+    if (!token) {
+      return SecureToken.create({
+        userId: userId,
+        token: crypto.randomBytes(32).toString('hex'),
+        //PW Reset Token expires after defined seconds.
+        expireAt: new Date(new Date().valueOf() + 1000 * expirationSeconds)
+      });
+    }
+    return token;
+  });
+};
+
+module.exports = { signNewJWT, verifyGoogleToken, createSecureToken };
