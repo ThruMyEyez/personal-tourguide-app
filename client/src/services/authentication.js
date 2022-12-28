@@ -9,6 +9,12 @@ export const verify = (token) =>
 
 export const passwordReset = (email) => api.post("/authentication/password-reset", { email });
 
+export const verifyPasswordReset = (id, token) =>
+  api.get(`/authentication/password-reset/${id}/${token}`);
+
+export const newPassword = (id, token, password) =>
+  api.put(`/authentication/password-reset/${id}/${token}`, { password });
+
 export const signupGoogle = (googleToken) =>
   api.post("/authentication/google/signup", { googleAccessToken: googleToken });
 

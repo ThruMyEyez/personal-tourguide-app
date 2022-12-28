@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { OnErrorAlert } from "../UI/Alerts";
 import { login, loginGoogle } from "../../services/authentication";
 import { AuthContext } from "../../context/authentication";
 import GoogleAuth from "./GoogleAuth";
 
-const Login = (props) => {
-  const [errorMessage, setErrorMessage] = useState(null);
+const Login = () => {
+  const [errorMsg, setErrorMsg] = useState(null);
   const [formData, setFormData] = useState({
     /*  name: "", */
     email: "",
@@ -31,7 +32,7 @@ const Login = (props) => {
         navigate("/dashboard");
       })
       .catch((error) => {
-        setErrorMessage(error.response.data.message);
+        setErrorMsg(error.response.data.message);
       });
   };
 
@@ -49,7 +50,7 @@ const Login = (props) => {
       <div className="container mx-auto">
         <h1>Login</h1>
 
-        <button onClick={() => navigate("/")}>X close X</button>
+        <button onClick={() => navigate(-1)}>X close X</button>
         <GoogleAuth authSuccessCallback={onGoogleLoginSuccess} />
 
         <form onSubmit={handleFormSubmit}>
@@ -72,10 +73,14 @@ const Login = (props) => {
           />
           <button>Login</button>
         </form>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMsg && <OnErrorAlert msg={errorMsg} />}
 
         <p>Don't have an account yet?</p>
         <Link to={"/signup"}>Sign Up</Link>
+        <p>Do you forgot your Passwort?</p>
+        <Link to={"/lost-password"} state={{ background: "/" }}>
+          pw resetMail
+        </Link>
       </div>
     </div>
   );

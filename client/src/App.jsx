@@ -7,10 +7,14 @@ import IndividualProgram from "./pages/IndividualProgram";
 import Calender from "./pages/Calender";
 import Dashboard from "./pages/Dashboard";
 
-import Login from "./components/AuthComponents/Login";
-import SignUp from "./components/AuthComponents/SignUp";
-import IsPrivate from "./components/AuthComponents/IsPrivate";
-import IsAnon from "./components/AuthComponents/IsAnon";
+import {
+  Login,
+  SignUp,
+  IsPrivate,
+  LostPassword,
+  SetPassword,
+  IsAnon,
+} from "./components/AuthComponents/";
 
 const App = () => {
   const location = useLocation();
@@ -27,10 +31,9 @@ const App = () => {
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />
           <Route path="/calender" element={<Calender />} />
-
+          <Route path="/lost-password/:id/:token" element={<SetPassword />} exact />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-
           <Route
             path="/dashboard"
             element={
@@ -60,6 +63,14 @@ const App = () => {
             element={
               <IsAnon>
                 <Login />
+              </IsAnon>
+            }
+          />
+          <Route
+            path="/lost-password"
+            element={
+              <IsAnon>
+                <LostPassword />
               </IsAnon>
             }
           />
