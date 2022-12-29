@@ -55,8 +55,7 @@ const TourMap = ({ startPlace }) => {
           eventHandlers={{ click: () => showPreview(place) }}
           icon={locationIcon}
         >
-          {" "}
-          <Tooltip>{place.title}</Tooltip>{" "}
+          <Tooltip>{place.title}</Tooltip>
         </Marker>
       ))}
       <Marker position={startPlace} icon={locationIcon}>

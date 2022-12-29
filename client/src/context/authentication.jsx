@@ -24,22 +24,22 @@ const AuthProviderWrapper = ({ children }) => {
         .then((response) => {
           //server verifies that JWT token is valid  ✅
           const user = response.data;
-          console.log("user: " + user);
+          console.log( user);
+          setUser(user);
           setIsLoggedIn(true);
           setIsLoading(false);
-          setUser(user);
         })
         .catch((error) => {
           // If the server sends an error response (invalid token) ❌
           setIsLoggedIn(false);
-          setIsLoading(false);
           setUser(null);
+          setIsLoading(false);
         });
     } else {
       // If token isn't available
+      setUser(null);
       setIsLoggedIn(false);
       setIsLoading(false);
-      setUser(null);
     }
   };
 

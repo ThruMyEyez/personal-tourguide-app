@@ -197,8 +197,14 @@ router.post('/login', (req, res, next) => {
       );
       !passwordCorrect &&
         res.status(401).json({ message: 'Password incorrect.' });
-      const { _id, email, name } = user;
-      const payload = { _id, email, name };
+      const payload = {
+        email: user?.email,
+        name: user?.name,
+        profilePicture: user?.profilePicture,
+        email_verified: user?.email_verified,
+        firstName: user?.firstName,
+        lastName: user?.lastName
+      };
       const authToken = signNewJWT(payload);
       res
         .status(200)

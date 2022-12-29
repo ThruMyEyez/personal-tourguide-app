@@ -1,7 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/authentication";
-import "./Navbar.scss";
 
 const Navbar = () => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -10,8 +9,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-clip-pink-violet">
-        <ul>
+      <nav className="flex justify-around w-full p-4 bg-clip-pink-violet">
+        <ul className="flex m-0 list-none gap-x-3">
           <li>
             <Link to="/">Main</Link>
           </li>
@@ -28,7 +27,7 @@ const Navbar = () => {
             <Link to="/calender">Kalender</Link>
           </li>
         </ul>
-        <div>
+        <div className="flex gap-x-1">
           {isLoggedIn && (
             <>
               <span>{user && user.name}</span>
