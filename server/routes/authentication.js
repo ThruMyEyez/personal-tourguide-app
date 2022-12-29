@@ -58,6 +58,7 @@ router.post('/google/login', (req, res, next) => {
     .then((newUser) => {
       const { _id, email, name, firstName, lastName, profilePicture, role } =
         newUser;
+      //If
       const authToken = signNewJWT({
         _id,
         email,
@@ -188,25 +189,20 @@ router.post('/login', (req, res, next) => {
 
   User.findOne({ email })
     .then((user) => {
-      if (!user) {
-        res.status(401).json({ message: 'invalid credentials.' });
-        return;
-      }
+      !user &&
+        res.status(401).json({ message: 'No user with given email found' });
       const passwordCorrect = bcryptjs.compareSync(
         password,
         user.passwordHashAndSalt
       );
-      if (passwordCorrect) {
-        const { _id, email, name } = user;
-        const payload = { _id, email, name };
-        const authToken = signNewJWT(payload);
-        console.log('TRUEE', authToken);
-        res
-          .status(200)
-          .json({ authToken: authToken, message: 'Login successful' });
-      } else {
-        res.status(401).json({ message: 'invalid credentials.' });
-      }
+      !passwordCorrect &&
+        res.status(401).json({ message: 'Password incorrect.' });
+      const { _id, email, name } = user;
+      const payload = { _id, email, name };
+      const authToken = signNewJWT(payload);
+      res
+        .status(200)
+        .json({ authToken: authToken, message: 'Login successful' });
     })
     .catch((error) => next(error));
 });
@@ -221,11 +217,10 @@ router.post('/password-reset', (req, res, next) => {
   let user;
   User.findOne({ email: req.body.email })
     .then((foundUser) => {
-      if (!foundUser) {
+      !foundUser &&
         res
           .status(409)
           .json({ message: 'User with with this email does not exist!' });
-      }
       user = foundUser;
       return createSecureToken(user._id, 1800);
     })

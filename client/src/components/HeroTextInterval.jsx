@@ -10,7 +10,7 @@ const HeroTextInterval = ({ title, strings }) => {
 
   return (
     <div className="flex flex-col items-center font-extrabold whitespace-pre sm:text-2xl">
-      <div className="bg-[url('../assets/topography.svg')] bg-cover">
+      <div className="bg-[url('../assets/topography.svg')] bg-cover text-center">
         <p className="text-md">{title}</p>
         {strings.map((string, idx) => {
           return (
