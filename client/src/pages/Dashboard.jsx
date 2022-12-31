@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
 import { IKContext, IKUpload } from "imagekitio-react";
+import Editor from "../components/Editor/Editor";
 
 const Dashboard = (props) => {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -21,8 +22,8 @@ const Dashboard = (props) => {
     <div className="flex">
       <DashSidebar />
       <div className="flex flex-col items-center w-full h-screen bg-slate-200">
-        <h2 className="p-3">Dashboard</h2>
-        <p>just a test</p>
+        <h1 className="p-3">Dashboard</h1>
+        <p>test & prototype</p>
         <p>{(isLoggedIn && `login: ${isLoggedIn}`) || `login: ${isLoggedIn}`}</p>
         {!isLoading && (
           <div>
@@ -50,6 +51,7 @@ const Dashboard = (props) => {
         >
           <IKUpload onSuccess={onFileUploadSuccess} onError={onFileUploadError} />
         </IKContext>
+        <Editor />
       </div>
     </div>
   );

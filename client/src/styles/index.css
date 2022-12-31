@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    box-sizing: border-box;
+    /*font-size: 16px;*/
+  }
   html {
     @apply max-h-screen antialiased;
   }
@@ -10,13 +14,33 @@
   body {
     @apply p-0 m-0;
   }
-  * {
-    box-sizing: border-box;
-    /*font-size: 16px;*/
+  h1 {
+    @apply mt-0 mb-2 text-4xl font-normal leading-normal;
+  }
+  h2 {
+    @apply mt-0 mb-2 text-3xl font-normal leading-normal;
+  }
+  h3 {
+    @apply mt-0 mb-2 text-2xl font-normal leading-normal;
+  }
+  h4 {
+    @apply mt-0 mb-2 text-xl font-normal leading-normal;
+  } 
+  h5 {
+    @apply mt-0 mb-2 text-lg font-normal leading-normal;
+  }
+  h6 {
+    @apply mt-0 mb-2 text-base font-normal leading-normal;
   }
   a {
     text-decoration: none;
     color: inherit;
+  }
+  ul {
+    @apply ml-6 list-disc;
+  }
+  ol {
+    @apply ml-6 list-decimal;
   }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -44,5 +68,14 @@ body {
   }
   .form-helper {
     @apply mt-1 text-sm text-gray-300 dark:text-gray-400;
+  }
+  .editorMenuBar {
+    @apply flex items-center justify-center w-full pb-5 bg-white;
+  }
+  .editorIconActive {
+    @apply py-[2px] px-[6px]  bg-slate-400;
+  }
+  .editorIconInactive {
+    @apply py-[2px] px-[6px] ;
   }
 }
