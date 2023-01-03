@@ -5,6 +5,10 @@ import {
   IconFormatItalic,
   IconBxStrikethrough,
   IconBxUnderline,
+  IconTextCenter,
+  IconTextRight,
+  IconTextLeft,
+  IconOrderedList,
 } from "../UI/Icons";
 export const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -70,7 +74,7 @@ export const MenuBar = ({ editor }) => {
             editor.isActive("orderedList") ? "editorIconActive" : "editorIconInactive"
           }
         >
-          ListOl
+          <IconOrderedList />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
@@ -78,7 +82,7 @@ export const MenuBar = ({ editor }) => {
             editor.isActive({ textAlign: "left" }) ? "editorIconActive" : "editorIconInactive"
           }
         >
-          left
+          <IconTextLeft />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
@@ -88,7 +92,7 @@ export const MenuBar = ({ editor }) => {
               : "editorIconInactive"
           }
         >
-          center
+          <IconTextCenter />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
@@ -96,7 +100,7 @@ export const MenuBar = ({ editor }) => {
             editor.isActive({ textAlign: "right" }) ? "editorIconActive" : "editorIconInactive"
           }
         >
-          right
+          <IconTextRight />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("justify").run()}

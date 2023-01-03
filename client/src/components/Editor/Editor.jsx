@@ -31,9 +31,9 @@ const Editor = () => {
 
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
-      const html = editor.getHTML();
+      //const html = editor.getHTML();
       setDescription(json);
-      //editor.commands.setContent(html);
+      editor.commands.setContent(json);
     },
   });
 
