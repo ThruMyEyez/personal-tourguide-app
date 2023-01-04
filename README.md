@@ -120,7 +120,6 @@ Roles:
       //- POST- > router.get('/create/:id', (req, res, next) => {}) ...see Product Handling (create new event/tour and assign to userID)
     - POST-> router.get('/booking/:productId', (req, res, next) => {}) (if customer purchase a tour or event)
     - PUT -> router.put('/booked/:productId', (req, res, next) => {}) (update the status of a purchase)
-    - DEL -> router.delete('/delete/:id/:productId', (req, res, next) => {}) (provider ability to delete a productItem! )
 
 - Product handling
 
@@ -130,6 +129,9 @@ Roles:
     - GET - router.get('/:id', (req, res, next) => {}) ...get all events and tours created by the provider (public)
     - POST -> router.post('/create', (req, res, next) => {}) ...if user === provider, can create a base product
     - POST -> router.post('/:productId/add-event', (req, res, next) => {}) ...then adding the productItem
+    - PUT -> router.put('/edit/:productId', (req, res, next) => {}) ...editing/updating the product, like price / thumbnail
+    - PUT -> router.put('/edit/:productItemId', (req, res, next) => {}) ...editing/updating the offered "Item"
+    - DEL -> router.delete('/delete/:id/:productId', (req, res, next) => {}) (provider ability to delete a productItem!)
 
 - authentication:
 
