@@ -23,8 +23,11 @@ const schema = new mongoose.Schema(
     firstName: { type: String },
     lastName: { type: String },
     profilePicture: { type: String },
-    //role: { type: [String], default: ['user'] },
-    role: { type: String, default: 'user' },
+    role: {
+      type: String,
+      enum: ['user', 'provider', 'admin'],
+      default: 'user'
+    },
     email_verified: { type: Boolean, default: false }
   },
   { timestamps: true }
