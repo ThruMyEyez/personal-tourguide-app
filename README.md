@@ -37,8 +37,6 @@ Roles:
 
 ## Server
 
--
-
 ### Models
 
 - User Model:
@@ -64,6 +62,15 @@ Roles:
   - productLimit: type: Number, required: true.
   - rating:: Schema.Types.ObjectId -> new model schema
   - with timestamps
+
+- Places Model:
+
+  - UserId: type: Schema.Types.ObjectId, ref: "user", required: true
+  - title: type: String, required: true
+  - description: type: String, required: true
+  - picture: type: String
+  - moreLink: type: String
+  - timestamps
 
 - productItem: (Type: event / tour)
 
@@ -121,6 +128,14 @@ Roles:
     - POST-> router.get('/booking/:productId', (req, res, next) => {}) (if customer purchase a tour or event)
     - PUT -> router.put('/booked/:productId', (req, res, next) => {}) (update the status of a purchase)
 
+- Places handling:
+
+  - app.use(/place/ placeRouter)
+    - GET -> router.get( "/", (req, res, next) => {}) ... Get all places of current provider
+    - POST-> router.post("/create", (req, res, next) => {}) ...Add a new place to the DB
+    - PUT -> router.put("/edit/:placeId/, (req, res, next) => {}) ...update a specific
+    - DEL -> router.delete("/delete/:placeId", (req, res, next) => {}) ...delete a place
+
 - Product handling
 
   - app.use('/product' productRouter)
@@ -147,14 +162,14 @@ Roles:
 - User
 
   - app.use('/user', userRouter)
-  - GET -> router.get('/', (req, res, next) => {}) ...get own user data if logged in
-  - GET -> router.get('/:purshaseId', (req, res, next) => {}) ... get specific purchase data
-  - GET -> router.get('/purchase-history',(req, res, next) => {})
-  - GET -> router.get('/:id', (req, res, next) => {}) .. get user profiles to show up for everyone
-  - POST-> router.post('/:id/follow', (req, res, next) => {})
-  - DEL -> router.delete('/:id/follow', (req, res, next) => {})
-  - PUT -> router.put('/:id/role', (req, res, next) => {}) (to level a user up to a provider & vice versa)
-  - ->
+    - GET -> router.get('/', (req, res, next) => {}) ...get own user data if logged in
+    - GET -> router.get('/:purshaseId', (req, res, next) => {}) ... get specific purchase data
+    - GET -> router.get('/purchase-history',(req, res, next) => {})
+    - GET -> router.get('/:id', (req, res, next) => {}) .. get user profiles to show up for everyone
+    - POST-> router.post('/:id/follow', (req, res, next) => {})
+    - DEL -> router.delete('/:id/follow', (req, res, next) => {})
+    - PUT -> router.put('/:id/role', (req, res, next) => {}) (to level a user up to a provider & vice versa)
+    - ->
 
 - Provider
 
@@ -176,5 +191,30 @@ Roles:
 ### Components
 
 ### Services
+
+### Layout & Design guidelines
+
+- Navbar(UI Component)
+
+  - Should contain a SVG logo
+  - Navigation: Links to pages (Right now there is too much)
+  - Add a Internationalizion menu
+    - undecided: whether open on hover or dropdown to select
+    - Language: English
+    - Language: undecided (2 languages should be enough for the UI)
+  - Conditional show "Signup" / "Login"
+  - Show A notification bell on the right (when the followed provider has new events, for billig notifications or notify about a new follower)
+  - Conditional show the Profile Picture (with or without the username?) as a dropdown menu
+    - Menu contains a link to dashboard
+    - Contains a link to profile (it should be a page in the dashboard)
+    - A Logout Link/Button
+
+- Footer(UI Component)
+
+- Main-Page
+  - Should have a nice Hero section with a search bar.
+  - Show Events/Tours as Cards
+  - More solutions to display products under different parameters.
+  -
 
 #### i18n / wysiwyg / product models: product itself, product date (event / tour etc) / product location
