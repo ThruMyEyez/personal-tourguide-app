@@ -56,9 +56,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.login-btn:hover {
-  transition: 0.3s;
-}
+/* .login-btn:hover {
+  /* ease in transition and ease out transition of .3 seconds
+  transition: all 0.3s ease-in-out;
+} */
 
 @layer components {
   .fullscreen-modal-container {

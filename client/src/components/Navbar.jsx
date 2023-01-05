@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex justify-around items-center w-full p-4 bg-clip-pink-violet">
+      <nav className="flex justify-around items-center w-full p-3 bg-clip-pink-violet">
         <ul className="flex m-0 list-none gap-x-3">
           <li className="font-bold pr-3">
             <Link to="/">GuideGo</Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
                 Sign up
               </Link>
               <Link
-                className="login-btn border-2 hover:border-pink-500 hover:bg-pink-500 hover:text-white rounded-lg pt-2 pb-2 px-3"
+                className="login-btn border-2 border-pink-100 hover:bg-gradient-to-r from:pink-500 to:violet-500 hover:text-white rounded-lg pt-2 pb-2 px-3"
                 to="/login"
                 state={{ background: location }}
               >
