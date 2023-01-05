@@ -8,7 +8,7 @@ const schema = mongoose.Schema(
     productId: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
     status: {
       type: String,
-      enum: ['PaymentOpen', 'PaymentDone', 'Visited', 'Expired']
+      enum: ['PaymentPending', 'PaymentDone', 'ClientVisited', 'Expired']
     }
   },
   { timestamps: true }

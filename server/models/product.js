@@ -10,15 +10,17 @@ const schema = mongoose.Schema(
       required: true
     },
     title: { type: String, required: true },
-    price: { type: Number, required: true },
-    description: { type: String },
+    price: { type: Number },
+    tagline: { type: String },
     productThumbnail: { type: String },
+    productType: { type: String, enum: ['tour', 'event'] },
     productItem: {
       // Product item should contain the product item Type
       type: Schema.Types.ObjectId,
       ref: 'productItem',
       required: true
-    }
+    },
+    rating: { type: Schema.Types.ObjectId, ref: 'rating' }
   },
   { timestamps: true }
 );

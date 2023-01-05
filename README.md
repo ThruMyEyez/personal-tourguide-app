@@ -117,18 +117,17 @@ Roles:
 
 - tours, events & experiences (products)
 
-  - app.use('/event', eventRouter) (the word "event" doesn't fit well in here )
+  - app.use('/event', eventRouter) (the word "event" doesn't fit well in here ) (joao)
 
-    - GET -> router.get('/', (req, res, next) => {}) (get all the events from the DB (not tours))
+    - GET -> router.get('/', (req, res, next) => {}) (get all the events (konzerts etc. products ) ALL events from the DB! (not tours))
+      //- GET -> router.get('/tour', (req, res, next) => {}) (get all the tours from the db)
     - GET -> router.get('/:productId' (req, res, next) => {}) (get the product: productItem detail page data)
-    - GET -> router.get('/travel', (req, res, next) => {}) (get all the tours from the db)
-    - GET -> router.get('/:productId/rating' (req, res, next) => {}) (get the ratings for a specific product)
-    - POST-> router.post('/:productId/rating/new/' (req, res, next) )
+      //- GET -> router.get('/:productId/rating' (req, res, next) => {}) (get the ratings for a specific product)
+    - POST-> router.post('/:productId/rating/' (req, res, next) )
       //- POST- > router.get('/create/:id', (req, res, next) => {}) ...see Product Handling (create new event/tour and assign to userID)
-    - POST-> router.get('/booking/:productId', (req, res, next) => {}) (if customer purchase a tour or event)
-    - PUT -> router.put('/booked/:productId', (req, res, next) => {}) (update the status of a purchase)
+    - GET-> router.get('/booking/:productId', (req, res, next) => {}) (if customer purchase a tour or event, when not registered store in LocalStorage)
 
-- Places handling:
+- Places handling: (artur)
 
   - app.use(/place/ placeRouter)
     - GET -> router.get( "/", (req, res, next) => {}) ... Get all places of current provider
@@ -136,19 +135,23 @@ Roles:
     - PUT -> router.put("/edit/:placeId/, (req, res, next) => {}) ...update a specific
     - DEL -> router.delete("/delete/:placeId", (req, res, next) => {}) ...delete a place
 
-- Product handling
+- Product handling (artur)
+
+  - PUT -> router.put('/booked/:productId', (req, res, next) => {}) (update the status of a purchase)
 
   - app.use('/product' productRouter)
     - GET -> router.get('/', (req, res, next) => {}) ...if user === provider, get all created products
     - GET -> router.get('/:productId' (req, res, next) => {}) (get the product: productItem detail page data)
-    - GET - router.get('/:id', (req, res, next) => {}) ...get all events and tours created by the provider (public)
+    - GET - router.get('/:id', (req, res, next) => {}) ...get all events and tours created of a specific provider(public)
     - POST -> router.post('/create', (req, res, next) => {}) ...if user === provider, can create a base product
     - POST -> router.post('/:productId/add-event', (req, res, next) => {}) ...then adding the productItem
     - PUT -> router.put('/edit/:productId', (req, res, next) => {}) ...editing/updating the product, like price / thumbnail
     - PUT -> router.put('/edit/:productItemId', (req, res, next) => {}) ...editing/updating the offered "Item"
     - DEL -> router.delete('/delete/:id/:productId', (req, res, next) => {}) (provider ability to delete a productItem!)
+      //- GET -> router.get('/:productId/rating' (req, res, next) => {}) (get the ratings for a specific product)
+    - POST-> router.post('/:productId/rating/' (req, res, next) )
 
-- authentication:
+- authentication: (artur) ✅ ☑️
 
   - app.use('/authentication', authenticationRouter)
     - POST -> router.post('/google/login', (req, res, next) => {})
@@ -159,30 +162,33 @@ Roles:
     - POST -> router.get('/password-reset', (req, res, next) => {})
     - PUT -> router.put('/password-reset/:id/:token' (req, res, next) => {}) ...update PW.
 
-- User
+- User: (artur)
 
   - app.use('/user', userRouter)
     - GET -> router.get('/', (req, res, next) => {}) ...get own user data if logged in
     - GET -> router.get('/:purshaseId', (req, res, next) => {}) ... get specific purchase data
-    - GET -> router.get('/purchase-history',(req, res, next) => {})
+    - GET -> router.get('/purchase-history',(req, res, next) => {}) (wishlist)
     - GET -> router.get('/:id', (req, res, next) => {}) .. get user profiles to show up for everyone
     - POST-> router.post('/:id/follow', (req, res, next) => {})
     - DEL -> router.delete('/:id/follow', (req, res, next) => {})
     - PUT -> router.put('/:id/role', (req, res, next) => {}) (to level a user up to a provider & vice versa)
     - ->
 
-- Provider
+- Provider:
 
   - app.use('/provider', providerRouter) (Rating for providers? Wishlist? )
 
-- Profile
-  - app.use('/profile', profileRouter)
-    - GET -> router.get('/', (req, res, next) => {}) ...get own extra profile data if logged in as a provider
+- ProverInfo: (Alex)
+
+  - app.use('/provider-info', profileRouter)
+    //- GET -> router.get('/', (req, res, next) => {}) ...get own extra profile data if logged in as a provider
     - GET -> router.get('/:id', (req, res, next) => {}) ...get a provider profile for everyone
-    - POST-> router.post('/new/provider/', (req, res, next) => {}) ...providers have to create additional profile
-    - PUT -> router.put('/provider/edit', (req, res, next) => {}) => {} ...providers can edit their profile
+      // Make a default profile that will be edited - POST-> router.post('/provider/new', (req, res, next) => {}) ...providers have to create additional profile
+    - PUT -> router.put('/provider-info/edit', (req, res, next) => {}) => {} ...providers can edit their profile
     - PUT -> router.put('/edit', (req, res, next) => {}) ...edit user profile
     - DEL -> router.delete('/delete', (req, res, next) => {}) ... handle delete own user data. (wishlist)
+
+legend: ✅ (done) | ☑️ (need improvement, in work) | ❔ (ToDo) | ❌ (droped: reason)
 
 ## Client
 
@@ -215,6 +221,5 @@ Roles:
   - Should have a nice Hero section with a search bar.
   - Show Events/Tours as Cards
   - More solutions to display products under different parameters.
-  -
 
 #### i18n / wysiwyg / product models: product itself, product date (event / tour etc) / product location
