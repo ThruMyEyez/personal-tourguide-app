@@ -1,9 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SidebarMenublock from "./SidebarMenublock";
 import chevronRight from "../../assets/right-thin-chevron-svgrepo-com.svg";
+import { IconMapLocationDot, IconMapLocationPlus, IconMapLocation } from "./Icons";
+
+const menuLinks = [
+  {
+    title: "Link1",
+    url: "/dashboard",
+  },
+  {
+    title: "Home",
+    url: "/",
+  },
+];
+
+const placesLinks = [
+  {
+    title: "Places",
+    url: "/dashboard/places",
+    Icon: IconMapLocation,
+  },
+  {
+    title: "Create",
+    url: "/dashboard/place/create",
+    Icon: IconMapLocationPlus,
+  },
+];
 
 const DashSidebar = () => {
   const [open, setOpen] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    placesLinks[1].location = location;
+  }, []);
 
   return (
     <div
@@ -50,8 +81,14 @@ const DashSidebar = () => {
           <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full"></div>
         </div>
         {/* Menu Block */}
-        <SidebarMenublock sidebarOpenState={open} menuTitle="Dash Menu" />
-        {/* Menu Block */}
+        <SidebarMenublock sidebarOpenState={open} menuTitle="Dash Menu" links={menuLinks} />
+        {/* TODO: Make this viewable only for providers/Admins */}
+        <SidebarMenublock
+          sidebarOpenState={open}
+          menuTitle="Places Menu"
+          links={placesLinks}
+          MenuTitleIcon={IconMapLocationDot}
+        />
       </div>
     </div>
   );

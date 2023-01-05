@@ -150,6 +150,39 @@ const IconOrderedList = (props) => {
   );
 };
 
+// Map and Location related icons
+const IconMapLocationDot = (props) => {
+  return (
+    <svg viewBox="0 0 576 512" fill="currentColor" className="w-6 h-6" {...props}>
+      <path d="M408 120c0 54.6-73.1 151.9-105.2 192-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120 168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6.5-1.2 1-2.5 1.5-3.7l116-46.4c15.8-6.3 32.9 5.3 32.9 22.3v270.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zm-278.4-62.1c2.4 14.1 7.2 28.3 12.8 41.5 2.9 6.8 6.1 13.7 9.6 20.6v251.4L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77v249.3l-192-54.9V255c20.5 31.3 42.3 59.6 56.2 77 20.5 25.6 59.1 25.6 79.6 0zM288 152c22.1 0 40-17.9 40-40s-17.9-40-40-40-40 17.9-40 40 17.9 40 40 40z" />
+    </svg>
+  );
+};
+
+const IconMapLocationPlus = (props) => {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" {...props}>
+      <path d="M12 22s8.029-5.56 8-12c0-4.411-3.589-8-8-8S4 5.589 4 9.995C3.971 16.44 11.696 21.784 12 22zM8 9h3V6h2v3h3v2h-3v3h-2v-3H8V9z" />
+    </svg>
+  );
+};
+
+const IconMapEditLocation = (props) => {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" {...props}>
+      <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zM9.799 14.987H8v-1.799l4.977-4.97 1.799 1.799-4.977 4.97zm5.824-5.817l-1.799-1.799L15.196 6l1.799 1.799-1.372 1.371z" />
+    </svg>
+  );
+};
+
+const IconMapLocation = (props) => {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" {...props}>
+      <path d="M10 20S3 10.87 3 7a7 7 0 1114 0c0 3.87-7 13-7 13zm0-11a2 2 0 100-4 2 2 0 000 4z" />
+    </svg>
+  );
+};
+
 export {
   IconUndo,
   IconRedo,
@@ -161,4 +194,8 @@ export {
   IconTextCenter,
   IconTextLeft,
   IconOrderedList,
+  IconMapLocationDot,
+  IconMapLocationPlus,
+  IconMapEditLocation,
+  IconMapLocation,
 };

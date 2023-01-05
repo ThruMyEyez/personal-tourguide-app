@@ -1,22 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const menuLinks = [
-  {
-    title: "Link1",
-    url: "/dashboard",
-  },
-  {
-    title: "Home",
-    url: "/",
-  },
-];
-
-const SidebarMenublock = ({ sidebarOpenState, menuTitle }) => {
+const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <ul className="flex-1 block pb-3 mt-3 overflow-y-auto">
+    <ul className="flex-1 block min-w-full pb-3 mx-0 mt-3 overflow-y-auto">
       <li
         className={`relative z-0 mx-3 overflow-hidden transition duration-500 ease-in-out rounded-lg ${
           open && "bg-gray-700 bg-opacity-60"
@@ -27,14 +16,16 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle }) => {
           onClick={() => setOpen(!open)}
         >
           <span className="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-6 h-6"
-            >
-              <path d="M6 12a.75.75 0 01-.75-.75v-7.5a.75.75 0 111.5 0v7.5A.75.75 0 016 12zM18 12a.75.75 0 01-.75-.75v-7.5a.75.75 0 011.5 0v7.5A.75.75 0 0118 12zM6.75 20.25v-1.5a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0zM18.75 18.75v1.5a.75.75 0 01-1.5 0v-1.5a.75.75 0 011.5 0zM12.75 5.25v-1.5a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0zM12 21a.75.75 0 01-.75-.75v-7.5a.75.75 0 011.5 0v7.5A.75.75 0 0112 21zM3.75 15a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0zM12 11.25a2.25 2.25 0 110-4.5 2.25 2.25 0 010 4.5zM15.75 15a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0z" />
-            </svg>
+            {(!MenuTitleIcon && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6"
+              >
+                <path d="M6 12a.75.75 0 01-.75-.75v-7.5a.75.75 0 111.5 0v7.5A.75.75 0 016 12zM18 12a.75.75 0 01-.75-.75v-7.5a.75.75 0 011.5 0v7.5A.75.75 0 0118 12zM6.75 20.25v-1.5a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0zM18.75 18.75v1.5a.75.75 0 01-1.5 0v-1.5a.75.75 0 011.5 0zM12.75 5.25v-1.5a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0zM12 21a.75.75 0 01-.75-.75v-7.5a.75.75 0 011.5 0v7.5A.75.75 0 0112 21zM3.75 15a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0zM12 11.25a2.25 2.25 0 110-4.5 2.25 2.25 0 010 4.5zM15.75 15a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0z" />
+              </svg>
+            )) || <MenuTitleIcon />}
           </span>
           {sidebarOpenState && <span className="mx-4 leading-none">{menuTitle}</span>}
           <span
@@ -60,17 +51,23 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle }) => {
         <div className={`${open ? "block" : "hidden"} rah-static rah-static--height-auto}`}>
           <div>
             <ul className="overflow-hidden">
-              {menuLinks.map((link) => {
+              {links?.map(({ title, url, Icon, location }) => {
                 return (
                   <li
-                    key={link.title}
+                    key={title}
                     className="relative z-0 -ml-px overflow-hidden transition duration-500 ease-in-out rounded-lg"
                   >
                     <Link
+                      state={location && { background: location }}
                       className="flex items-center h-10 px-3 py-px text-gray-300 truncate transition-all duration-150 ease-in-out outline-none cursor-pointer hover:text-white focus:text-opacity-100"
-                      to={link.url}
+                      to={url}
                     >
-                      <span className="leading-none">{link.title}</span>
+                      {(!Icon && <span></span>) || (
+                        <span>
+                          <Icon />
+                        </span>
+                      )}
+                      {sidebarOpenState && <span className="leading-none">{title}</span>}
                     </Link>
                   </li>
                 );

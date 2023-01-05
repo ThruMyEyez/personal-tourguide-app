@@ -3,6 +3,7 @@ import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
 import { IKContext, IKUpload } from "imagekitio-react";
 import Editor from "../components/Editor/Editor";
+import AddPlace from "../components/TourMap/AddPlace";
 
 const Dashboard = (props) => {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -13,9 +14,6 @@ const Dashboard = (props) => {
 
   const onFileUploadError = (val) => {
     console.log("File UploadError", val);
-    console.log(process.env.REACT_APP_IMAGEKIT_URL);
-    console.log(process.env.REACT_APP_SERVER_POINT);
-    console.log(process.env.REACT_APP_IMAGEKIT_AUTHENTICTION_ENDPOINT);
   };
 
   return (

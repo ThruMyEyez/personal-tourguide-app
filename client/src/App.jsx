@@ -16,6 +16,8 @@ import {
   IsAnon,
 } from "./components/AuthComponents/";
 
+import { NewPlaceModal } from "./components/DashboardComponents";
+
 const App = () => {
   const location = useLocation();
   // initialize route as location background backdrop, default location.state: null
@@ -39,6 +41,15 @@ const App = () => {
             element={
               <IsPrivate>
                 <Dashboard />
+              </IsPrivate>
+            }
+            exact
+          />
+          <Route
+            path="/dashboard/place/create"
+            element={
+              <IsPrivate>
+                <NewPlaceModal />
               </IsPrivate>
             }
             exact
@@ -73,6 +84,15 @@ const App = () => {
                 <LostPassword />
               </IsAnon>
             }
+          />
+          <Route
+            path="/dashboard/place/create"
+            element={
+              <IsPrivate>
+                <NewPlaceModal />
+              </IsPrivate>
+            }
+            exact
           />
         </Routes>
       )}

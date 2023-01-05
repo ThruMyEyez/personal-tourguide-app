@@ -17,6 +17,7 @@ const mongoose = require('mongoose');
 /* routes folder */
 const baseRouter = require('./routes/base');
 const authenticationRouter = require('./routes/authentication');
+const placeRouter = require('./routes/place');
 
 const app = express();
 
@@ -60,7 +61,7 @@ app.use(
 /* Routes path config */
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
-
+app.use('/place', placeRouter);
 /* Catch missing routes and forward to error handler */
 app.use((req, res, next) => {
   next(createError(404));
