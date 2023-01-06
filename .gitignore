@@ -1,0 +1,12 @@
+**.env
+
+package-lock.json
+
+
+
+client/.gitignore
+server/.gitignore
+client/.env
+server/.env
+client/package-lock.json
+server/package-lock.json
