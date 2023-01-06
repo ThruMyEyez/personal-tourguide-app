@@ -48,10 +48,15 @@ const Login = () => {
 
   return (
     <div className="fullscreen-modal-container">
-      <div className="absolute mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 sm:max-w-sm top-1/2 left-1/2">
+      <div className="absolute mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 sm:max-w-sm top-1/2 left-1/2 bg-white p-10 shadow-sm rounded-lg">
+        <button
+          className="bg-black text-white px-3 py-1 rounded-md"
+          onClick={() => navigate(-1)}
+        >
+          X
+        </button>
         <h1>Login</h1>
 
-        <button onClick={() => navigate(-1)}>X</button>
         <GoogleAuth authSuccessCallback={onGoogleLoginSuccess} />
 
         <HorizontalTextRuler str="OR" />

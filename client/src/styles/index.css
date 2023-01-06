@@ -25,7 +25,7 @@
   }
   h4 {
     @apply mt-0 mb-2 text-xl font-normal leading-normal;
-  } 
+  }
   h5 {
     @apply mt-0 mb-2 text-lg font-normal leading-normal;
   }
@@ -43,15 +43,23 @@
     @apply ml-6 list-decimal;
   }
   code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
   }
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* .login-btn:hover {
+  /* ease in transition and ease out transition of .3 seconds
+  transition: all 0.3s ease-in-out;
+} */
 
 @layer components {
   .fullscreen-modal-container {
@@ -60,7 +68,8 @@ body {
   .btn-primary {
     @apply px-4 py-2 my-4 font-bold text-white bg-blue-500 rounded;
   }
-  .bg-clip-pink-violet { /* a test */
+  .bg-clip-pink-violet {
+    /* a test */
     @apply text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500;
   }
   .form-label {
@@ -76,6 +85,6 @@ body {
     @apply py-[2px] px-[6px]  bg-slate-400;
   }
   .editorIconInactive {
-    @apply py-[2px] px-[6px] ;
+    @apply py-[2px] px-[6px];
   }
 }
