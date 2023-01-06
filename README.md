@@ -82,10 +82,13 @@ Roles:
 - user (Provider and Special user) Profile
 
   - UserId : type: Schema.Types.ObjectId, required: true, ref: 'user'
-  - aboutMe: type: String
-  - payment credential: (ToDo)
-  - Rating: type: Number
+  - taxID: type: String
+  - (bio)aboutMe: type: String
+  - pictures: [String]
   - kind of provider: type: String, required: true.
+
+  - ❌ Dropped, belongs to base user - payment credential: (ToDo)
+  - ❌ Drop to wishlist, it requires an extra model - Rating: type: Number
 
 - Rating Model:
 
@@ -108,10 +111,11 @@ Roles:
   - followee: type: Schema.Types.ObjectId, required: true, ref: 'user'
   - timestamps
 
-- purchaseHistory (wishlist .. a timeline in frontend would be cool?):
-  - userId: type: Schema.Types.ObjectId, required: true, ref: 'user'
-  - purchaseId: type: Schema.Types.ObjectId, required: true, ref: 'purchase'
-  - timestamps
+❌ Dropped - history can be obtained by using timestamps + userId of Pushase Model.
+// - purchaseHistory (wishlist .. a timeline in frontend would be cool?):
+//- userId: type: Schema.Types.ObjectId, required: true, ref: 'user'
+//- purchaseId: type: Schema.Types.ObjectId, required: true, ref: 'purchase'
+//- timestamps
 
 ### Endpoints (Not logically sorted yet)
 
@@ -127,7 +131,7 @@ Roles:
       //- POST- > router.get('/create/:id', (req, res, next) => {}) ...see Product Handling (create new event/tour and assign to userID)
     - GET-> router.get('/booking/:productId', (req, res, next) => {}) (if customer purchase a tour or event, when not registered store in LocalStorage)
 
-- Places handling: (artur)
+- Places handling: (artur) ☑️
 
   - app.use(/place/ placeRouter)
     - GET -> router.get( "/", (req, res, next) => {}) ... Get all places of current provider
@@ -149,7 +153,7 @@ Roles:
     - PUT -> router.put('/edit/:productItemId', (req, res, next) => {}) ...editing/updating the offered "Item"
     - DEL -> router.delete('/delete/:id/:productId', (req, res, next) => {}) (provider ability to delete a productItem!)
       //- GET -> router.get('/:productId/rating' (req, res, next) => {}) (get the ratings for a specific product)
-    - POST-> router.post('/:productId/rating/' (req, res, next) )
+      //- POST-> router.post('/:productId/rating/' (req, res, next) )
 
 - authentication: (artur) ✅ ☑️
 
@@ -170,15 +174,15 @@ Roles:
     - GET -> router.get('/purchase-history',(req, res, next) => {}) (wishlist)
     - GET -> router.get('/:id', (req, res, next) => {}) .. get user profiles to show up for everyone
     - POST-> router.post('/:id/follow', (req, res, next) => {})
-    - DEL -> router.delete('/:id/follow', (req, res, next) => {})
+    - DEL -> router.delete('/:id/unfollow', (req, res, next) => {})
     - PUT -> router.put('/:id/role', (req, res, next) => {}) (to level a user up to a provider & vice versa)
     - ->
 
-- Provider:
+//- Provider:
+//
+// - app.use('/provider', providerRouter) (Rating for providers? Wishlist? )
 
-  - app.use('/provider', providerRouter) (Rating for providers? Wishlist? )
-
-- ProverInfo: (Alex)
+- ProviderInfo: (Alex)
 
   - app.use('/provider-info', profileRouter)
     //- GET -> router.get('/', (req, res, next) => {}) ...get own extra profile data if logged in as a provider

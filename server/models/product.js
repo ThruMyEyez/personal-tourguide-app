@@ -2,12 +2,14 @@
 
 const mongoose = require('mongoose');
 
-const schema = mongoose.Schema(
+const Schema = mongoose.Schema;
+
+const schema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'user',
-      required: true
+      required: true,
+      ref: 'User'
     },
     title: { type: String, required: true },
     price: { type: Number },
