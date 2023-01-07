@@ -7,7 +7,21 @@ const Schema = mongoose.Schema;
 const schema = Schema(
   {
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    productId: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
+    product: {
+      _id: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
+      title: { type: String, required: true },
+      price: { type: Number },
+      tagline: { type: String },
+      productThumbnail: { type: String },
+      productType: { type: String, enum: ['tour', 'event'] },
+      productItem: {
+        // Product item should contain the product item Type
+        type: Schema.Types.ObjectId,
+        ref: 'productItem',
+        required: true
+      }
+    },
+
     status: {
       type: String,
       enum: ['PaymentPending', 'PaymentDone', 'ClientVisited', 'Expired']
