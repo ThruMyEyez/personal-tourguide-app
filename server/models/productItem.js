@@ -6,12 +6,18 @@ const Schema = mongoose.Schema;
 
 const schema = Schema(
   {
-    productId: {
+    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'product',
+      ref: 'user',
       required: true
     },
-    eventDate: String,
+    title: {
+      type: String,
+      required: [true, 'Title can not be empty, no new place created!'],
+      maxLength: [92, 'Title can have max 92 characters, got {VALUE}'],
+      unique: true
+    },
+    eventDate: Date,
     description: Object,
     places: {
       type: [Schema.Types.ObjectId],

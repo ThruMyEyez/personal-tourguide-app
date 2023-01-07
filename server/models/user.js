@@ -25,7 +25,10 @@ const schema = new mongoose.Schema(
     profilePicture: { type: String },
     role: {
       type: String,
-      enum: ['user', 'provider', 'admin'],
+      enum: {
+        values: ['user', 'provider', 'admin'],
+        message: '{VALUE} is not supported as role!'
+      },
       default: 'user'
     },
     email_verified: { type: Boolean, default: false }

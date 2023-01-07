@@ -15,8 +15,11 @@ const schema = new Schema(
       type: [String],
       enum: ['Guide', 'Host']
     },
-    taxID: { type: String /*required: true*/ },
-    bio: String,
+    taxID: { type: String /*required: true*/, default: 'XX XXX XXX XXX' },
+    bio: {
+      type: String,
+      default: `A short "Bio" or "About Me". Describe yourself!`
+    },
     //Propably gallery is false here, we will see
     gallery: [String]
   },
