@@ -75,6 +75,8 @@ app.use((req, res, next) => {
 
 /* Catch all error handler */
 app.use((error, req, res, next) => {
+  console.log('Error Catch all handling Middleware called');
+  console.log('Path: ', req.path);
   res.status(error.status || 500);
   res.json({ type: 'error', error: { message: error.message } });
 });
