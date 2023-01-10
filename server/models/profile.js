@@ -9,11 +9,12 @@ const schema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
-      required: true
+      required: true,
+      unique: true
     },
     providerType: {
       type: [String],
-      enum: ['Guide', 'Host']
+      enum: ['Tourguide', 'Host']
     },
     taxID: { type: String /*required: true*/, default: 'XX XXX XXX XXX' },
     bio: {

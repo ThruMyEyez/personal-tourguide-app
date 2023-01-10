@@ -6,9 +6,9 @@ const Schema = mongoose.Schema;
 
 const schema = Schema(
   {
-    userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+    userId: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
     product: {
-      _id: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
+      _id: { type: Schema.Types.ObjectId, required: true, ref: 'product' },
       title: { type: String, required: true },
       price: { type: Number },
       tagline: { type: String },

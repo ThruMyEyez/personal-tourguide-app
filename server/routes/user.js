@@ -16,8 +16,7 @@ const {
 } = require('../utils/ErrorHelper');
 
 // Getting complete data of current user & check,
-// if he has role privileges. If true, then populate extra data
-// based on the role.
+// If he has a providerProfile than it will be included in the response Object.
 router.get('/', routeGuard, async (req, res, next) => {
   const { _id } = req.payload;
 
@@ -49,6 +48,7 @@ router.get('/', routeGuard, async (req, res, next) => {
     });
 });
 
+//WIP
 router.get('/purchases', routeGuard, (req, res, next) => {
   const { _id } = req.payload;
   Place.find({ userId: _id }).then((places) => {
@@ -62,41 +62,42 @@ router.get('/purchases', routeGuard, (req, res, next) => {
   });
 });
 
+//redudant 🙄 its included above
+//router.get('/purchase-history', (req, res, next) => {});
 router.get('/purchases/:purshaseId', (req, res, next) => {});
 
-router.get('/purchase-history', (req, res, next) => {});
-
-// Following a specific user. :id Is the targetUser to be followed
+// Following a specific user. req.body.followee Is the target user to be followed
 // This route checks first if the current user is already following target User
-router.post('follow/:id/', routeGuard, (req, res, next) => {
-  const { id } = req.params;
+router.post('/follow/', routeGuard, async (req, res, next) => {
+  const { followee } = req.body;
   const { _id } = req.payload;
+  const isFollowing = await Follow.findOne({
+    followee: followee,
+    follower: _id
+  });
 
-  Follow.findOne({ follower: _id, followee: id })
-    .then((result) => {
-      if (result) {
-        res.status(418).json({
-          success: false,
-          message: `you already a follower of ${id}`
-        });
-      } else {
-        return Follow.create({ follower: _id, followee: id });
-      }
-    })
-    .then((result) => {
-      result &&
-        res.status(201).json({
-          success: true,
-          message: `you followed to ${id}`
-        });
+  if (isFollowing)
+    next(new ErrorResponse(`you already a follower of ${followee}`, 400));
+
+  const newFollowing = new Follow({ followee: followee, follower: _id });
+  newFollowing
+    .save()
+    .then((newFollowing) => {
+      res.status(201).json({
+        success: true,
+        message: `userId: ${newFollowing.follower} is now following ${newFollowing.followee}`,
+        data: newFollowing
+      });
     })
     .catch((error) => {
+      modelValidationErrorHelper(error);
       next(error);
     });
 });
 
-//Unfollowing a specific user. :id Is the targetUser to be unfollowed
-router.delete('unfollow/:id/', routeGuard, (req, res, next) => {
+// Unfollowing a specific user. :id Is the targetUser to be unfollowed
+router.delete('/unfollow/:id/', routeGuard, (req, res, next) => {
+  console.log(true);
   const { id } = req.params;
   const { _id } = req.payload;
   Follow.findOneAndDelete({ follower: _id, followee: id })
@@ -123,8 +124,8 @@ router.delete('unfollow/:id/', routeGuard, (req, res, next) => {
 router.put('/update-role/:id/', routeGuard, (req, res, next) => {
   const { _id } = req.payload;
   const { id } = req.params; // Target userId & Role
-  const { targetRole } = req.body;
-
+  //const { targetRole } = req.body;
+  console.log(req.body);
   User.findOne({ _id })
     .then((foundUser) => {
       if (foundUser.role !== 'admin') {
@@ -140,7 +141,7 @@ router.put('/update-role/:id/', routeGuard, (req, res, next) => {
         return User.findByIdAndUpdate(
           id,
           {
-            role: targetRole,
+            ...req.body,
             $inc: { __v: 1 }
           },
           { new: true }
@@ -186,6 +187,76 @@ router.get('/:id', async (req, res, next) => {
     .catch((error) => {
       next(error);
     });
+});
+
+// If the user.role is "provider" or "admin", user can create a provider profile
+router.post('/new-provider-profile', routeGuard, async (req, res, next) => {
+  const { _id, role } = req.payload;
+
+  if (role === 'provider' || 'admin') {
+    const providerProfile = await Profile.findOne(
+      { userId: _id },
+      { explicit: true }
+    ).exec();
+
+    if (providerProfile)
+      next(
+        new ErrorResponse(`user with id: ${_id} has already a Profile!`, 409)
+      );
+
+    const newProfile = new Profile({ ...req.body, userId: _id });
+    newProfile
+      .save()
+      .then((createdProfile) => {
+        res.status(201).json({
+          success: true,
+          status: 201,
+          message: `Profile for userId: ${createdProfile.userId} saved in the Database`,
+          data: createdProfile
+        });
+      })
+      .catch((error) => {
+        modelValidationErrorHelper(error);
+        next(error);
+      });
+  } else {
+    next(new ErrorResponse('invalid permissions', 403));
+  }
+});
+
+// If the user.role is "provider" or "admin", user can update his provider profile
+router.put('/edit-profile/', routeGuard, (req, res, next) => {
+  //const { profileId } = req.params;
+  const { _id, role, name } = req.payload;
+
+  if (role === 'provider' || 'admin') {
+    Profile.findOneAndUpdate(
+      { userId: _id },
+      //Profile.findByIdAndUpdate(
+      //  profileId,
+      { ...req.body, $inc: { __v: 1 } },
+      { new: true }
+    )
+      .then((updatedProfile) => {
+        if (!updatedProfile)
+          next(
+            new ErrorResponse(
+              `The provider ${name} has no profile created. Please create one before you create Products!`,
+              404
+            )
+          );
+        res.status(201).json({
+          success: true,
+          message: `Place updates saved in the Database. Edited ${updatedProfile.__v} times.`,
+          status: 201,
+          data: updatedProfile
+        });
+      })
+      .catch((error) => {
+        modelValidationErrorHelper(error);
+        next(error);
+      });
+  }
 });
 
 module.exports = router;
