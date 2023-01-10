@@ -4,7 +4,9 @@ const express = require('express');
 const router = express.Router();
 const Purchase = require('../models/purchase');
 const Product = require('./../models/product');
+const ProductItem = require('./../models/productItem');
 const Rating = require('./../models/rating');
+const Place = require('./../models/place');
 const { routeGuard } = require('../middleware/route-guard');
 const {
   ErrorResponse,
@@ -14,8 +16,21 @@ const {
 // - GET -> router.get('/', (req, res, next) => {}) (get all the events from the DB)
 router.get('/', (req, res, next) => {
   Product.find()
-    .populate(`productItem`)
-    .populate(`rating`)
+    .populate({
+      path: 'productItem',
+      select: 'userId title eventDate description places',
+      model: ProductItem,
+      populate: {
+        path: 'places',
+        select: 'title description picture moreLink position',
+        model: Place
+      }
+    })
+    .populate({
+      path: 'rating',
+      select: 'stars comment productId',
+      model: Rating
+    })
     .then((events) => {
       res.status(200).json({
         success: true,
@@ -52,11 +67,11 @@ router.get('/:id', (req, res, next) => {
 });
 
 // - POST-> router.post('/:productId/rating/' (req, res, next) )
-router.post('/:productId/rating', routeGuard, async (req, res, next) => {
+router.post('/rating/:productId', routeGuard, async (req, res, next) => {
   const { productId } = req.params;
   const { _id } = req.payload;
   const { stars, comment } = req.body;
-
+  console.log(stars, comment);
   //Check if is stars evaluation
 
   if (!stars) {
