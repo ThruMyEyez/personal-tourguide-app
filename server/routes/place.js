@@ -13,10 +13,11 @@ const {
 //Get all places belonging to the current user
 router.get('/', routeGuard, (req, res, next) => {
   const { _id } = req.payload;
-
+  console.log('body: ', req.body);
   Place.find({ userId: _id })
     .then((places) => {
       res.status(200).json({
+        status: 200,
         success: true,
         message: `${places.length} provider generated places found`,
         data: places
@@ -29,32 +30,48 @@ router.post('/create', routeGuard, async (req, res, next) => {
   const { _id } = req.payload;
   const { title } = req.body;
 
+  if (!title)
+    res.status(400).json({
+      status: 400,
+      message: 'Title must be provided! No place created!'
+    });
+
   const isPlace = await Place.findOne({ title: title }).exec();
 
-  //!title &&
-  //  res.status(400).json({
-  //    success: false,
-  //    message: 'Title can not be empty, no new place created!'
-  //  });
-
-  if (isPlace) {
+  if (isPlace)
     next(
       new ErrorResponse(`A Place with the title ${title} already exist's!`, 409)
     );
-  } else {
-    Place.create({ ...req.body, userId: _id }, { new: true })
-      .then((result) => {
-        res.status(201).json({
-          success: true,
-          message: 'Place saved in the Database',
-          data: result
-        });
-      })
-      .catch((error) => {
-        modelValidationErrorHelper(error);
-        next(error);
+  //Bug free so far
+  const newPlace = new Place({ ...req.body, userId: _id });
+  newPlace
+    .save()
+    .then((place) => {
+      res.status(201).json({
+        success: true,
+        status: 201,
+        message: `Place: ${place.title} saved in the Database`,
+        data: place
       });
-  }
+    })
+    .catch((error) => {
+      modelValidationErrorHelper(error);
+      next(error);
+    });
+
+  // Creates bugs + result
+  //Place.create({ ...req.body, userId: _id }, { new: true })
+  //  .then((result) => {
+  //    res.status(201).json({
+  //      success: true,
+  //      message: 'Place saved in the Database',
+  //      data: result
+  //    });
+  //  })
+  //  .catch((error) => {
+  //    modelValidationErrorHelper(error);
+  //    next(error);
+  //  });
 });
 
 // req.body should contain: title, description, picture, moreLink & position
@@ -96,7 +113,7 @@ router.delete('/delete/:placeId', routeGuard, (req, res, next) => {
         );
       res.status(200).json({
         success: true,
-        message: `Place with ID  deleted successfully`,
+        message: `Place with ID ${placeId} deleted successfully`,
         status: 200
       });
     })

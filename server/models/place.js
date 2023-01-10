@@ -13,9 +13,11 @@ const schema = new Schema(
     },
     title: {
       type: String,
-      required: [true, 'Title can not be empty, no new place created!'],
+      //required: [true, 'Title can not be empty, no new place created!'],
       minLength: [3, 'Title must be betwee least 3 characters, got {VALUE}'],
-      maxLength: [92, 'Title can have max 92 characters, got {VALUE}']
+      maxLength: [92, 'Title can have max 92 characters, got {VALUE}'],
+      unique: true
+      //required: [true, 'Title can not be empty, no new place created!']
     },
     description: {
       type: String,
