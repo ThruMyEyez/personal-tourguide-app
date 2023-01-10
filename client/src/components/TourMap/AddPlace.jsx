@@ -56,15 +56,35 @@ const AddPlace = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // send data to backend
-    authenticateUser();
-    const { _id: id } = user;
-    saveNewPlace(formData, id).then((response) => {
-      if (response.status === 200) {
+
+    /* // For Testing of geting all places. Works!
+    getProviderPlaces(formData).then((response) => {
+      console.log(response.data);
+    }); */
+
+    /* // For Testing of editing place. Works!
+      editPlace(formData, "63bcb24f8c6d32268c1ba634").then((response) => {
+      console.log(response.data);
+    }); */
+
+    /* // For testing of deletion of a Place. Works! 
+    deletePlace("63bcb4bc5680e3ac211eaeaa").then((response) => {
+      console.log(response.data);
+    }); */
+
+    saveNewPlace(formData)
+      .then((response) => {
+        if (response.status === 201) {
+          console.log(response.data.message);
+          navigate("/dashboard");
+        }
+        //if (response.status === 204) console.log(response);
         console.log(response.data.message);
-        navigate("/dashboard");
-      }
-      if (response.status === 204) console.log(response);
-    });
+      })
+      .catch((error) => {
+        if (error.response.status === 409) console.log(error.response.data.error.message);
+        console.log(error.response.data.message);
+      });
   };
 
   const icon = L.icon({
