@@ -1,9 +1,10 @@
-import api from "./api";
+import { api, authHeaders } from "./api";
 
-export const getProviderPlaces = (data) => api.get("/place", data);
+export const getProviderPlaces = () => api.get("/place", authHeaders);
 
-export const saveNewPlace = (data, id) => api.post("/place/create", { ...data, userId: id });
+export const saveNewPlace = (data) => api.post("/place/create", { ...data }, authHeaders);
 
-export const editPlace = (data, placeId) => api.put(`/place/edit/${placeId}`, data);
+export const editPlace = (data, placeId) =>
+  api.put(`/place/edit/${placeId}`, data, authHeaders);
 
-export const deletePlace = (data, placeId) => api.delete(`/place/delete/${placeId}`, data);
+export const deletePlace = (placeId) => api.delete(`/place/delete/${placeId}`, authHeaders);
