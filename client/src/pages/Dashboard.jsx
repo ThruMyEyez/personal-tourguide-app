@@ -11,6 +11,7 @@ import {
   updateEventItem,
   updateProduct,
 } from "../services/product";
+
 import {
   followUser,
   unfollowUser,
@@ -250,51 +251,50 @@ const Dashboard = (props) => {
         </IKContext>
         <Editor />
         <form onSubmit={handleFormDelete1Submit}>
-          <button className="btn-primary">Provider delete ProductItem by ID</button>
+          <button className="btn-primary">Provider delete ProductItem by ID - artur</button>
         </form>
         <form onSubmit={handleGetAllEvents}>
-          <button className="btn-primary">get All Events/Products from DB</button>
+          <button className="btn-primary">get All Events/Products from DB - alex</button>
         </form>
         <form onSubmit={handleNewEventRating}>
-          <button className="btn-primary">make rating for Events/Products</button>
+          <button className="btn-primary">make rating for Events/Products - alex</button>
         </form>
         <form onSubmit={handleFormSubmit}>
           <button className="btn-primary">
-            Get All Products for specific Provider "userId"
+            Get All Products for specific Provider "userId" - alex
           </button>
         </form>
         <form onSubmit={handleFormTest1Submit}>
-          <button className="btn-primary">Create new Product</button>
+          <button className="btn-primary">Create new Product - artur</button>
         </form>
         <form onSubmit={handleFormDelete2Submit}>
           <button className="btn-primary">Provider delete Product by ID</button>
         </form>
         <form onSubmit={handleFormUpdateProductSubmit}>
-          <button className="btn-primary">Update Provider Product</button>
+          <button className="btn-primary">Update Provider Product - artur</button>
         </form>
         <form onSubmit={handleFormUpdateProductItemSubmit}>
-          <button className="btn-primary">Update Provider productItem</button>
+          <button className="btn-primary">Update Provider productItem - artur</button>
         </form>
         <form onSubmit={handleFollow}>
-          <button className="btn-primary">follow userId</button>
+          <button className="btn-primary">follow userId - joao </button>
         </form>
+        {/* Follow/Unfollow could be achieved in one route / component */}
         <form onSubmit={handleUnfollow}>
-          <button className="btn-primary">unfollow userId</button>
+          <button className="btn-primary">unfollow userId - joao </button>
         </form>
         <form onSubmit={handleUpdateUserRole}>
-          <button className="btn-primary">Update user role</button>
+          <button className="btn-primary">Update user role - alex</button>
         </form>
         <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">Create Provider Profile</button>
-        </form>
-        <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">Create Provider Profile</button>
+          <button className="btn-primary">Create Provider Profile - joao </button>
         </form>
         <form onSubmit={handleUpdateProviderProfile}>
-          <button className="btn-primary">Update Provider Profile</button>
+          <button className="btn-primary">Update Provider Profile - joao </button>
         </form>
       </div>
     </div>
   );
 };
+
 export default Dashboard;
