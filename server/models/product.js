@@ -9,20 +9,20 @@ const schema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: 'User'
+      ref: 'user'
     },
     title: { type: String, required: true },
-    price: { type: Number },
+    priceInCents: { type: Number, required: true },
     tagline: { type: String },
     productThumbnail: { type: String },
-    productType: { type: String, enum: ['tour', 'event'] },
+    productType: { type: String, enum: ['tour', 'event'], default: 'event' },
     productItem: {
       // Product item should contain the product item Type
       type: Schema.Types.ObjectId,
       ref: 'productItem',
       required: true
     },
-    rating: { type: Schema.Types.ObjectId, ref: 'rating' }
+    rating: { type: [Schema.Types.ObjectId], ref: 'rating' }
   },
   { timestamps: true }
 );

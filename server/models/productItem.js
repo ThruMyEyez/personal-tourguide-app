@@ -18,7 +18,7 @@ const schema = Schema(
       unique: true
     },
     eventDate: Date,
-    description: Object,
+    description: String,
     places: {
       type: [Schema.Types.ObjectId],
       ref: 'place'
