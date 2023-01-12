@@ -49,7 +49,10 @@ const Dashboard = (props) => {
   // Events => New Event rating!
   const handleNewEventRating = (e) => {
     e.preventDefault();
-    newEventRating({ stars: 4, comment: "It was exciting tour!" }, "63bcf64109a3aa67e2c7c668")
+    newEventRating(
+      { stars: 4, comment: "It was exciting tour!" },
+      "63bcf64109a3aa67e2c7c668"
+    )
       .then((response) => {
         console.log(response.data);
       })
@@ -225,7 +228,9 @@ const Dashboard = (props) => {
         <h1 className="p-3">Dashboard</h1>
         <Outlet />
         <p>test & prototype</p>
-        <p>{(isLoggedIn && `login: ${isLoggedIn}`) || `login: ${isLoggedIn}`}</p>
+        <p>
+          {(isLoggedIn && `login: ${isLoggedIn}`) || `login: ${isLoggedIn}`}
+        </p>
         {!isLoading && (
           <div>
             <img
@@ -250,16 +255,25 @@ const Dashboard = (props) => {
             process.env.REACT_APP_IMAGEKIT_AUTHENTICTION_ENDPOINT
           }
         >
-          <IKUpload onSuccess={onFileUploadSuccess} onError={onFileUploadError} />
+          <IKUpload
+            onSuccess={onFileUploadSuccess}
+            onError={onFileUploadError}
+          />
         </IKContext>
         <form onSubmit={handleFormDelete1Submit}>
-          <button className="btn-primary">Provider delete ProductItem by ID - artur</button>
+          <button className="btn-primary">
+            Provider delete ProductItem by ID - artur
+          </button>
         </form>
         <form onSubmit={handleGetAllEvents}>
-          <button className="btn-primary">get All Events/Products from DB - alex</button>
+          <button className="btn-primary">
+            get All Events/Products from DB - alex
+          </button>
         </form>
         <form onSubmit={handleNewEventRating}>
-          <button className="btn-primary">make rating for Events/Products - alex</button>
+          <button className="btn-primary">
+            make rating for Events/Products - alex
+          </button>
         </form>
         <form onSubmit={handleFormSubmit}>
           <button className="btn-primary">
@@ -273,10 +287,14 @@ const Dashboard = (props) => {
           <button className="btn-primary">Provider delete Product by ID</button>
         </form>
         <form onSubmit={handleFormUpdateProductSubmit}>
-          <button className="btn-primary">Update Provider Product - artur</button>
+          <button className="btn-primary">
+            Update Provider Product - artur
+          </button>
         </form>
         <form onSubmit={handleFormUpdateProductItemSubmit}>
-          <button className="btn-primary">Update Provider productItem - artur</button>
+          <button className="btn-primary">
+            Update Provider productItem - artur
+          </button>
         </form>
         <form onSubmit={handleFollow}>
           <button className="btn-primary">follow userId - joao </button>
@@ -289,10 +307,14 @@ const Dashboard = (props) => {
           <button className="btn-primary">Update user role - alex</button>
         </form>
         <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">Create Provider Profile - joao </button>
+          <button className="btn-primary">
+            Create Provider Profile - joao{" "}
+          </button>
         </form>
         <form onSubmit={handleUpdateProviderProfile}>
-          <button className="btn-primary">Update Provider Profile - joao </button>
+          <button className="btn-primary">
+            Update Provider Profile - joao{" "}
+          </button>
         </form>
       </div>
     </div>

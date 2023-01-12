@@ -16,7 +16,11 @@ import {
   IsAnon,
 } from "./components/AuthComponents/";
 
-import { NewPlaceModal, NewProductItem } from "./components/DashboardComponents";
+import {
+  NewPlaceModal,
+  NewProductItem,
+} from "./components/DashboardComponents";
+import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
 
 const App = () => {
   const location = useLocation();
@@ -33,7 +37,12 @@ const App = () => {
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />
           <Route path="/calender" element={<Calender />} />
-          <Route path="/lost-password/:id/:token" element={<SetPassword />} exact />
+          <Route
+            path="/lost-password/:id/:token"
+            element={<SetPassword />}
+            exact
+          />
+          <Route path="/provider/:id" element={<AllProviderProducts />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route

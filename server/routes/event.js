@@ -12,6 +12,7 @@ const {
   ErrorResponse,
   modelValidationErrorHelper
 } = require('../utils/ErrorHelper');
+const mongoose = require('mongoose');
 
 // - GET -> router.get('/', (req, res, next) => {}) (get all the events from the DB)
 router.get('/', (req, res, next) => {
@@ -88,16 +89,15 @@ router.post('/rating/:productId', routeGuard, async (req, res, next) => {
   //Needs to have bought this event before beeing able to posta rating
   const hasPurchusedThisEvent = await Purchase.findOne({
     userId: _id,
-    'product._id': 'productId'
+    'product._id': mongoose.Types.ObjectId(productId)
   }).exec();
 
-  if (!hasPurchusedThisEvent) {
-    next(new ErrorResponse(`Purchase not found`, 404));
-  }
+  // if (!hasPurchusedThisEvent) {
+  //   next(new ErrorResponse(`Purchase not found`, 404));
+  // }
 
   Rating.create({ productId, userId: _id, stars, comment })
-    .then((event) => {
-      console.log(rating);
+    .then((rating) => {
       res.status(201).json({
         status: 201,
         message: `Created new eventItem: ${rating.comment} `,

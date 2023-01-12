@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 
 const schema = Schema(
   {
-    productId: { type: Schema.Types.ObjectId, required: true, ref: 'product' },
-    userId: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
-    stars: { type: Number, required: true, min: 1, max: 5 },
+    productId: { type: Schema.Types.ObjectId, ref: 'product' },
+    userId: { type: Schema.Types.ObjectId, ref: 'user' },
+    stars: { type: Number, min: 1, max: 5 },
     comment: String
   },
   { timestamps: true }
