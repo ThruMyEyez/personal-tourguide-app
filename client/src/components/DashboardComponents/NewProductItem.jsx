@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-//import { AddPlace } from "../TourMap";
 import { Editor } from "../Editor";
 import { getProviderPlaces } from "../../services/place";
 import { createEventItem } from "../../services/product";
+import "react-datepicker/dist/react-datepicker.css";
 
 import React from "react";
 
@@ -16,19 +16,20 @@ const NewProductItem = () => {
   const [selectedPlaces, setSelectedPlaces] = useState([]); // push only placeIDs
   const [providerPlaces, setProviderPlaces] = useState(null);
 
-  const options = [
-    { value: "place0", label: "place0" },
-    { value: "place1", label: "place1" },
-    { value: "place2", label: "place2" },
-  ];
-
   const navigate = useNavigate();
 
   useEffect(() => {
     getProviderPlaces()
-      .then((result) => {
-        console.log(result.data);
-        setProviderPlaces(result.data.data); // Need more than just the ID
+      .then((response) => {
+        console.log(response.data);
+        response.data.data.map((place) => {
+          place.value = place._id;
+          place.label = place.title;
+          console.log(place.value, place._id, place.title);
+          return place;
+        });
+        console.log(response.data.data);
+        setProviderPlaces(response.data.data); // Need more than just the ID
       })
       .catch((error) => {
         console.error(error.response.data.error.message);
@@ -38,11 +39,16 @@ const NewProductItem = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    const placeIDs = selectedPlaces.map((place) => {
+      return place._id;
+    });
+
     createEventItem({
       description: JSON.stringify(description),
       title: title,
       eventDate: eventDate, //new Date("2023-01-21"),
-      places: selectedPlaces,
+      places: placeIDs,
     })
       .then((response) => {
         console.log(response.data);
@@ -54,12 +60,14 @@ const NewProductItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(providerPlaces);
   };
 
   const handleInput = (e) => {
-    const { value, name } = e.target;
-    setTitle(value);
+    setTitle(e.target.value);
+  };
+
+  const handleSelect = (data) => {
+    setSelectedPlaces(data);
   };
 
   useEffect(() => {
@@ -72,10 +80,9 @@ const NewProductItem = () => {
         <h1>Create a new Tour or Event</h1>
 
         <button onClick={() => navigate(-1)}>X</button>
-        {/* <AddPlace /> */}
-
+        {/* Input productItem Title */}
         <form onSubmit={handleFormSubmit}>
-          <label className="block" htmlFor="input-name">
+          <label className="block" htmlFor="input-title">
             <span className="form-label">Event or Tour title</span>
           </label>
           <input
@@ -86,26 +93,41 @@ const NewProductItem = () => {
             value={title}
             onChange={handleInput}
           />
-
-          <label className="block" htmlFor="input-description">
+          {/* Select Multiple Places */}
+          <label className="">
             <span className="form-label">Set the Places for the Tour or Event</span>
           </label>
-          <Select className="my-1" isMulti={true} options={options} />
+          <Select
+            className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            placeholder="Search & select your places for the tour or event."
+            isMulti
+            value={selectedPlaces}
+            options={providerPlaces}
+            onChange={handleSelect}
+            autoFocus={true}
+          />
 
-          <DatePicker selected={eventDate} onChange={(date: Date) => setEventDate(date)} />
-
-          <label className="block" htmlFor="input-description">
+          {/* DatePicker */}
+          <label className="">
+            <span className="form-label">When your Tour or Event takes place?</span>
+          </label>
+          <DatePicker
+            className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            selected={eventDate}
+            onChange={(date) => setEventDate(date)}
+          />
+          {/* WYSIWYG Editor Input */}
+          <label className="">
             <span className="form-label">Create a detailed Tour or Event description</span>
           </label>
           <Editor
+            className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             description={description}
             setDescription={setDescription}
             handleFormSubmit={handleFormSubmit}
           />
+
           <button className="btn-primary">create new productItem</button>
-        </form>
-        <form onSubmit={handleSubmit}>
-          <button className="btn-primary">Test</button>
         </form>
       </div>
     </div>
