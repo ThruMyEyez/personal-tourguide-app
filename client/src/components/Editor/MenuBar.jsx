@@ -10,7 +10,8 @@ import {
   IconTextLeft,
   IconOrderedList,
 } from "../UI/Icons";
-export const MenuBar = ({ editor }) => {
+
+const MenuBar = ({ editor }) => {
   if (!editor) {
     return null;
   }
@@ -130,3 +131,5 @@ export const MenuBar = ({ editor }) => {
     </div>
   );
 };
+
+export default MenuBar;

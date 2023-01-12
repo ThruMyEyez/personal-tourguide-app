@@ -1,9 +1,9 @@
 import { EditorContent } from "@tiptap/react";
 
-const EditorView = () => {
+const EditorView = ({ content }) => {
   return (
     <div>
-      <EditorContent />
+      <EditorContent editor={content} />
     </div>
   );
 };
