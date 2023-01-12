@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Select from "react-select";
 import DatePicker from "react-datepicker";
 import { Editor } from "../Editor";
 import { getProviderPlaces } from "../../services/place";
 import { createEventItem } from "../../services/product";
+import { Selector } from "../UI";
 import "react-datepicker/dist/react-datepicker.css";
 
 import React from "react";
@@ -14,7 +14,8 @@ const NewProductItem = () => {
   const [description, setDescription] = useState("");
   const [eventDate, setEventDate] = useState(new Date());
   const [selectedPlaces, setSelectedPlaces] = useState([]); // push only placeIDs
-  const [providerPlaces, setProviderPlaces] = useState(null);
+  const [providerPlaces, setProviderPlaces] = useState([]);
+  const [isPlacesLoading, setIsPlacesLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ const NewProductItem = () => {
         });
         console.log(response.data.data);
         setProviderPlaces(response.data.data); // Need more than just the ID
+        setIsPlacesLoading(false);
       })
       .catch((error) => {
         console.error(error.response.data.error.message);
@@ -56,10 +58,6 @@ const NewProductItem = () => {
       .catch((error) => {
         console.error(error.response.data.error.message);
       });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
   };
 
   const handleInput = (e) => {
@@ -97,14 +95,13 @@ const NewProductItem = () => {
           <label className="">
             <span className="form-label">Set the Places for the Tour or Event</span>
           </label>
-          <Select
-            className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Search & select your places for the tour or event."
-            isMulti
+          <Selector
             value={selectedPlaces}
             options={providerPlaces}
-            onChange={handleSelect}
-            autoFocus={true}
+            handleChange={handleSelect}
+            loading={isPlacesLoading}
+            isMulti
+            placeholder="Search & select your places for the tour or event."
           />
 
           {/* DatePicker */}
@@ -124,10 +121,9 @@ const NewProductItem = () => {
             className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             description={description}
             setDescription={setDescription}
-            handleFormSubmit={handleFormSubmit}
           />
 
-          <button className="btn-primary">create new productItem</button>
+          <button className="btn-primary">Save Tour or Event in Database</button>
         </form>
       </div>
     </div>

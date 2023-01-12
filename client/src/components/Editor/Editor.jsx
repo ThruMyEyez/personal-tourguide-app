@@ -8,7 +8,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 
-const Editor = ({ description, setDescription, handleFormSubmit }) => {
+const Editor = ({ setDescription }) => {
   const editor = useEditor({
     extensions: [
       /* Document,
