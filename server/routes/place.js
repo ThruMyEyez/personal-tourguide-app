@@ -13,9 +13,11 @@ const {
 //Get all places belonging to the current user
 router.get('/', routeGuard, (req, res, next) => {
   const { _id } = req.payload;
-  console.log('body: ', req.body);
+  console.log('ID: ', _id);
   Place.find({ userId: _id })
     .then((places) => {
+      //if (!places) next(new ErrorResponse('No Places found!', 400));
+      console.log('places: ', places);
       res.status(200).json({
         status: 200,
         success: true,

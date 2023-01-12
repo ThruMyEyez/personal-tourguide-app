@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
 import { IKContext, IKUpload } from "imagekitio-react";
@@ -219,8 +220,10 @@ const Dashboard = (props) => {
   return (
     <div className="flex">
       <DashSidebar />
+
       <div className="flex flex-col items-center w-full h-screen bg-slate-200">
         <h1 className="p-3">Dashboard</h1>
+        <Outlet />
         <p>test & prototype</p>
         <p>{(isLoggedIn && `login: ${isLoggedIn}`) || `login: ${isLoggedIn}`}</p>
         {!isLoading && (
@@ -249,7 +252,6 @@ const Dashboard = (props) => {
         >
           <IKUpload onSuccess={onFileUploadSuccess} onError={onFileUploadError} />
         </IKContext>
-        <Editor />
         <form onSubmit={handleFormDelete1Submit}>
           <button className="btn-primary">Provider delete ProductItem by ID - artur</button>
         </form>

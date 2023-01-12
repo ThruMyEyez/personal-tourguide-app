@@ -16,7 +16,7 @@ import {
   IsAnon,
 } from "./components/AuthComponents/";
 
-import { NewPlaceModal } from "./components/DashboardComponents";
+import { NewPlaceModal, NewProductItem } from "./components/DashboardComponents";
 
 const App = () => {
   const location = useLocation();
@@ -44,7 +44,9 @@ const App = () => {
               </IsPrivate>
             }
             exact
-          />
+          >
+            <Route path="/dashboard/new-event" element={<NewProductItem />} />
+          </Route>
           <Route
             path="/dashboard/place/create"
             element={
@@ -94,6 +96,15 @@ const App = () => {
             }
             exact
           />
+          {/*          <Route
+            path="/dashboard/new-event"
+            element={
+              <IsPrivate>
+                <NewProductItemModal />
+              </IsPrivate>
+            }
+            exact
+          /> */}
         </Routes>
       )}
     </div>

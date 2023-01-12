@@ -15,6 +15,14 @@ const menuLinks = [
   },
 ];
 
+const productLinks = [
+  {
+    title: "New Tour/Event",
+    url: "/dashboard/new-event",
+    Icon: IconMapLocationDot,
+  },
+];
+
 const placesLinks = [
   {
     title: "Places",
@@ -83,6 +91,11 @@ const DashSidebar = () => {
         {/* Menu Block */}
         <SidebarMenublock sidebarOpenState={open} menuTitle="Dash Menu" links={menuLinks} />
         {/* TODO: Make this viewable only for providers/Admins */}
+        <SidebarMenublock
+          sidebarOpenState={open}
+          menuTitle="Events & Tours"
+          links={productLinks}
+        />
         <SidebarMenublock
           sidebarOpenState={open}
           menuTitle="Places Menu"
