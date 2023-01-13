@@ -16,7 +16,12 @@ import {
   IsAnon,
 } from "./components/AuthComponents/";
 
-import { NewPlaceModal, NewProductItem } from "./components/DashboardComponents";
+import {
+  NewPlaceModal,
+  NewProductItem,
+  MyOfferings,
+  HandleOffering,
+} from "./components/DashboardComponents";
 
 const App = () => {
   const location = useLocation();
@@ -46,6 +51,8 @@ const App = () => {
             exact
           >
             <Route path="/dashboard/new-event" element={<NewProductItem />} />
+            <Route path="/dashboard/new-offering" element={<HandleOffering />} />
+            <Route path="/dashboard/my-offerings" element={<MyOfferings />} />
           </Route>
           <Route
             path="/dashboard/place/create"

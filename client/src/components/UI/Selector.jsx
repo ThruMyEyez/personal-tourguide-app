@@ -20,7 +20,7 @@ const Selector = ({
         options={options}
         onChange={handleChange}
         isDisabled={disabled}
-        primaryColor={"indigo"}
+        primaryColor="indigo"
         classNames={{
           menuButton: ({ isDisabled }) =>
             `flex  text-sm text-gray-500 border border-gray-300 rounded shadow-sm transition-all duration-300 focus:outline-none ${

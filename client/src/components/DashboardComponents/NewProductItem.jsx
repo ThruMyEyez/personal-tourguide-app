@@ -35,7 +35,7 @@ const NewProductItem = () => {
       })
       .catch((error) => {
         setErrorMsg(error.response.data.error.message);
-        console.error(error.response.data.error.message);
+        console.error(error.response.data);
         console.log(error);
       });
   }, []);
@@ -54,12 +54,10 @@ const NewProductItem = () => {
       places: placeIDs,
     })
       .then((response) => {
-        console.log(response.data);
         navigate(-1);
       })
       .catch((error) => {
         setErrorMsg(error.response.data.error.message);
-        console.error(error.response.data.error.message);
       });
   };
 
@@ -78,10 +76,14 @@ const NewProductItem = () => {
 
   return (
     <div className="w-full p-3 border border-sky-600">
-      <div className="mx-auto space-y-4 ">
+      <div className="mx-auto space-y-4">
+        <button
+          className="float-right px-3 py-1 mr-3 text-white bg-black rounded-md"
+          onClick={() => navigate(-1)}
+        >
+          X
+        </button>
         <h1>Create a new Tour or Event</h1>
-
-        <button onClick={() => navigate(-1)}>X</button>
 
         {errorMsg && <OnErrorAlert msg={errorMsg} />}
 

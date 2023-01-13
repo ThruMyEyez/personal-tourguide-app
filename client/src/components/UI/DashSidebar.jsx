@@ -4,6 +4,7 @@ import SidebarMenublock from "./SidebarMenublock";
 import chevronRight from "../../assets/right-thin-chevron-svgrepo-com.svg";
 import { IconMapLocationDot, IconMapLocationPlus, IconMapLocation } from "./Icons";
 
+// menuLinks could be serving well for user profile?
 const menuLinks = [
   {
     title: "Link1",
@@ -14,15 +15,28 @@ const menuLinks = [
     url: "/",
   },
 ];
-
+// contains the Product dashboard Links
 const productLinks = [
+  {
+    title: "New Offer",
+    url: "/dashboard/new-offering",
+    //Icon: IconMapLocationDot,
+  },
+  {
+    title: "My Offerings",
+    url: "/dashboard/my-offerings",
+    //Icon: IconMapLocationDot,
+  },
+];
+// contains the productItem dashboard Links
+const eventLinks = [
   {
     title: "New Tour/Event",
     url: "/dashboard/new-event",
     Icon: IconMapLocationDot,
   },
 ];
-
+// contains the places managing dashboard Links
 const placesLinks = [
   {
     title: "Places",
@@ -41,6 +55,7 @@ const DashSidebar = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // To get the current location for the Modal component background
     placesLinks[1].location = location;
   }, []);
 
@@ -91,10 +106,17 @@ const DashSidebar = () => {
         {/* Menu Block */}
         <SidebarMenublock sidebarOpenState={open} menuTitle="Dash Menu" links={menuLinks} />
         {/* TODO: Make this viewable only for providers/Admins */}
+        {/* Product handling menu */}
+        <SidebarMenublock
+          sidebarOpenState={open}
+          menuTitle="Tour & Event Offers"
+          links={productLinks}
+        />
+        {/* Event & Tour handling menu */}
         <SidebarMenublock
           sidebarOpenState={open}
           menuTitle="Events & Tours"
-          links={productLinks}
+          links={eventLinks}
         />
         <SidebarMenublock
           sidebarOpenState={open}
