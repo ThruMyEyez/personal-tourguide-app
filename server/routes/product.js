@@ -20,7 +20,6 @@ router.get('/:productId', (req, res, next) => {});
 */
 
 //get all products from a specific provider (public)
-// 🙄 Redudant, I'm sorry
 router.get('/provider/:id', (req, res, next) => {
   const { id } = req.params;
   Product.find({
@@ -79,6 +78,20 @@ router.post('/create', routeGuard, async (req, res, next) => {
 
 // Provider can create and save a new productItem to the database!
 // The productItem is neccessary for the provider to be enabled creating new Products
+router.get('/event-items/:id', (req, res, next) => {
+  //const { _id } = req.payload;
+  const { id } = req.params;
+  ProductItem.find({ userId: id })
+    .then((foundProductItems) => {
+      console.log(foundProductItems);
+      res.status(200).json({
+        message: `Found ${foundProductItems.length} product items.`,
+        data: foundProductItems
+      });
+    })
+    .catch((error) => next(error));
+});
+
 router.post('/item/create', routeGuard, async (req, res, next) => {
   const { _id } = req.payload;
 

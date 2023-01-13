@@ -19,8 +19,7 @@ const schema = new Schema(
     productItem: {
       // Product item should contain the product item Type
       type: Schema.Types.ObjectId,
-      ref: 'productItem',
-      required: true
+      ref: 'productItem'
     },
     rating: { type: [Schema.Types.ObjectId], ref: 'rating' }
   },
