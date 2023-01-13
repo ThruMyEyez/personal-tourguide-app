@@ -6,6 +6,7 @@ import { getProviderPlaces } from "../../services/place";
 import { createEventItem } from "../../services/product";
 import { Selector } from "../UI";
 import "react-datepicker/dist/react-datepicker.css";
+import { OnErrorAlert } from "../UI/Alerts";
 
 import React from "react";
 
@@ -16,13 +17,12 @@ const NewProductItem = () => {
   const [selectedPlaces, setSelectedPlaces] = useState([]); // push only placeIDs
   const [providerPlaces, setProviderPlaces] = useState([]);
   const [isPlacesLoading, setIsPlacesLoading] = useState(true);
-
+  const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     getProviderPlaces()
       .then((response) => {
-        console.log(response.data);
         response.data.data.map((place) => {
           place.value = place._id;
           place.label = place.title;
@@ -34,6 +34,7 @@ const NewProductItem = () => {
         setIsPlacesLoading(false);
       })
       .catch((error) => {
+        setErrorMsg(error.response.data.error.message);
         console.error(error.response.data.error.message);
         console.log(error);
       });
@@ -54,8 +55,10 @@ const NewProductItem = () => {
     })
       .then((response) => {
         console.log(response.data);
+        navigate(-1);
       })
       .catch((error) => {
+        setErrorMsg(error.response.data.error.message);
         console.error(error.response.data.error.message);
       });
   };
@@ -65,6 +68,7 @@ const NewProductItem = () => {
   };
 
   const handleSelect = (data) => {
+    console.log(data);
     setSelectedPlaces(data);
   };
 
@@ -78,6 +82,9 @@ const NewProductItem = () => {
         <h1>Create a new Tour or Event</h1>
 
         <button onClick={() => navigate(-1)}>X</button>
+
+        {errorMsg && <OnErrorAlert msg={errorMsg} />}
+
         {/* Input productItem Title */}
         <form onSubmit={handleFormSubmit}>
           <label className="block" htmlFor="input-title">
