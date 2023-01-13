@@ -29,7 +29,7 @@ router.get('/', (req, res, next) => {
     })
     .populate({
       path: 'rating',
-      select: 'stars comment productId',
+      select: 'stars comment productId userId',
       model: Rating
     })
     .then((events) => {
@@ -49,17 +49,28 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
   Product.findById(id)
-    .populate(`productItem`)
-    .populate(`rating`)
+    .populate({
+      path: 'productItem',
+      select: 'userId title eventDate description places',
+      model: ProductItem,
+      populate: {
+        path: 'places',
+        select: 'title description picture moreLink position',
+        model: Place
+      }
+    })
+    .populate({
+      path: 'rating',
+      select: 'stars comment productId userId',
+      model: Rating
+    })
     .then((event) => {
-      if (event) {
+      if (!event) {
         next(new ErrorResponse(`Event not found!`, 404));
       }
       res.status(200).json({
-        success: true,
         message: `Event ${event.title} found`,
-        places: event,
-        status: 200
+        data: event
       });
     })
     .catch((err) => {

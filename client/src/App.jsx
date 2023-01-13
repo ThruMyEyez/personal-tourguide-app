@@ -54,6 +54,7 @@ const App = () => {
           >
             <Route path="/dashboard/new-event" element={<NewProductItem />} />
             <Route path="/dashboard/new-offering" element={<HandleOffering />} />
+            <Route path="/dashboard/manage-offering/:id" element={<HandleOffering />} />
             <Route path="/dashboard/my-offerings" element={<MyOfferings />} />
           </Route>
           <Route
