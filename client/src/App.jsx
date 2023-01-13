@@ -22,6 +22,7 @@ import {
   MyOfferings,
   HandleOffering,
 } from "./components/DashboardComponents";
+import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
 
 const App = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/individual-program" element={<IndividualProgram />} />
           <Route path="/calender" element={<Calender />} />
           <Route path="/lost-password/:id/:token" element={<SetPassword />} exact />
+          <Route path="/provider/:id" element={<AllProviderProducts />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route

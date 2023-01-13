@@ -1,4 +1,6 @@
+import ProductsFromDatabase from "../components/FetchFromDB/AllProductsFromDatabase";
 import HeroTextInterval from "../components/HeroTextInterval";
+import SubmitRating from "../components/Rating/SubmitRating";
 
 const Main = () => {
   return (
@@ -8,6 +10,10 @@ const Main = () => {
           title={"Explore the city in the App & get on"}
           strings={["Unique Tours", "Rare Events", "Personal Guides"]}
         />
+      </div>
+      <div>
+        <ProductsFromDatabase />
+        <SubmitRating />
       </div>
     </div>
   );
