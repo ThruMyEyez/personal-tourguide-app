@@ -15,9 +15,6 @@ const MyOfferings = () => {
     !isLoading &&
       getProviderProducts(user._id)
         .then((response) => {
-          console.log("status: ", response.data.status);
-          console.log("message: ", response.data.message);
-          console.log(user.role);
           setOfferings(response.data.data);
         })
         .catch((error) => {

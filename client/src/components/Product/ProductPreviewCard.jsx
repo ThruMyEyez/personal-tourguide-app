@@ -49,7 +49,7 @@ const ProductPreviewCard = ({ product, provider, isOwn, offers, setOffers }) => 
         <div className="flex flex-col">
           <dt className="text-xs capitalize text-slate-100">{product.productType} on:</dt>
           <dd className="text-sm font-medium text-slate-200">
-            {product.productItem.eventDate}
+            {product.productItem?.eventDate}
           </dd>
         </div>
 
