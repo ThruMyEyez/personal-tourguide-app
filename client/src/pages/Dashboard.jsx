@@ -314,13 +314,14 @@ const Dashboard = (props) => {
           <button className="btn-primary">Update user role - alex</button>
         </form>
         <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">Create Provider Profile</button>
-        </form>
-        <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">Create Provider Profile</button>
+          <button className="btn-primary">
+            Create Provider Profile - joao{" "}
+          </button>
         </form>
         <form onSubmit={handleUpdateProviderProfile}>
-          <button className="btn-primary">Update Provider Profile</button>
+          <button className="btn-primary">
+            Update Provider Profile - joao{" "}
+          </button>
         </form>
       </div>
     </div>
