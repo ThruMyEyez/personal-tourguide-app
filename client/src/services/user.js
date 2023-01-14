@@ -40,3 +40,6 @@ export const createProviderProfile = (data) =>
 // If the user.role is "provider" or "admin", user can update his provider profile
 export const updateProviderProfile = (data) =>
   api.put(`/user/edit-profile/`, data, authHeaders);
+
+export const getUserRatings = (userId) =>
+  api.get(`/user/${userId}/ratings`, authHeaders);

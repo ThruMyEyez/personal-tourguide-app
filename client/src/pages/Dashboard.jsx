@@ -26,6 +26,7 @@ import { getAllEvents, newEventRating } from "../services/event";
 import Rating from "../components/Profile/Rating";
 import CreateProviderForm from "../components/Profile/CreateProviderForm";
 import UpdateProviderForm from "../components/Profile/UpdateProviderForm";
+import SubmitRating from "../components/Rating/SubmitRating";
 
 const Dashboard = (props) => {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -230,11 +231,12 @@ const Dashboard = (props) => {
       <DashSidebar />
 
       <div className="flex flex-col items-center w-full h-screen bg-slate-200">
+        {/* <SubmitRating /> */}
         <UpdateProviderForm />
         <CreateProviderForm />
         <Profile>
           <Follow />
-          <Rating />
+          <Rating id="63bda8fd8ba6ba4d46895962" />
         </Profile>
         <h1 className="p-3">Dashboard</h1>
         <Outlet />

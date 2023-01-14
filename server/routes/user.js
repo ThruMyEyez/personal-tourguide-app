@@ -8,6 +8,7 @@ const Follow = require('../models/follow');
 const Profile = require('../models/profile');
 const Purchase = require('../models/purchase');
 const Place = require('../models/place');
+const Ratings = require('../models/rating');
 
 const { routeGuard } = require('../middleware/route-guard');
 const {
@@ -25,7 +26,6 @@ router.get('/', routeGuard, async (req, res, next) => {
     { userId: _id },
     { explicit: true }
   ).exec();
-  console.log(providerProfile);
 
   User.findById({ _id })
     .select('-passwordHashAndSalt') // hidden for security

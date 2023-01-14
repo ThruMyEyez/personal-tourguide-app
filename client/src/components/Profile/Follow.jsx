@@ -7,10 +7,10 @@ import {
 } from "../../services/user";
 
 const Follow = (profileId) => {
-  const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(null);
   const [clicked, setClicked] = useState(false);
 
-  profileId = "63b8544b32f2eca6481fedbe";
+  profileId = "63b8544b32f2eca6481fedbe"; //TODO: remove
 
   useEffect(() => {
     followedUser(profileId)
@@ -27,16 +27,16 @@ const Follow = (profileId) => {
 
   const handleFollowingStatus = () => {
     if (following) {
+      setFollowing(false);
       unfollowUser(profileId /*"USER ID "*/).catch((error) => {
         console.log(error);
       });
-      setFollowing(false);
     }
     if (!following) {
+      setFollowing(true);
       followUser(profileId /*"USER ID "*/).catch((error) => {
         console.log(error);
       });
-      setFollowing(true);
     }
     setClicked(!clicked);
   };

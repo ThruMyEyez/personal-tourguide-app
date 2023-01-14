@@ -5,8 +5,9 @@ import { api, authHeaders } from "./api";
 // export const getAllProducts = () => api.get("/products/");
 
 //get all products from a specific provider (public)
-export const getProviderProducts = (userId) =>
-  api.get(`/product/provider/${userId}`);
+export const getProviderProducts = (userId) => {
+  return api.get(`/product/provider/${userId}`);
+};
 
 // get all productItems from a specific provider
 export const getAllProviderProductItems = (userId) =>
@@ -29,9 +30,7 @@ export const deleteProduct = (productId) =>
 
 // Provider can create a productItem from WYSIWYG and his places under this route service
 // The productItem is neccessary for the provider to be enabled creating new Products
-//TODO:
 export const createEventItem = (data) => {
-  console.log(authHeaders);
   return api.post("/product/item/create", data, authHeaders);
 };
 
