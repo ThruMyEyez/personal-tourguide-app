@@ -7,14 +7,13 @@ import { createEventItem } from "../../services/product";
 import { Selector } from "../UI";
 import "react-datepicker/dist/react-datepicker.css";
 import { OnErrorAlert } from "../UI/Alerts";
-
-import React from "react";
+import { CloseNavigateBtn } from "../UI";
 
 const NewProductItem = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [eventDate, setEventDate] = useState(new Date());
-  const [selectedPlaces, setSelectedPlaces] = useState([]); // push only placeIDs
+  const [selectedPlaces, setSelectedPlaces] = useState([]);
   const [providerPlaces, setProviderPlaces] = useState([]);
   const [isPlacesLoading, setIsPlacesLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -26,17 +25,13 @@ const NewProductItem = () => {
         response.data.data.map((place) => {
           place.value = place._id;
           place.label = place.title;
-          console.log(place.value, place._id, place.title);
           return place;
         });
-        console.log(response.data.data);
-        setProviderPlaces(response.data.data); // Need more than just the ID
+        setProviderPlaces(response.data.data); // Need more than only a ID
         setIsPlacesLoading(false);
       })
       .catch((error) => {
         setErrorMsg(error.response.data.error.message);
-        console.error(error.response.data);
-        console.log(error);
       });
   }, []);
 
@@ -66,23 +61,13 @@ const NewProductItem = () => {
   };
 
   const handleSelect = (data) => {
-    console.log(data);
     setSelectedPlaces(data);
   };
-
-  useEffect(() => {
-    console.log(description);
-  }, [description]);
 
   return (
     <div className="w-full p-3 border border-sky-600">
       <div className="mx-auto space-y-4">
-        <button
-          className="float-right px-3 py-1 mr-3 text-white bg-black rounded-md"
-          onClick={() => navigate(-1)}
-        >
-          X
-        </button>
+        <CloseNavigateBtn navigateTo={"/dashboard/"} />
         <h1>Create a new Tour or Event</h1>
 
         {errorMsg && <OnErrorAlert msg={errorMsg} />}
