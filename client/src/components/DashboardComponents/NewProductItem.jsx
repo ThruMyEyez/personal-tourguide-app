@@ -87,7 +87,9 @@ const NewProductItem = () => {
           />
           {/* Select Multiple Places */}
           <label className="">
-            <span className="form-label">Set the Places for the Tour or Event</span>
+            <span className="form-label">
+              Set the Places for the Tour or Event
+            </span>
           </label>
           <Selector
             value={selectedPlaces}
@@ -100,7 +102,9 @@ const NewProductItem = () => {
 
           {/* DatePicker */}
           <label className="">
-            <span className="form-label">When your Tour or Event takes place?</span>
+            <span className="form-label">
+              When your Tour or Event takes place?
+            </span>
           </label>
           <DatePicker
             className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -109,7 +113,9 @@ const NewProductItem = () => {
           />
           {/* WYSIWYG Editor Input */}
           <label className="">
-            <span className="form-label">Create a detailed Tour or Event description</span>
+            <span className="form-label">
+              Create a detailed Tour or Event description
+            </span>
           </label>
           <Editor
             className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -117,7 +123,9 @@ const NewProductItem = () => {
             setDescription={setDescription}
           />
 
-          <button className="btn-primary">Save Tour or Event in Database</button>
+          <button className="btn-primary">
+            Save Tour or Event in Database
+          </button>
         </form>
       </div>
     </div>

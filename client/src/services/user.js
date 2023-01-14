@@ -11,9 +11,18 @@ export const getPurchaseDetails = (purchaseId) =>
 // get public user profile
 export const getFullUserDetails = (userId) => api.get(`/user/${userId}`);
 
+// Following a specific user. req.body.followee aIs the target user to be followed
+export const followedUser = (followee) =>
+  api
+    .get(`/user/followed/${followee}`, authHeaders)
+    .then((response) => response.data)
+    .catch((err) => console.log(err));
+
 // Following a specific user. req.body.followee Is the target user to be followed
-export const followUser = (data) =>
-  api.post(`/user/follow/`, data, authHeaders);
+export const followUser = (followee) =>
+  api
+    .post(`/user/follow/`, { followee }, authHeaders)
+    .then((response) => response.data);
 
 // Unfollowing a specific user. :id Is the targetUser to be unfollowed
 export const unfollowUser = (userId) =>

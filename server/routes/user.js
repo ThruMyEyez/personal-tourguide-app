@@ -25,6 +25,7 @@ router.get('/', routeGuard, async (req, res, next) => {
     { userId: _id },
     { explicit: true }
   ).exec();
+  console.log(providerProfile);
 
   User.findById({ _id })
     .select('-passwordHashAndSalt') // hidden for security
@@ -65,6 +66,34 @@ router.get('/purchases', routeGuard, (req, res, next) => {
 //redudant 🙄 its included above
 //router.get('/purchase-history', (req, res, next) => {});
 router.get('/purchases/:purshaseId', (req, res, next) => {});
+
+//Gets a Following document if exists
+router.get('/followed/:id', routeGuard, (req, res, next) => {
+  const { id } = req.params;
+  const { _id } = req.payload;
+  console.log(_id, id);
+  Follow.findOne({
+    followee: id,
+    follower: _id
+  })
+    .then((newFollowing) => {
+      if (!newFollowing) {
+        res.json({
+          success: true,
+          message: `you do not follow ${id}`
+        });
+      } else {
+        res.status(201).json({
+          success: true,
+          message: `userId: ${newFollowing.follower} is  following ${newFollowing.followee}`,
+          data: newFollowing
+        });
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 
 // Following a specific user. req.body.followee Is the target user to be followed
 // This route checks first if the current user is already following target User
@@ -109,7 +138,7 @@ router.delete('/unfollow/:id/', routeGuard, (req, res, next) => {
           message: `you don't follow ${id}`
         });
       result &&
-        res.status(200).json({
+        res.json({
           success: true,
           message: `you unfollowed ${id}`
         });
@@ -154,35 +183,6 @@ router.put('/update-role/:id/', routeGuard, (req, res, next) => {
           success: true,
           message: `User ${result.name}'s role has been updated to ${result.role}`
         });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
-
-// get userData of specific user to show up for everyone
-// if the user is a provider get additional provider profile data
-// for public display
-router.get('/:id', async (req, res, next) => {
-  const { id } = req.params;
-  const providerProfile = await Profile.findOne(
-    { userId: id },
-    { explicit: true }
-  ).exec();
-
-  User.findById({ _id: id })
-    .select('-passwordHashAndSalt -updatedAt')
-    .then((foundUser) => {
-      if (!foundUser) {
-        throw new ErrorResponse(`No user with the id: ${id}`, 404);
-      }
-      const { role, name } = foundUser;
-
-      res.status(200).json({
-        message: `Found user: ${name}, role: ${role}`,
-        status: 200,
-        data: { ...foundUser._doc, providerProfile: providerProfile }
-      });
     })
     .catch((error) => {
       next(error);
@@ -259,4 +259,32 @@ router.put('/edit-profile/', routeGuard, (req, res, next) => {
   }
 });
 
+// get userData of specific user to show up for everyone
+// if the user is a provider get additional provider profile data
+// for public display
+router.get('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const providerProfile = await Profile.findOne(
+    { userId: id },
+    { explicit: true }
+  ).exec();
+
+  User.findById({ _id: id })
+    .select('-passwordHashAndSalt -updatedAt')
+    .then((foundUser) => {
+      if (!foundUser) {
+        throw new ErrorResponse(`No user with the id: ${id}`, 404);
+      }
+      const { role, name } = foundUser;
+
+      res.status(200).json({
+        message: `Found user: ${name}, role: ${role}`,
+        status: 200,
+        data: { ...foundUser._doc, providerProfile: providerProfile }
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 module.exports = router;
