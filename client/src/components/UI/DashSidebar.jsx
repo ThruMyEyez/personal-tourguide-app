@@ -7,11 +7,11 @@ import { IconMapLocationDot, IconMapLocationPlus, IconMapLocation } from "./Icon
 // menuLinks could be serving well for user profile?
 const menuLinks = [
   {
-    title: "Link1",
+    title: "Profile Settings",
     url: "/dashboard",
   },
   {
-    title: "Home",
+    title: "My Purchases",
     url: "/",
   },
 ];
@@ -30,6 +30,14 @@ const productLinks = [
 ];
 // contains the productItem dashboard Links
 const eventLinks = [
+  {
+    title: "Prepared Tours",
+    url: "/dashboard/new-event",
+  },
+  {
+    title: "Prepared Events",
+    url: "/dashboard/new-event",
+  },
   {
     title: "New Tour/Event",
     url: "/dashboard/new-event",

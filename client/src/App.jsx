@@ -23,6 +23,7 @@ import {
   HandleOffering,
 } from "./components/DashboardComponents";
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
+import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
 
 const App = () => {
   const location = useLocation();
@@ -56,6 +57,7 @@ const App = () => {
             <Route path="/dashboard/new-offering" element={<HandleOffering />} />
             <Route path="/dashboard/manage-offering/:id" element={<HandleOffering />} />
             <Route path="/dashboard/my-offerings" element={<MyOfferings />} />
+            <Route path="/dashboard/places" element={<AllPlacesFromProvider />} />
           </Route>
           <Route
             path="/dashboard/place/create"

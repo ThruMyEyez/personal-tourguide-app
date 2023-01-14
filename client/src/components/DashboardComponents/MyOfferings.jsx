@@ -19,8 +19,6 @@ const MyOfferings = () => {
         })
         .catch((error) => {
           setErrorMsg(error.response.data.error.message);
-          console.error(error.response.data);
-          console.log(error);
         });
   }, []);
 
