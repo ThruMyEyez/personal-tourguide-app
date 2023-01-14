@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
 import { IKContext, IKUpload } from "imagekitio-react";
-import Editor from "../components/Editor/Editor";
+
 import {
   createNewProduct,
   deleteEventItem,
