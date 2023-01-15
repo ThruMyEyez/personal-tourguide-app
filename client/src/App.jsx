@@ -23,7 +23,7 @@ import {
   HandleOffering,
 } from "./components/DashboardComponents";
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
-import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
+import AllPlacesFromProvider from "./components/FetchFromDB/AllProviderProducts";
 
 const App = () => {
   const location = useLocation();
@@ -40,10 +40,15 @@ const App = () => {
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />
           <Route path="/calender" element={<Calender />} />
-          <Route path="/lost-password/:id/:token" element={<SetPassword />} exact />
+          <Route
+            path="/lost-password/:id/:token"
+            element={<SetPassword />}
+            exact
+          />
           <Route path="/provider/:id" element={<AllProviderProducts />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/purchase/:id" />
           <Route
             path="/dashboard"
             element={
@@ -54,10 +59,19 @@ const App = () => {
             exact
           >
             <Route path="/dashboard/new-event" element={<NewProductItem />} />
-            <Route path="/dashboard/new-offering" element={<HandleOffering />} />
-            <Route path="/dashboard/manage-offering/:id" element={<HandleOffering />} />
+            <Route
+              path="/dashboard/new-offering"
+              element={<HandleOffering />}
+            />
+            <Route
+              path="/dashboard/manage-offering/:id"
+              element={<HandleOffering />}
+            />
             <Route path="/dashboard/my-offerings" element={<MyOfferings />} />
-            <Route path="/dashboard/places" element={<AllPlacesFromProvider />} />
+            <Route
+              path="/dashboard/places"
+              element={<AllPlacesFromProvider />}
+            />
           </Route>
           <Route
             path="/dashboard/place/create"
