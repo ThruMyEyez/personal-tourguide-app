@@ -1,30 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteProduct } from "../../services/product";
+import { deletePlace } from "../../services/place";
 import { ConfirmDeleteModal } from "../UI";
 
-const DeleteOwnProduct = ({ curProduct, productId, title, type, offers, setOffers }) => {
-  //const [confirmDelete, setConfirmDelete] = useState(false);
+export const DeletePlace = ({ curPlace, title, type, offers, setOffers }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigate = useNavigate();
 
   const handleDeleteConfirm = (id) => {
-    //NEED TO DEBUG!
-    deleteProduct(id)
+    deletePlace(id)
       .then((response) => {
-        console.log("res: ", response);
-        setOffers(
-          offers.splice(
-            offers.findIndex((product) => product._id === curProduct._id),
-            1
-          )
-        );
-
-        navigate("/dashboard/my-offerings");
+        navigate("/dashboard/places");
       })
       .catch((error) => {
         console.error(error.response.data);
-        console.log(error);
       });
   };
 
@@ -34,14 +23,12 @@ const DeleteOwnProduct = ({ curProduct, productId, title, type, offers, setOffer
         onClick={() => setShowDeleteModal(true)}
         className="px-4 py-2 mx-3 my-5 text-sm font-medium rounded bg-red-400/60 hover:bg-red-600/80 text-slate-200"
       >
-        Delete this
+        Delete
       </div>
-
       {showDeleteModal ? (
         <ConfirmDeleteModal
-          delType={`${curProduct.productType} Offering`}
-          delTitle={curProduct.title}
-          delId={curProduct._id}
+          delTitle={curPlace.title}
+          delId={curPlace._id}
           setShowModal={setShowDeleteModal}
           handleDeleteConfirm={handleDeleteConfirm}
         />
@@ -50,4 +37,4 @@ const DeleteOwnProduct = ({ curProduct, productId, title, type, offers, setOffer
   );
 };
 
-export default DeleteOwnProduct;
+export default DeletePlace;

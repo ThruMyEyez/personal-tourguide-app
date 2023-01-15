@@ -23,13 +23,13 @@ import {
   HandleOffering,
 } from "./components/DashboardComponents";
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
-// import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
+import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
+import { OwnProviderProductItems } from "./components/Product";
 
 const App = () => {
   const location = useLocation();
   // initialize route as location background backdrop, default location.state: null
   const background = location.state && location.state.background;
-  console.log(location);
 
   return (
     <div className="App">
@@ -48,6 +48,7 @@ const App = () => {
           <Route path="/provider/:id" element={<AllProviderProducts />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/purchase/:id" />
           <Route
             path="/dashboard"
             element={
@@ -67,7 +68,10 @@ const App = () => {
               element={<HandleOffering />}
             />
             <Route path="/dashboard/my-offerings" element={<MyOfferings />} />
-            {/* <Route path="/dashboard/places" element={<AllPlacesFromProvider />} /> */}
+            <Route
+              path="/dashboard/places"
+              element={<AllPlacesFromProvider />}
+            />
           </Route>
           <Route
             path="/dashboard/place/create"

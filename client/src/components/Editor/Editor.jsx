@@ -1,14 +1,11 @@
-import MenuBar from "./MenuBar";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-//import Document from "@tiptap/extension-document";
-//import Heading from "@tiptap/extension-heading";
-//import Paragraph from "@tiptap/extension-paragraph";
-//import Text from "@tiptap/extension-text";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 
-const Editor = ({ setDescription }) => {
+import MenuBar from "./MenuBar";
+// ToDo Blockquote & Icons + Styling
+const Editor = ({ setDescription, hideMenubar }) => {
   const editor = useEditor({
     extensions: [
       /* Document,
@@ -19,6 +16,7 @@ const Editor = ({ setDescription }) => {
       }), */
       StarterKit,
       Underline,
+
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -31,13 +29,12 @@ const Editor = ({ setDescription }) => {
       },
     },
     content: ``,
-    injectCSS: false,
 
     onUpdate: ({ editor }) => {
+      console.log(editor);
       const json = editor.getJSON();
-      //const html = editor.getHTML();
+
       setDescription(json);
-      editor.commands.setContent(json);
     },
   });
 

@@ -22,6 +22,7 @@ const userRouter = require('./routes/user');
 const productRouter = require('./routes/product');
 const profileRouter = require('./routes/profile');
 const eventsRouter = require('./routes/event');
+const purchaseRouter = require('./routes/purchase');
 
 const app = express();
 
@@ -70,6 +71,7 @@ app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.use('/profile', profileRouter);
 app.use('/event', eventsRouter);
+app.use('/purchase', purchaseRouter);
 /* Catch missing routes and forward to error handler */
 app.use((req, res, next) => {
   next(createError(404));

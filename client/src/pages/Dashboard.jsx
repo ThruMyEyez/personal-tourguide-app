@@ -5,7 +5,7 @@ import DashSidebar from "../components/UI/DashSidebar";
 import Profile from "../components/Profile/Profile";
 import Follow from "../components/Profile/Follow";
 import { IKContext, IKUpload } from "imagekitio-react";
-import Editor from "../components/Editor/Editor";
+
 import {
   createNewProduct,
   deleteEventItem,
