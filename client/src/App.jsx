@@ -23,13 +23,13 @@ import {
   HandleOffering,
 } from "./components/DashboardComponents";
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
-import AllPlacesFromProvider from "./components/FetchFromDB/AllProviderProducts";
+import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
+import { OwnProviderProductItems } from "./components/Product";
 
 const App = () => {
   const location = useLocation();
   // initialize route as location background backdrop, default location.state: null
   const background = location.state && location.state.background;
-  console.log(location);
 
   return (
     <div className="App">
@@ -59,6 +59,10 @@ const App = () => {
             exact
           >
             <Route path="/dashboard/new-event" element={<NewProductItem />} />
+            <Route
+              path="/dashboard/my-events"
+              element={<OwnProviderProductItems />}
+            />
             <Route
               path="/dashboard/new-offering"
               element={<HandleOffering />}

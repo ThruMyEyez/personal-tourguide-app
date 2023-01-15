@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
+
 import { Editor } from "../Editor";
 import { getProviderPlaces } from "../../services/place";
 import { createEventItem } from "../../services/product";
@@ -27,7 +28,7 @@ const NewProductItem = () => {
           place.label = place.title;
           return place;
         });
-        setProviderPlaces(response.data.data); // Need more than only a ID
+        setProviderPlaces(response.data.data);
         setIsPlacesLoading(false);
       })
       .catch((error) => {
@@ -38,10 +39,10 @@ const NewProductItem = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const placeIDs = selectedPlaces.map((place) => {
+    const placeIDs = selectedPlaces?.map((place) => {
       return place._id;
     });
-
+    console.log("FORM SUBMIT");
     createEventItem({
       description: JSON.stringify(description),
       title: title,
@@ -49,7 +50,7 @@ const NewProductItem = () => {
       places: placeIDs,
     })
       .then((response) => {
-        navigate(-1);
+        //navigate(-1);
       })
       .catch((error) => {
         setErrorMsg(error.response.data.error.message);

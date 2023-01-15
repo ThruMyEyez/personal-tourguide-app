@@ -8,8 +8,16 @@ const HorizontalTextRuler = ({ str }) => {
   );
 };
 
+const HorizontalRuler = () => {
+  return (
+    <div className="flex items-center space-x-4">
+      <hr className="w-full border border-gray-300" />
+    </div>
+  );
+};
+
 const FormHelper = ({ str }) => {
   return <p className="form-helper">{str}</p>;
 };
 
-export { HorizontalTextRuler, FormHelper };
+export { HorizontalTextRuler, HorizontalRuler, FormHelper };

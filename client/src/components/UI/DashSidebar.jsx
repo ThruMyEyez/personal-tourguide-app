@@ -31,12 +31,12 @@ const productLinks = [
 // contains the productItem dashboard Links
 const eventLinks = [
   {
-    title: "Prepared Tours",
+    title: "Mangage Tours",
     url: "/dashboard/new-event",
   },
   {
-    title: "Prepared Events",
-    url: "/dashboard/new-event",
+    title: "My Events & Tours",
+    url: "/dashboard/my-events",
   },
   {
     title: "New Tour/Event",
@@ -112,7 +112,7 @@ const DashSidebar = () => {
           <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full"></div>
         </div>
         {/* Menu Block */}
-        <SidebarMenublock sidebarOpenState={open} menuTitle="Dash Menu" links={menuLinks} />
+        <SidebarMenublock sidebarOpenState={open} menuTitle="User Menu" links={menuLinks} />
         {/* TODO: Make this viewable only for providers/Admins */}
         {/* Product handling menu */}
         <SidebarMenublock
