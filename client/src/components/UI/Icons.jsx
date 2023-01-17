@@ -1,3 +1,14 @@
+import {
+  MapTrifold,
+  LineSegments,
+  Storefront,
+  IdentificationBadge,
+  Ticket,
+  Tag,
+  Mountains,
+  Money,
+} from "phosphor-react";
+
 const IconUndo = (props) => {
   return (
     <svg
@@ -197,6 +208,71 @@ const IconMapLocation = (props) => {
   );
 };
 
+const MapIcon = () => {
+  return (
+    <>
+      <MapTrifold size={24} weight="duotone" />
+    </>
+  );
+};
+
+const EventItemIcon = () => {
+  return (
+    <>
+      <LineSegments size={24} weight="duotone" />
+    </>
+  );
+};
+
+const OfferingsIcon = () => {
+  return (
+    <>
+      <Storefront size={24} weight="duotone" />
+    </>
+  );
+};
+
+const ProviderUserIcon = () => {
+  return (
+    <>
+      <IdentificationBadge size={24} weight="duotone" />
+    </>
+  );
+};
+
+const ProviderOffersIcon = () => {
+  return (
+    <>
+      <Ticket size={24} weight="duotone" />
+    </>
+  );
+};
+
+const OfferTagIcon = () => {
+  return (
+    <>
+      <Tag size={24} weight="duotone" />
+    </>
+  );
+};
+
+const TourEventIcon = () => {
+  return (
+    <>
+      <Mountains size={24} weight="duotone" />
+    </>
+  );
+};
+
+const MoneyIcon = () => {
+  return (
+    <>
+      <Money size={24} weight="duotone" />
+    </>
+  );
+};
+
+// <Fire size={24} />
 export {
   IconUndo,
   IconRedo,
@@ -213,4 +289,13 @@ export {
   IconMapLocationPlus,
   IconMapEditLocation,
   IconMapLocation,
+  //phosphor-react from here
+  MapIcon,
+  EventItemIcon,
+  OfferingsIcon,
+  ProviderUserIcon,
+  ProviderOffersIcon,
+  OfferTagIcon,
+  TourEventIcon,
+  MoneyIcon,
 };

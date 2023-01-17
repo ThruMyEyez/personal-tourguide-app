@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IKContext, IKUpload, IKImage } from "imagekitio-react";
 import { MapContainer, TileLayer, useMapEvents, Marker, Popup } from "react-leaflet";
-import { saveNewPlace } from "../../services/place";
-import { AuthContext } from "../../context/authentication";
+import { saveNewPlace, editPlace } from "../../services/place";
+
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -17,24 +17,24 @@ const NewPosition = ({ setNewPosition }) => {
     dblclick: (e) => {
       map.setView(e.latlng);
     },
-    /*locationfound: (location) => {
-      console.log("location found:", location);
-    },*/
   });
   return null;
 };
 
-const AddPlace = () => {
-  const [position, setPosition] = useState(null);
-  const [formData, setFormData] = useState({
-    // userId: "",
-    title: "",
-    description: "",
-    picture: "",
-    moreLink: "",
-    position: [],
-  });
-  const { user, authenticateUser, isLoading, isLoggedIn } = useContext(AuthContext);
+const HandlePlace = ({ place }) => {
+  const [position, setPosition] = useState(place ? place.position : null);
+  const [formData, setFormData] = useState(
+    place
+      ? place
+      : {
+          // userId: "",
+          title: "",
+          description: "",
+          picture: "",
+          moreLink: "",
+          position: [],
+        }
+  );
 
   const navigate = useNavigate();
 
@@ -55,36 +55,27 @@ const AddPlace = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // send data to backend
-
-    /* // For Testing of geting all places. Works!
-    getProviderPlaces(formData).then((response) => {
-      console.log(response.data);
-    }); */
-
-    /* // For Testing of editing place. Works!
-      editPlace(formData, "63bcb24f8c6d32268c1ba634").then((response) => {
-      console.log(response.data);
-    }); */
-
-    /* // For testing of deletion of a Place. Works! 
-    deletePlace("63bcb4bc5680e3ac211eaeaa").then((response) => {
-      console.log(response.data);
-    }); */
-
-    saveNewPlace(formData)
-      .then((response) => {
-        if (response.status === 201) {
-          console.log(response.data.message);
-          navigate("/dashboard");
-        }
-        //if (response.status === 204) console.log(response);
-        console.log(response.data.message);
-      })
-      .catch((error) => {
-        if (error.response.status === 409) console.log(error.response.data.error.message);
-        console.log(error.response.data.message);
+    if (place) {
+      delete formData.__v;
+      editPlace(formData, place._id).then((response) => {
+        console.log(response.data);
+        navigate(-1);
       });
+    } else {
+      saveNewPlace(formData)
+        .then((response) => {
+          if (response.status === 201) {
+            console.log(response.data.message);
+            navigate(-1);
+          }
+          //if (response.status === 204) console.log(response);
+          console.log(response.data.message);
+        })
+        .catch((error) => {
+          if (error.response.status === 409) console.log(error.response.data.error.message);
+          console.log(error.response.data.message);
+        });
+    }
   };
 
   const icon = L.icon({
@@ -96,8 +87,6 @@ const AddPlace = () => {
   });
 
   useEffect(() => {
-    console.log("POSITION :", position);
-    console.log("current formData :", formData);
     setFormData({ ...formData, position: position });
   }, [position]);
 
@@ -107,7 +96,7 @@ const AddPlace = () => {
       zoom={13}
       doubleClickZoom={false}
       closePopupOnClick={false}
-      style={{ height: "600px", width: "800px" }}
+      className="w-full rounded-lg h-[91%]"
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -123,7 +112,7 @@ const AddPlace = () => {
                 <span className="form-label">Title</span>
               </label>
               <input
-                className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 id="input-title"
                 type="text"
                 name="title"
@@ -135,7 +124,7 @@ const AddPlace = () => {
                 <span className="form-label">Description</span>
               </label>
               <textarea
-                className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 id="input-description"
                 type="text"
                 name="description"
@@ -150,7 +139,7 @@ const AddPlace = () => {
                 <span className="form-label">Read-more</span>
               </label>
               <input
-                className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 id="input-more-link"
                 type="text"
                 name="moreLink"
@@ -167,15 +156,18 @@ const AddPlace = () => {
                   process.env.REACT_APP_IMAGEKIT_AUTHENTICTION_ENDPOINT
                 }
               >
-                <IKUpload onSuccess={onFileUploadSuccess} onError={onFileUploadError} />
+                <IKUpload
+                  className="my-2"
+                  onSuccess={onFileUploadSuccess}
+                  onError={onFileUploadError}
+                />
                 {formData.picture && (
                   <IKImage
-                    className="mx-auto"
+                    className="mx-auto my-3 rounded-md shadow-lg hover:shadow-xl"
                     src={formData.picture}
-                    //path="/hqdefault_eeAM2KBS6.jpg"
                     transformation={[
                       {
-                        height: "150",
+                        height: "160",
                         width: "auto",
                       },
                     ]}
@@ -191,4 +183,4 @@ const AddPlace = () => {
   );
 };
 
-export default AddPlace;
+export default HandlePlace;

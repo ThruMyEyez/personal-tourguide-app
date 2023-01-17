@@ -1,12 +1,13 @@
 import { TourMapProviderWrapper } from "../context/tourmapping";
-import Tour from "../components/Tour";
+import RenderEventItem from "../components/RenderEventItem";
+
 const PublicTours = () => {
   return (
     <>
       <h2 className="p-3">PublicTours page</h2>
       <TourMapProviderWrapper>
         {/* A single tour */}
-        <Tour />
+        <RenderEventItem />
         {/* A single tour */}
       </TourMapProviderWrapper>
     </>

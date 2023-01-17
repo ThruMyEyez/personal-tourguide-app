@@ -1,18 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { AddPlace } from "../TourMap";
+import { HandlePlace } from "../TourMap";
 import { CloseNavigateBtn } from "../UI";
 
-import React from "react";
-
 const NewPlaceModal = () => {
-  const navigate = useNavigate();
   return (
-    <div className="fullscreen-modal-container">
-      <div className="absolute mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 sm:max-w-sm top-1/2 left-1/2">
-        <h1>Create a new Tour or Event</h1>
-
+    <div className="z-50 fullscreen-modal-container">
+      <div className="absolute w-2/3 p-2 mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-200 rounded-lg shadow-xl h-2/3 top-1/2 left-1/2">
         <CloseNavigateBtn navigateTo={-1} />
-        <AddPlace />
+        <h1>Create a new Place</h1>
+
+        <HandlePlace />
       </div>
     </div>
   );

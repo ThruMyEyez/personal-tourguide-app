@@ -13,14 +13,13 @@ const DeleteOwnProduct = ({ curProduct, productId, title, type, offers, setOffer
     deleteProduct(id)
       .then((response) => {
         console.log("res: ", response);
-        setOffers(
+        /*setOffers(
           offers.splice(
             offers.findIndex((product) => product._id === curProduct._id),
             1
           )
-        );
-
-        navigate("/dashboard/my-offerings");
+        );*/
+        navigate(0);
       })
       .catch((error) => {
         console.error(error.response.data);

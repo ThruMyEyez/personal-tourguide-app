@@ -13,11 +13,9 @@ const {
 //Get all places belonging to the current user
 router.get('/', routeGuard, (req, res, next) => {
   const { _id } = req.payload;
-  console.log('ID: ', _id);
   Place.find({ userId: _id })
     .then((places) => {
       //if (!places) next(new ErrorResponse('No Places found!', 400));
-      console.log('places: ', places);
       res.status(200).json({
         status: 200,
         success: true,
@@ -28,13 +26,35 @@ router.get('/', routeGuard, (req, res, next) => {
     .catch((error) => next(error));
 });
 
+//Get one specific place =>
+router.get('/:id', routeGuard, async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const place = await Place.findById(id);
+    !place &&
+      next(
+        new ErrorResponse(
+          `Place with ID "${id}" not found`,
+          400,
+          'ValidationError'
+        )
+      );
+    res.status(200).json({
+      message: `Place "${place.title}" was found`,
+      data: place
+    });
+  } catch (error) {
+    modelValidationErrorHelper(error);
+    next(error);
+  }
+});
+
 router.post('/create', routeGuard, async (req, res, next) => {
   const { _id } = req.payload;
   const { title } = req.body;
 
   if (!title)
     res.status(400).json({
-      status: 400,
       message: 'Title must be provided! No place created!'
     });
 
@@ -60,20 +80,6 @@ router.post('/create', routeGuard, async (req, res, next) => {
       modelValidationErrorHelper(error);
       next(error);
     });
-
-  // Creates bugs + result
-  //Place.create({ ...req.body, userId: _id }, { new: true })
-  //  .then((result) => {
-  //    res.status(201).json({
-  //      success: true,
-  //      message: 'Place saved in the Database',
-  //      data: result
-  //    });
-  //  })
-  //  .catch((error) => {
-  //    modelValidationErrorHelper(error);
-  //    next(error);
-  //  });
 });
 
 // req.body should contain: title, description, picture, moreLink & position

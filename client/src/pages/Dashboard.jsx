@@ -6,14 +6,7 @@ import Profile from "../components/Profile/Profile";
 import Follow from "../components/Profile/Follow";
 import { IKContext, IKUpload } from "imagekitio-react";
 
-import {
-  createNewProduct,
-  deleteEventItem,
-  deleteProduct,
-  getProviderProducts,
-  updateEventItem,
-  updateProduct,
-} from "../services/product";
+import { getProviderProducts, updateEventItem } from "../services/product";
 
 import {
   followUser,
@@ -31,13 +24,6 @@ import SubmitRating from "../components/Rating/SubmitRating";
 const Dashboard = (props) => {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
 
-  const onFileUploadSuccess = (val) => {
-    console.log("File UploadSuccess", val);
-  };
-
-  const onFileUploadError = (val) => {
-    console.log("File UploadError", val);
-  };
   // TEST & PROTOTYPE AREA
   // Public Events => All Products
   const handleGetAllEvents = (e) => {
@@ -74,66 +60,6 @@ const Dashboard = (props) => {
     getProviderProducts("63aa6b493595c079a80b7607")
       .then((response) => {
         console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
-
-  const handleFormTest1Submit = (e) => {
-    e.preventDefault();
-    createNewProduct({
-      title: "TestProduct",
-      priceInCents: 2100,
-      tagline: "No Name, No Slogan",
-      productThumbnail:
-        "https://www.lg.com/in/images/microwave-ovens/md05266384/gallery/MC2146BP-microwave-ovens-Right-Open-view-D-04.jpg",
-      productType: "tour",
-      productItem: "63bce3755b49ac99a7dfbdd6",
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
-
-  const handleFormDelete2Submit = (e) => {
-    e.preventDefault();
-    deleteProduct("63bcf3db17c3653e97f013cb")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
-
-  const handleFormDelete1Submit = (e) => {
-    e.preventDefault();
-    deleteEventItem("63bce311b109298e43fc3293")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
-
-  const handleFormUpdateProductSubmit = (e) => {
-    e.preventDefault();
-    updateProduct(
-      { title: "UpdatedTestProduct", priceInCents: 1899 },
-      "63bcf64109a3aa67e2c7c668"
-    )
-      .then((response) => {
-        console.log(response.data);
-        console.log("Updated Product: ", response.data.data);
       })
       .catch((error) => {
         console.error(error.response.data.error.message);
@@ -225,9 +151,10 @@ const Dashboard = (props) => {
         console.log(error);
       });
   };
+
   // End of: TEST & PROTOTYPE AREA
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <DashSidebar />
 
       <div className="flex flex-col items-center w-full h-screen bg-slate-200">
@@ -241,43 +168,7 @@ const Dashboard = (props) => {
         <h1 className="p-3">Dashboard</h1>
         <Outlet />
         <p>test & prototype</p>
-        <p>
-          {(isLoggedIn && `login: ${isLoggedIn}`) || `login: ${isLoggedIn}`}
-        </p>
-        {!isLoading && (
-          <div>
-            <img
-              referrerPolicy="no-referrer"
-              className="rounded-full"
-              src={user.profilePicture}
-              alt="Profile"
-            />
-          </div>
-        )}{" "}
-        <div className="relative flex items-center justify-center w-12 h-12 m-1 mr-2 text-xl text-white uppercase bg-red-500 rounded-full">
-          jc
-        </div>
         {/* <ProfileBox /> */}
-        <IKContext
-          // Displays the image
-          urlEndpoint={process.env.REACT_APP_IMAGEKIT_URL}
-          // required for uploading
-          publicKey={process.env.REACT_APP_IMAGEKIT_PUBLIC_KEY}
-          authenticationEndpoint={
-            process.env.REACT_APP_SERVER_POINT +
-            process.env.REACT_APP_IMAGEKIT_AUTHENTICTION_ENDPOINT
-          }
-        >
-          <IKUpload
-            onSuccess={onFileUploadSuccess}
-            onError={onFileUploadError}
-          />
-        </IKContext>
-        <form onSubmit={handleFormDelete1Submit}>
-          <button className="btn-primary">
-            Provider delete ProductItem by ID - artur
-          </button>
-        </form>
         <form onSubmit={handleGetAllEvents}>
           <button className="btn-primary">
             get All Events/Products from DB - alex
@@ -293,17 +184,11 @@ const Dashboard = (props) => {
             Get All Products for specific Provider "userId" - alex
           </button>
         </form>
-        <form onSubmit={handleFormTest1Submit}>
-          <button className="btn-primary">Create new Product - artur</button>
-        </form>
-        <form onSubmit={handleFormDelete2Submit}>
-          <button className="btn-primary">Provider delete Product by ID</button>
-        </form>
-        <form onSubmit={handleFormUpdateProductSubmit}>
-          <button className="btn-primary">Update Provider Product</button>
-        </form>
+
         <form onSubmit={handleFormUpdateProductItemSubmit}>
-          <button className="btn-primary">Update Provider productItem</button>
+          <button className="btn-primary">
+            Update Provider productItem - artur
+          </button>
         </form>
         <form onSubmit={handleFollow}>
           <button className="btn-primary">follow userId - joao </button>

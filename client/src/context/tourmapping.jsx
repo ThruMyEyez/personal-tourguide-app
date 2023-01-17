@@ -65,6 +65,7 @@ const TourMapProviderWrapper = ({ children }) => {
         previewPlace,
         setNewPreviewPlace,
         places,
+        setPlaces,
       }}
     >
       {children}
