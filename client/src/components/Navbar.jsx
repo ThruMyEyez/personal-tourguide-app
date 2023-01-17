@@ -1,40 +1,49 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/authentication";
 import { MdBackpack } from "react-icons/md";
 
 const Navbar = () => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
+  const firstChar = isLoggedIn && user.name.charAt(0).toUpperCase();
   const location = useLocation();
 
   return (
     <>
-      <nav className="flex lg:p-3 p-5 lg:justify-around text-lg justify-between items-center w-full bg-clip-pink-violet">
+      <nav className="flex items-center justify-between w-full p-5 text-lg lg:p-3 lg:justify-around bg-clip-pink-violet">
         <ul className="flex m-0 list-none">
           <li className="font-bold">
             <Link to="/">GuideGo</Link>
           </li>
-          <MdBackpack className="mr-6 my-auto h-100 text-pink-500 inline-flex" />
+          <MdBackpack className="inline-flex my-auto mr-6 text-pink-500 h-100" />
           <li>
             <Link to="/public-tours">Explore Tours</Link>
           </li>
         </ul>
+
         <div className="flex items-center">
           {isLoggedIn && (
             <>
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://placeimg.com/80/80/people"
-                      alt="profile"
-                    />
+                  <div className="w-12 mask mask-hexagon ">
+                    {/* hexagon as alternative to rounded-full */}
+                    {(user.profilePicture && (
+                      <img
+                        referrerPolicy="no-referrer" // Google Avatar doesn't render without this attribute!
+                        src={user.profilePicture}
+                        alt="profile"
+                      />
+                    )) || (
+                      <div className="flex items-center justify-center h-12 text-xl text-white uppercase bg-indigo-500 ">
+                        {firstChar}
+                      </div>
+                    )}
                   </div>
                 </label>
                 <ul
                   tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                  className="p-2 mt-3 text-black shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li>
                     <Link to="/dashboard">Dashboard</Link>
@@ -49,15 +58,11 @@ const Navbar = () => {
           {!isLoggedIn && (
             <>
               {/* set the background state for the modals with current router location as background backdrop */}
-              <Link
-                className="pr-3"
-                to="/signup"
-                state={{ background: location }}
-              >
+              <Link className="pr-3" to="/signup" state={{ background: location }}>
                 Sign up
               </Link>
               <Link
-                className="login-btn border-2 border-pink-100 hover:bg-gradient-to-r from:pink-500 to:violet-500 hover:text-white mr-3 rounded-lg pt-2 pb-2 px-3"
+                className="px-3 pt-2 pb-2 mr-3 border-2 border-pink-100 rounded-lg login-btn hover:bg-gradient-to-r from:pink-500 to:violet-500 hover:text-white"
                 to="/login"
                 state={{ background: location }}
               >

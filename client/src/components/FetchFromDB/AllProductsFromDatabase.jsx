@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { getAllEvents } from "../../services/event";
 import { Link } from "react-router-dom";
 import { createPurchase } from "../../services/purchase";
@@ -24,18 +23,19 @@ const ProductsFromDatabase = () => {
   };
 
   return (
-    <div className="flex justify-around flex-wrap">
+    <div className="flex flex-wrap justify-around">
       {products &&
         products.map((product) => {
+          console.log(product);
           return (
             <div className="" key={product._id}>
-              <div className="mb-5 card w-128 bg-base-100 shadow-xl">
+              <div className="mb-5 shadow-xl card w-128 bg-base-100">
                 <figure>
                   {
                     <img
-                      src="https://placeimg.com/400/225/arch"
+                      src={product.productThumbnail}
                       alt={product.title}
-                      className="card-image"
+                      className="w-96 card-image"
                     />
                   }
                 </figure>
@@ -44,7 +44,7 @@ const ProductsFromDatabase = () => {
                     <h2 className="text-black card-title">{product.title}</h2>
                   </Link>
                   <p>{product.tagline}</p>
-                  <div className="card-actions justify-end">
+                  <div className="justify-end card-actions">
                     <button
                       className="btn btn-primary"
                       onClick={() => handlePurchase(product._id)}

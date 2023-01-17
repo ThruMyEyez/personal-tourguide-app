@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deletePlace } from "../../services/place";
+import { deleteEventItem } from "../../services/product";
 import { ConfirmDeleteModal } from "../UI";
 
-export const DeletePlace = ({ curPlace, title, type, offers, setOffers }) => {
+const DeleteOwnProductItem = ({ item }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigate = useNavigate();
 
   const handleDeleteConfirm = (id) => {
-    deletePlace(id)
+    deleteEventItem(id)
       .then((response) => {
         navigate(0);
       })
@@ -22,14 +22,14 @@ export const DeletePlace = ({ curPlace, title, type, offers, setOffers }) => {
       <div
         onClick={() => setShowDeleteModal(true)}
         className="px-4 py-2 mx-3 my-5 btn btn-sm btn-outline tooltip tooltip-warning"
-        data-tip={`Delete "${curPlace.title}"`}
+        data-tip={`Delete "${item.title}"`}
       >
         Delete
       </div>
       {showDeleteModal ? (
         <ConfirmDeleteModal
-          delTitle={curPlace.title}
-          delId={curPlace._id}
+          delTitle={item.title}
+          delId={item._id}
           setShowModal={setShowDeleteModal}
           handleDeleteConfirm={handleDeleteConfirm}
         />
@@ -38,4 +38,4 @@ export const DeletePlace = ({ curPlace, title, type, offers, setOffers }) => {
   );
 };
 
-export default DeletePlace;
+export default DeleteOwnProductItem;

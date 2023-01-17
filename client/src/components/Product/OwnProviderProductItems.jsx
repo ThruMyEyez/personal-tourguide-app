@@ -3,6 +3,7 @@ import { getAllProviderProductItems } from "../../services/product";
 import { AuthContext } from "../../context/authentication";
 import { EditorView } from "../Editor";
 import { HorizontalTextRuler, HorizontalRuler } from "../UI/UIHelper";
+import DeleteOwnProductItem from "./DeleteOwnProductItem";
 
 const OwnProviderProductItems = () => {
   const [productItems, setProductItems] = useState([]);
@@ -23,21 +24,20 @@ const OwnProviderProductItems = () => {
 
   return (
     <div>
-      <h4>Manage Event's & Guidedtours</h4>
+      <h4>Manage your Event's & Tours</h4>
       <div>
         {productItems &&
-          productItems.map(({ _id, title, description, eventDate, places }) => {
-            //const _description = JSON.parse(description);
-            //console.log(_description);
+          productItems.map((item) => {
             return (
-              <div className="flex flex-col" key={_id}>
-                <h5>{title}</h5>
+              <div className="flex flex-col" key={item._id}>
+                <h5>{item.title}</h5>
                 <HorizontalTextRuler str="description" />
-                <EditorView content={description} />
+                <EditorView content={item.description} />
                 <HorizontalRuler />
-                <p>{eventDate}</p>
+                <p>{item.eventDate}</p>
                 <button>edit</button>
-                <button>delete</button>
+
+                <DeleteOwnProductItem item={item} />
               </div>
             );
           })}

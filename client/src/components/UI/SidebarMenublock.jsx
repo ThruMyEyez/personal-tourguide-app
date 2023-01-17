@@ -7,12 +7,12 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links })
   return (
     <ul className="flex-1 block min-w-full pb-3 mx-0 mt-3 overflow-y-auto">
       <li
-        className={`relative z-0 mx-3 overflow-hidden transition duration-500 ease-in-out rounded-lg ${
+        className={`relative z-0 mx-3 overflow-hidden transition duration-500 ease-in-out rounded-md ${
           open && "bg-gray-700 bg-opacity-60"
         }`}
       >
         <div
-          className="flex items-center h-10 px-3 py-px text-gray-100 truncate transition-all duration-150 ease-in-out outline-none cursor-pointer hover:text-white focus:text-opacity-100 "
+          className="flex items-center h-10 px-3 text-gray-100 truncate transition-all duration-150 ease-in-out outline-none cursor-pointer hover:text-white focus:text-opacity-100 "
           onClick={() => setOpen(!open)}
         >
           <span className="">
@@ -27,7 +27,7 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links })
               </svg>
             )) || <MenuTitleIcon />}
           </span>
-          {sidebarOpenState && <span className="mx-4 leading-none">{menuTitle}</span>}
+          {sidebarOpenState && <span className="mx-3 leading-none">{menuTitle}</span>}
           <span
             className={`transition duration-150 ease-in transform ${
               open ? "rotate-0" : "rotate-180"
@@ -41,39 +41,35 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links })
               ></path>
             </svg>
           </span>
-          <div
-            className="absolute top-0 bottom-0 left-0 right-0 overflow-hidden"
-            duration="850"
-            color="#fff"
-          ></div>
         </div>
         {/* Submenu */}
-        <div className={`${open ? "block" : "hidden"} rah-static rah-static--height-auto}`}>
-          <div>
-            <ul className="overflow-hidden">
-              {links?.map(({ title, url, Icon, location }) => {
-                return (
-                  <li
-                    key={title}
-                    className="relative z-0 -ml-px overflow-hidden transition duration-500 ease-in-out rounded-lg"
-                  >
-                    <Link
-                      state={location && { background: location }}
-                      className="flex items-center h-10 px-3 py-px text-gray-300 truncate transition-all duration-150 ease-in-out outline-none cursor-pointer hover:text-white focus:text-opacity-100"
-                      to={url}
+        <div className={`${open ? "block" : "hidden"}`}>
+          {links?.map(({ title, url, Icon, location, tooltip }) => {
+            return (
+              <div
+                key={title}
+                className={`${
+                  sidebarOpenState ? "pl-6" : "justify-center"
+                } flex transition duration-500 ease-in-out`}
+              >
+                <Link
+                  state={location && { background: location }}
+                  className="flex h-12 text-gray-300 transition-all duration-150 ease-in-out outline-none cursor-pointer hover:text-white focus:text-opacity-100"
+                  to={url}
+                >
+                  {Icon && (
+                    <span
+                      className="flex items-center px-2 btn btn-sm tooltip tooltip-primary"
+                      data-tip={tooltip}
                     >
-                      {(!Icon && <span></span>) || (
-                        <span>
-                          <Icon />
-                        </span>
-                      )}
-                      {sidebarOpenState && <span className="leading-none">{title}</span>}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                      <Icon />
+                    </span>
+                  )}
+                  {sidebarOpenState && <span className="p-3 leading-none">{title}</span>}
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </li>
     </ul>

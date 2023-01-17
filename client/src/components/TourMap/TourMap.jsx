@@ -13,13 +13,10 @@ const TourMap = ({ startPlace }) => {
   useEffect(() => {
     // useEffect for getting the polylines props
     setPolylineProps(
-      places.reduce(
-        (prev, curr) => {
-          prev.push(curr.position);
-          return prev;
-        },
-        [startPlace]
-      )
+      places?.reduce((prev, curr) => {
+        prev.push(curr.position);
+        return prev;
+      }, [])
     ); // startPlace is the center of the Map, here could be a empty array
   }, [places]);
 
@@ -32,7 +29,7 @@ const TourMap = ({ startPlace }) => {
   const showPreview = (place) => {
     setNewPreviewPlace(place);
     togglePreview(true);
-    console.log("PreviewPlace", previewPlace);
+    //console.log("PreviewPlace", previewPlace);
   };
 
   return (
@@ -40,7 +37,7 @@ const TourMap = ({ startPlace }) => {
       center={startPlace}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: "500px", width: "100%" }}
+      style={{ height: "600px", width: "100%" }}
       zoomControl={true}
     >
       <TileLayer
@@ -48,7 +45,7 @@ const TourMap = ({ startPlace }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Polyline positions={polylineProps} />
-      {places.map((place) => (
+      {places?.map((place) => (
         <Marker
           key={place.title}
           position={place.position}
@@ -58,11 +55,11 @@ const TourMap = ({ startPlace }) => {
           <Tooltip>{place.title}</Tooltip>
         </Marker>
       ))}
-      <Marker position={startPlace} icon={locationIcon}>
+      {/*     <Marker position={startPlace} icon={locationIcon}>
         <Popup>
           CSS3 popup 🎉 <br /> Place every kind of data here.
         </Popup>
-      </Marker>
+      </Marker> */}
     </MapContainer>
   );
 };

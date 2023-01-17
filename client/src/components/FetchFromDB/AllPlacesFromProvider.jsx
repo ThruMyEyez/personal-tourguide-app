@@ -1,7 +1,39 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { DeletePlace } from "../DashboardComponents";
 import { getProviderPlaces } from "../../services/place";
+
+const PlaceCard = ({ title, picture, description, children }) => {
+  return (
+    <div className="mx-2 mb-2 bg-indigo-300 shadow-xl card w-96 image-full">
+      <figure>
+        <img src={picture} alt={title} />
+      </figure>
+      <div className="card-body">
+        <h4 className="card-title">{title}</h4>
+        <p className="overflow-hidden break-words ">{description}</p>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+/*const card = () => {
+  return (
+    <div className="shadow-xl card w-96 bg-base-100 image-full">
+      <figure>
+        <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">Shoes!</h2>
+        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <div className="justify-end card-actions">
+          <button className="btn btn-primary">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  );
+};*/
 
 const AllPlacesFromProvider = () => {
   const [places, setPlaces] = useState([]);
@@ -9,12 +41,14 @@ const AllPlacesFromProvider = () => {
   const fetchPlaces = async () => {
     const allProviderPlaces = await getProviderPlaces();
     setPlaces([...allProviderPlaces.data.data]);
-    console.log(allProviderPlaces.data.data);
+    //console.log(allProviderPlaces.data.data);
   };
 
   useEffect(() => {
     fetchPlaces();
   }, []);
+
+  const location = useLocation();
 
   return (
     <div className="flex flex-col">
@@ -22,8 +56,37 @@ const AllPlacesFromProvider = () => {
       <div className="flex flex-wrap">
         {places &&
           places.map((place) => {
+            //console.log(place.position);
             return (
-              <div
+              <PlaceCard
+                key={place._id}
+                title={place.title}
+                description={place.description}
+                picture={place.picture}
+              >
+                <div className="card-actions">
+                  <Link
+                    state={location && { background: location }}
+                    className="btn btn-sm"
+                    to={`/dashboard/place/update/${place._id}`}
+                  >
+                    Update
+                  </Link>
+                  <button className="btn btn-sm btn-outline btn-error">delete</button>
+                  <DeletePlace curPlace={place} />
+                </div>
+              </PlaceCard>
+            );
+          })}
+      </div>
+    </div>
+  );
+};
+
+export default AllPlacesFromProvider;
+
+/*
+<div
                 key={place._id}
                 className="flex justify-center p-3 m-2 rounded shadow-lg w-90 bg-slate-50"
               >
@@ -48,11 +111,4 @@ const AllPlacesFromProvider = () => {
                   </div>
                 </div>
               </div>
-            );
-          })}
-      </div>
-    </div>
-  );
-};
-
-export default AllPlacesFromProvider;
+*/
