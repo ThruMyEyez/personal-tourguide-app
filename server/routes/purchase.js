@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 require('dotenv').config();
-const stripe = require('stripe')(
-  'sk_test_51MOmpwG0oGZ76irVjck88Gbx8bhr1jeHz6raF4ClicmhQvgXdMF7jr3jWh67iu7Jl5HCjo6l9l4oZMXrtSombgTE00MHBnW2zw'
-);
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const Product = require('../models/product');
 
