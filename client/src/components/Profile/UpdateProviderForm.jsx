@@ -52,6 +52,7 @@ const UpdateProviderForm = () => {
           value={formData.providerType}
           name="providerType"
           onChange={handleInput}
+          multiple={false}
         >
           <option value={"Host"}>Host </option>
           <option value={"Tourguide"}>Tourguide</option>

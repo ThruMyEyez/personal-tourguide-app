@@ -54,7 +54,7 @@ const ProductsCarouselCopy = ({ id }) => {
             <div
               key={product._id}
               id={"slide" + index}
-              className="carousel-item  relative m-10 p-11"
+              className="carousel-item  m-10 p-11"
             >
               <div className="card w-96 bg-base-100 shadow-xl image-full">
                 <figure>
