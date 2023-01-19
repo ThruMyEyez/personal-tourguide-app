@@ -26,7 +26,7 @@ const menuLinks = [
     tooltip: "Edit Profile",
   },
   {
-    title: "Sold Tours",
+    title: "Booked Tours",
     url: "/",
     Icon: MoneyIcon,
     tooltip: "Show Sales",
