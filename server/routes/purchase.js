@@ -5,6 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const Product = require('../models/product');
 
+// route for purchasing a product
 router.post('/:productId', async (req, res, next) => {
   const { productId } = req.params;
   let productDocument;
