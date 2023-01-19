@@ -83,6 +83,7 @@ router.post('/rating/:productId', routeGuard, async (req, res, next) => {
   const { productId } = req.params;
   const { _id } = req.payload;
   const { stars, comment } = req.body;
+  let rating = {};
   console.log(stars, comment);
   //Check if is stars evaluation
 
@@ -108,11 +109,17 @@ router.post('/rating/:productId', routeGuard, async (req, res, next) => {
   // }
 
   Rating.create({ productId, userId: _id, stars, comment })
-    .then((rating) => {
+    .then((result) => {
+      console.log(result._id);
+      Product.findOneAndUpdate(
+        { _id: productId },
+        { $push: { rating: [result._id] } },
+        { new: true }
+      ).then((prduct) => console.log(prduct));
       res.status(201).json({
         status: 201,
         message: `Created new eventItem: ${rating.comment} `,
-        data: rating
+        data: result
       });
     })
     .catch((err) => {

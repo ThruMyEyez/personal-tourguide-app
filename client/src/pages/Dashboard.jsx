@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
+import Profile from "./Profile";
+import Follow from "../components/Profile/Follow";
+import { IKContext, IKUpload } from "imagekitio-react";
 
 import { getProviderProducts, updateEventItem } from "../services/product";
 
@@ -13,9 +16,15 @@ import {
   updateProviderProfile,
 } from "../services/user";
 import { getAllEvents, newEventRating } from "../services/event";
+import Rating from "../components/Profile/Rating";
+import CreateProviderForm from "../components/Profile/CreateProviderForm";
+import UpdateProviderForm from "../components/Profile/UpdateProviderForm";
+import SubmitRating from "../components/Rating/SubmitRating";
+import IsProvider from "../components/AuthComponents/IsProvider";
 
 const Dashboard = (props) => {
-  const { isLoggedIn, isLoading, user } = useContext(AuthContext);
+  const { isLoggedIn, isLoading, user, userFullDetails } =
+    useContext(AuthContext);
 
   // TEST & PROTOTYPE AREA
   // Public Events => All Products
@@ -34,7 +43,10 @@ const Dashboard = (props) => {
   // Events => New Event rating!
   const handleNewEventRating = (e) => {
     e.preventDefault();
-    newEventRating({ stars: 4, comment: "It was exciting tour!" }, "63bcf64109a3aa67e2c7c668")
+    newEventRating(
+      { stars: 4, comment: "It was exciting tour!" },
+      "63bcf64109a3aa67e2c7c668"
+    )
       .then((response) => {
         console.log(response.data);
       })
@@ -147,24 +159,35 @@ const Dashboard = (props) => {
     <div className="flex h-full">
       <DashSidebar />
 
-      <div className="flex flex-col items-center w-full h-full bg-slate-200">
+      <div className="flex flex-col items-center w-full h-screen bg-slate-200">
+        {/* <SubmitRating /> */}
+
+        <CreateProviderForm />
+
         <h1 className="p-3">Dashboard</h1>
         <Outlet />
         <p>test & prototype</p>
         {/* <ProfileBox /> */}
         <form onSubmit={handleGetAllEvents}>
-          <button className="btn-primary">get All Events/Products from DB - alex</button>
+          <button className="btn-primary">
+            get All Events/Products from DB - alex
+          </button>
         </form>
         <form onSubmit={handleNewEventRating}>
-          <button className="btn-primary">make rating for Events/Products - alex</button>
+          <button className="btn-primary">
+            make rating for Events/Products - alex
+          </button>
         </form>
         <form onSubmit={handleFormSubmit}>
           <button className="btn-primary">
             Get All Products for specific Provider "userId" - alex
           </button>
         </form>
+
         <form onSubmit={handleFormUpdateProductItemSubmit}>
-          <button className="btn-primary">Update Provider productItem - artur</button>
+          <button className="btn-primary">
+            Update Provider productItem - artur
+          </button>
         </form>
         <form onSubmit={handleFollow}>
           <button className="btn-primary">follow userId - joao </button>
@@ -177,10 +200,14 @@ const Dashboard = (props) => {
           <button className="btn-primary">Update user role - alex</button>
         </form>
         <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">Create Provider Profile - joao </button>
+          <button className="btn-primary">
+            Create Provider Profile - joao{" "}
+          </button>
         </form>
         <form onSubmit={handleUpdateProviderProfile}>
-          <button className="btn-primary">Update Provider Profile - joao </button>
+          <button className="btn-primary">
+            Update Provider Profile - joao{" "}
+          </button>
         </form>
       </div>
     </div>

@@ -5,7 +5,9 @@ import { api, authHeaders } from "./api";
 // export const getAllProducts = () => api.get("/products/");
 
 //get all products from a specific provider (public)
-export const getProviderProducts = (userId) => api.get(`/product/provider/${userId}`);
+export const getProviderProducts = (userId) => {
+  return api.get(`/product/provider/${userId}`);
+};
 
 // get all productItems from a specific provider
 export const getAllProviderProductItems = (userId) =>
@@ -18,7 +20,8 @@ export const getSpecificProductItem = (productItemId) =>
 //export const getProductDetails = (productId) => api.get(`/product/${productId}`);
 
 // Provider can created a Product from a productItem and save in the DB.
-export const createNewProduct = (data) => api.post(`/product/create`, data, authHeaders);
+export const createNewProduct = (data) =>
+  api.post(`/product/create`, data, authHeaders);
 
 // Provider can edit a Product that he already has created in the DB.
 export const updateProduct = (data, productId) =>
@@ -30,7 +33,9 @@ export const deleteProduct = (productId) =>
 
 // Provider can create a productItem from WYSIWYG and his places under this route service
 // The productItem is neccessary for the provider to be enabled creating new Products
-export const createEventItem = (data) => api.post("/product/item/create", data, authHeaders);
+export const createEventItem = (data) => {
+  return api.post("/product/item/create", data, authHeaders);
+};
 
 // Provider can edit a productItem that he already has created in the DB.
 export const updateEventItem = (data, productItemId) =>

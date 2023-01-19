@@ -15,7 +15,8 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, getUserDetails } =
+    useContext(AuthContext);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -28,7 +29,9 @@ const SignUp = () => {
       .then((response) => {
         //If success >> provide user a token on the registration and navigate to Mainpage
         storeToken(response.data.authToken);
+
         authenticateUser();
+        getUserDetails();
         navigate("/");
       })
       .catch((error) => {
@@ -40,6 +43,7 @@ const SignUp = () => {
     signupGoogle(response.credential).then((response) => {
       storeToken(response.data.authToken);
       authenticateUser();
+      getUserDetails();
       navigate("/");
     });
   };
