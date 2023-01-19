@@ -25,7 +25,7 @@ import {
 } from "./components/DashboardComponents";
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
 import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
-import { OwnProviderProductItems } from "./components/Product";
+import { EditProductItem, OwnProviderProductItems } from "./components/Product";
 import EditProfilePictureModal from "./components/Profile/EditProfilePictureModal";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";

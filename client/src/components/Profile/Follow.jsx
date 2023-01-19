@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { followedUser, followUser, unfollowUser } from "../../services/user";
 
-const Follow = ({ provider, profileId }) => {
+const Follow = ({ profileId }) => {
   const [following, setFollowing] = useState(null);
   const [clicked, setClicked] = useState(false);
 
@@ -36,7 +36,6 @@ const Follow = ({ provider, profileId }) => {
   return (
     <div className="text-xs mr-2 my-1 uppercase tracking-wider border px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-indigo-100 cursor-default">
       <button onClick={handleFollowingStatus}>
-        {console.log("Provider", provider)}
         {(following && "Unfollow") || "Follow"}
       </button>
     </div>

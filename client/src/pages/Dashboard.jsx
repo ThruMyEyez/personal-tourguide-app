@@ -21,7 +21,6 @@ import CreateProviderForm from "../components/Profile/CreateProviderForm";
 import UpdateProviderForm from "../components/Profile/UpdateProviderForm";
 import SubmitRating from "../components/Rating/SubmitRating";
 import IsProvider from "../components/AuthComponents/IsProvider";
-import UpdateProfile from "../components/Profile/UpdateProfile";
 
 const Dashboard = (props) => {
   const { isLoggedIn, isLoading, user, userFullDetails } =

@@ -48,7 +48,7 @@ const ProductsCarouselCopy = ({ id }) => {
             "No Products Available"}
         </h1>
       </div>
-      <div className="carousel  max-w-[500px] overflow-hidden m-auto rounded-box  ">
+      <div className="carousel carousel-center w-[800px] m-auto rounded-box scroll ">
         {productItems.map((product, index, productItems) => {
           return (
             <div
@@ -73,26 +73,6 @@ const ProductsCarouselCopy = ({ id }) => {
                     </div>
                   </Link>
                 </div>
-              </div>
-              <div className="absolute flex justify-between transform-translate-y-1/2 left-1 right-1 top-1/2 z-99">
-                <a
-                  href={
-                    "#slide" +
-                    (index - 1 === -1 ? productItems.length - 1 : index - 1)
-                  }
-                  className="btn btn-circle"
-                >
-                  ❮
-                </a>
-                <a
-                  href={
-                    "#slide" +
-                    (index + 1 === productItems.length ? 0 : index + 1)
-                  }
-                  className="btn btn-circle"
-                >
-                  ❯
-                </a>
               </div>
             </div>
           );

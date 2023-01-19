@@ -116,8 +116,8 @@ const Profile = ({ self, children }) => {
           {/* TODO: Link to a real id */}
         </div>
         <div className="">
-          {userFullDetails && userFullDetails.providerProfile && (
-            <Bio bio={userFullDetails.providerProfile.bio}></Bio>
+          {profileOwner && profileOwner.providerProfile && (
+            <Bio bio={profileOwner.providerProfile.bio}></Bio>
           )}
 
           {profileOwner._id && <ProductsCarousel id={profileOwner._id} />}
