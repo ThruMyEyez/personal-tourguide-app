@@ -4,15 +4,17 @@ import DatePicker from "react-datepicker";
 
 import { Editor } from "../Editor";
 import { getProviderPlaces } from "../../services/place";
-import { createEventItem } from "../../services/product";
+import { createEventItem, updateEventItem } from "../../services/product";
 import { Selector } from "../UI";
 import "react-datepicker/dist/react-datepicker.css";
 import { OnErrorAlert } from "../UI/Alerts";
 import { CloseNavigateBtn } from "../UI";
 
-const NewProductItem = () => {
+const HandleProductItem = ({ productItem }) => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(
+    (productItem && JSON.parse(productItem.description)) || ""
+  );
   const [eventDate, setEventDate] = useState(new Date());
   const [selectedPlaces, setSelectedPlaces] = useState([]);
   const [providerPlaces, setProviderPlaces] = useState([]);
@@ -21,6 +23,18 @@ const NewProductItem = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // On Update set productItem current places to selectedPlaces
+    if (productItem) {
+      setTitle(productItem.title);
+      productItem.places.map((place) => {
+        place.value = place._id;
+        place.label = place.title;
+        return place;
+      });
+
+      setSelectedPlaces(productItem.places);
+    }
+
     getProviderPlaces()
       .then((response) => {
         response.data.data.map((place) => {
@@ -42,19 +56,38 @@ const NewProductItem = () => {
     const placeIDs = selectedPlaces?.map((place) => {
       return place._id;
     });
-    console.log("FORM SUBMIT");
-    createEventItem({
-      description: JSON.stringify(description),
-      title: title,
-      eventDate: eventDate, //new Date("2023-01-21"),
-      places: placeIDs,
-    })
-      .then((response) => {
-        //navigate(-1);
+    // On Update
+    if (productItem) {
+      updateEventItem(
+        {
+          description: JSON.stringify(description),
+          title: title,
+          eventDate: eventDate,
+          places: placeIDs,
+        },
+        productItem._id
+      )
+        .then((response) => {
+          navigate("/dashboard/my-events");
+        })
+        .catch((error) => {
+          setErrorMsg(error.response.data.error.message);
+        });
+    } else {
+      // On Create
+      createEventItem({
+        description: JSON.stringify(description),
+        title: title,
+        eventDate: eventDate, //new Date("2023-01-21"),
+        places: placeIDs,
       })
-      .catch((error) => {
-        setErrorMsg(error.response.data.error.message);
-      });
+        .then((response) => {
+          navigate("/dashboard/my-events");
+        })
+        .catch((error) => {
+          setErrorMsg(error.response.data.error.message);
+        });
+    }
   };
 
   const handleInput = (e) => {
@@ -65,11 +98,17 @@ const NewProductItem = () => {
     setSelectedPlaces(data);
   };
 
+  useEffect(() => {
+    console.log(description);
+  }, [description]);
+
   return (
     <div className="w-full p-3 border border-sky-600">
       <div className="mx-auto space-y-4">
         <CloseNavigateBtn navigateTo={"/dashboard/"} />
-        <h1>Create a new Tour or Event</h1>
+        {(!productItem && <h2>Create a new Tour or Event</h2>) || (
+          <h2>Edit "{productItem.title}" Data</h2>
+        )}
 
         {errorMsg && <OnErrorAlert msg={errorMsg} />}
 
@@ -120,7 +159,7 @@ const NewProductItem = () => {
           </label>
           <Editor
             className="my-1 text-center border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            description={description}
+            content={description}
             setDescription={setDescription}
           />
 
@@ -133,4 +172,4 @@ const NewProductItem = () => {
   );
 };
 
-export default NewProductItem;
+export default HandleProductItem;

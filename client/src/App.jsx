@@ -18,7 +18,7 @@ import {
 
 import {
   NewPlaceModal,
-  NewProductItem,
+  HandleProductItem,
   MyOfferings,
   HandleOffering,
   EditPlaceModal,
@@ -66,7 +66,14 @@ const App = () => {
             }
             exact
           >
-            <Route path="/dashboard/new-event" element={<NewProductItem />} />
+            <Route
+              path="/dashboard/new-event"
+              element={<HandleProductItem />}
+            />
+            <Route
+              path="/dashboard/edit-event/:id"
+              element={<EditProductItem />}
+            />
             <Route
               path="/dashboard/my-events"
               element={<OwnProviderProductItems />}
