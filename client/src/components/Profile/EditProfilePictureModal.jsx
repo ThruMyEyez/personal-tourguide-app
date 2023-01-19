@@ -28,10 +28,8 @@ const EditProfilePictureModal = () => {
   };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const response = await updateUser(formData).catch((error) => {
-      console.log("Error creating Provider Profile", error);
-      setErrorMsg(error.response.data.message);
-    });
+    const response = await updateUser(formData);
+
     console.log("Edited the user Profile", response);
     getUserDetails();
     navigate(-1);
