@@ -17,7 +17,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, getUserDetails } =
+    useContext(AuthContext);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -30,7 +31,9 @@ const Login = () => {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
+
         navigate("/dashboard");
+        getUserDetails();
       })
       .catch((error) => {
         setErrorMsg(error.response.data.message);
@@ -39,10 +42,10 @@ const Login = () => {
 
   const onGoogleLoginSuccess = (response) => {
     loginGoogle(response.credential).then((response) => {
-      console.log(response.data.authToken);
       storeToken(response.data.authToken);
       authenticateUser();
       navigate("/dashboard");
+      getUserDetails();
     });
   };
 

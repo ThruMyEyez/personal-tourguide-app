@@ -26,6 +26,9 @@ import {
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
 import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
 import { OwnProviderProductItems } from "./components/Product";
+import EditProfilePictureModal from "./components/Profile/EditProfilePictureModal";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 
 const App = () => {
   const location = useLocation();
@@ -37,6 +40,10 @@ const App = () => {
       <Routes location={background || location}>
         <Route path="/" element={<Navbar />}>
           <Route path="/" element={<Main />} />
+          <Route path="/profile" element={<Profile self={true} />} />
+          <Route path="/profile/edit" element={<Profile self={true} />} />
+
+          <Route path="/profile/:id" element={<Profile self={false} />} />
           <Route path="/public-tours" element={<PublicTours />} />
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />
@@ -87,6 +94,11 @@ const App = () => {
               element={<EditPlaceModal />}
               exact
             />
+            <Route
+              path="/dashboard/profile"
+              element={<Profile self={true} />}
+            />
+            <Route path="/dashboard/profile/edit" element={<EditProfile />} />
           </Route>
         </Route>
       </Routes>
@@ -131,6 +143,11 @@ const App = () => {
           <Route
             path="/dashboard/place/update/:id"
             element={<EditPlaceModal />}
+            exact
+          />
+          <Route
+            path="/profile/edit/picture"
+            element={<EditProfilePictureModal />}
             exact
           />
         </Routes>

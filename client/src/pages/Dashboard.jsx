@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
-import Profile from "../components/Profile/Profile";
+import Profile from "./Profile";
 import Follow from "../components/Profile/Follow";
 import { IKContext, IKUpload } from "imagekitio-react";
 
@@ -20,9 +20,12 @@ import Rating from "../components/Profile/Rating";
 import CreateProviderForm from "../components/Profile/CreateProviderForm";
 import UpdateProviderForm from "../components/Profile/UpdateProviderForm";
 import SubmitRating from "../components/Rating/SubmitRating";
+import IsProvider from "../components/AuthComponents/IsProvider";
+import UpdateProfile from "../components/Profile/UpdateProfile";
 
 const Dashboard = (props) => {
-  const { isLoggedIn, isLoading, user } = useContext(AuthContext);
+  const { isLoggedIn, isLoading, user, userFullDetails } =
+    useContext(AuthContext);
 
   // TEST & PROTOTYPE AREA
   // Public Events => All Products
@@ -159,12 +162,9 @@ const Dashboard = (props) => {
 
       <div className="flex flex-col items-center w-full h-screen bg-slate-200">
         {/* <SubmitRating /> */}
-        <UpdateProviderForm />
+
         <CreateProviderForm />
-        <Profile>
-          <Follow />
-          <Rating id="63bda8fd8ba6ba4d46895962" />
-        </Profile>
+
         <h1 className="p-3">Dashboard</h1>
         <Outlet />
         <p>test & prototype</p>

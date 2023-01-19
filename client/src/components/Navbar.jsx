@@ -4,7 +4,8 @@ import { AuthContext } from "../context/authentication";
 import { MdBackpack } from "react-icons/md";
 
 const Navbar = () => {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user, logOutUser, userFullDetails } =
+    useContext(AuthContext);
   const firstChar = isLoggedIn && user.name.charAt(0).toUpperCase();
   const location = useLocation();
 
@@ -31,7 +32,10 @@ const Navbar = () => {
                     {(user.profilePicture && (
                       <img
                         referrerPolicy="no-referrer" // Google Avatar doesn't render without this attribute!
-                        src={user.profilePicture}
+                        src={
+                          (userFullDetails && userFullDetails.profilePicture) ||
+                          user.profilePicture
+                        }
                         alt="profile"
                       />
                     )) || (
@@ -58,7 +62,11 @@ const Navbar = () => {
           {!isLoggedIn && (
             <>
               {/* set the background state for the modals with current router location as background backdrop */}
-              <Link className="pr-3" to="/signup" state={{ background: location }}>
+              <Link
+                className="pr-3"
+                to="/signup"
+                state={{ background: location }}
+              >
                 Sign up
               </Link>
               <Link

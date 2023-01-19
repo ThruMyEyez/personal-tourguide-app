@@ -31,20 +31,17 @@ const Rating = ({ id }) => {
         })
         .reduce((acc, rating) => {
           return acc + Number(rating);
-        });
+        }, 0);
       setRating(ratingsAverage / divider.shift());
     });
   }, [id]);
-  const handleRating = () => {
-    console.log(products);
-  };
+
+  const fullStarCount = Math.round(Number(rating || 0));
+  const emptyStarCount = 5 - fullStarCount;
 
   return (
-    <div
-      className="text-xs  my-1 uppercase tracking-wider border px-2 text-yellow-600 border-yellow-600 hover:bg-yellow-600 hover:text-yellow-100 cursor-default"
-      onClick={handleRating}
-    >
-      {rating}{" "}
+    <div className="text-xs  my-1 uppercase tracking-wider border px-2 text-yellow-600 border-yellow-600 hover:bg-yellow-600 hover:text-yellow-100 cursor-default">
+      {"★".repeat(fullStarCount) + "☆".repeat(emptyStarCount)}
     </div>
   );
 };
