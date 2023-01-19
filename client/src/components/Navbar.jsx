@@ -26,7 +26,7 @@ const Navbar = () => {
             <>
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-12 mask mask-hexagon ">
+                  <div className="w-8 mask mask-hexagon ">
                     {/* hexagon as alternative to rounded-full */}
                     {(user.profilePicture && (
                       <img
@@ -35,7 +35,7 @@ const Navbar = () => {
                         alt="profile"
                       />
                     )) || (
-                      <div className="flex items-center justify-center h-12 text-xl text-white uppercase bg-indigo-500 ">
+                      <div className="flex items-center justify-center h-8 text-xl text-white uppercase bg-indigo-500 ">
                         {firstChar}
                       </div>
                     )}
@@ -58,7 +58,11 @@ const Navbar = () => {
           {!isLoggedIn && (
             <>
               {/* set the background state for the modals with current router location as background backdrop */}
-              <Link className="pr-3" to="/signup" state={{ background: location }}>
+              <Link
+                className="pr-3"
+                to="/signup"
+                state={{ background: location }}
+              >
                 Sign up
               </Link>
               <Link
