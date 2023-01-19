@@ -56,6 +56,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.link-logo {
+  width: 10rem;
+}
+
 /* .login-btn:hover {
   /* ease in transition and ease out transition of .3 seconds
   transition: all 0.3s ease-in-out;
