@@ -12,7 +12,9 @@ import { CloseNavigateBtn } from "../UI";
 
 const HandleProductItem = ({ productItem }) => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(
+    (productItem && JSON.parse(productItem.description)) || ""
+  );
   const [eventDate, setEventDate] = useState(new Date());
   const [selectedPlaces, setSelectedPlaces] = useState([]);
   const [providerPlaces, setProviderPlaces] = useState([]);
@@ -29,10 +31,8 @@ const HandleProductItem = ({ productItem }) => {
         place.label = place.title;
         return place;
       });
-      const parsedDescription = JSON.parse(productItem.description);
-      setDescription(parsedDescription);
+
       setSelectedPlaces(productItem.places);
-      console.log("productItem description: ", parsedDescription);
     }
 
     getProviderPlaces()
