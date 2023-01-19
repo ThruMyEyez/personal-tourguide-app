@@ -28,8 +28,8 @@ router.post('/:productId', async (req, res, next) => {
             }
           ],
           mode: 'payment',
-          success_url: `http://localhost:3000/purchase/success`,
-          cancel_url: `http://localhost:3000/purchase/cancel`
+          success_url: `${process.env.CLIENT_APP_ORIGINS}/purchase/success`,
+          cancel_url: `${process.env.CLIENT_APP_ORIGINS}/purchase/cancel`
         });
       })
       .then((session) => {
