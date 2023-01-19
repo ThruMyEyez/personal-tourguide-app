@@ -21,7 +21,7 @@ export const DeletePlace = ({ curPlace, title, type, offers, setOffers }) => {
     <>
       <div
         onClick={() => setShowDeleteModal(true)}
-        className="px-4 py-2 mx-3 my-5 btn btn-sm btn-outline tooltip tooltip-warning"
+        className="px-4 py-2 mx-3 btn btn-sm btn-outline btn-error tooltip tooltip-warning"
         data-tip={`Delete "${curPlace.title}"`}
       >
         Delete

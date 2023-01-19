@@ -72,7 +72,7 @@ const AllPlacesFromProvider = () => {
                   >
                     Update
                   </Link>
-                  <button className="btn btn-sm btn-outline btn-error">delete</button>
+
                   <DeletePlace curPlace={place} />
                 </div>
               </PlaceCard>

@@ -23,11 +23,11 @@ const EditPlaceModal = () => {
 
   return (
     <div className="z-50 fullscreen-modal-container">
-      <div className="absolute w-2/3 p-2 mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-200 rounded-lg shadow-xl h-2/3 top-1/2 left-1/2">
+      <div className="absolute w-2/3 h-[91%] p-2 mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-200 rounded-lg shadow-xl top-1/2 left-1/2">
         <CloseNavigateBtn navigateTo={-1} />
         {place && (
           <>
-            <h1>Update Place-Data</h1>
+            <h1>Update selected Place</h1>
             <HandlePlace place={place} />
           </>
         )}
