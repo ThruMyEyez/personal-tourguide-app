@@ -18,14 +18,14 @@ import {
 
 import {
   NewPlaceModal,
-  NewProductItem,
+  HandleProductItem,
   MyOfferings,
   HandleOffering,
   EditPlaceModal,
 } from "./components/DashboardComponents";
 import AllProviderProducts from "./components/FetchFromDB/AllProviderProducts";
 import AllPlacesFromProvider from "./components/FetchFromDB/AllPlacesFromProvider";
-import { OwnProviderProductItems } from "./components/Product";
+import { OwnProviderProductItems, EditProductItem } from "./components/Product";
 
 const App = () => {
   const location = useLocation();
@@ -55,7 +55,8 @@ const App = () => {
             }
             exact
           >
-            <Route path="/dashboard/new-event" element={<NewProductItem />} />
+            <Route path="/dashboard/new-event" element={<HandleProductItem />} />
+            <Route path="/dashboard/edit-event/:id" element={<EditProductItem />} />
             <Route path="/dashboard/my-events" element={<OwnProviderProductItems />} />
             <Route path="/dashboard/new-offering" element={<HandleOffering />} />
             <Route path="/dashboard/manage-offering/:id" element={<HandleOffering />} />

@@ -92,6 +92,26 @@ router.get('/event-items/:id', (req, res, next) => {
     .catch((error) => next(error));
 });
 
+//serve a specific provider productItem for updating.
+router.get('/event-item/:id', routeGuard, (req, res, next) => {
+  //const { _id } = req.payload;
+  const { id } = req.params;
+  ProductItem.findOne({ _id: id })
+    .populate({
+      path: 'places',
+      select: 'title',
+      model: Place
+    })
+    .then((foundProductItem) => {
+      console.log(foundProductItem);
+      res.status(200).json({
+        message: `Found ${foundProductItem.length} product items.`,
+        data: foundProductItem
+      });
+    })
+    .catch((error) => next(error));
+});
+
 router.post('/item/create', routeGuard, async (req, res, next) => {
   const { _id } = req.payload;
 

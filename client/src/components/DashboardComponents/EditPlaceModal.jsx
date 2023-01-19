@@ -17,10 +17,6 @@ const EditPlaceModal = () => {
     fetchPlace();
   }, [id]);
 
-  useEffect(() => {
-    console.log("place", place);
-  }, [place]);
-
   return (
     <div className="z-50 fullscreen-modal-container">
       <div className="absolute w-2/3 h-[91%] p-2 mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-200 rounded-lg shadow-xl top-1/2 left-1/2">

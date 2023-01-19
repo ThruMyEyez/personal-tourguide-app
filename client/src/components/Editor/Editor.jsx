@@ -5,8 +5,9 @@ import TextAlign from "@tiptap/extension-text-align";
 
 import MenuBar from "./MenuBar";
 // ToDo Blockquote & Icons + Styling
-const Editor = ({ setDescription, hideMenubar }) => {
+const Editor = ({ setDescription, content }) => {
   const editor = useEditor({
+    content: content,
     extensions: [
       /* Document,
       Paragraph,
@@ -28,12 +29,9 @@ const Editor = ({ setDescription, hideMenubar }) => {
           "prose min-h-10 prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none",
       },
     },
-    content: ``,
 
     onUpdate: ({ editor }) => {
-      console.log(editor);
       const json = editor.getJSON();
-
       setDescription(json);
     },
   });

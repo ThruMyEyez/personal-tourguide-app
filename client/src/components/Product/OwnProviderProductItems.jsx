@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { getAllProviderProductItems } from "../../services/product";
 import { AuthContext } from "../../context/authentication";
 import { EditorView } from "../Editor";
@@ -35,7 +36,13 @@ const OwnProviderProductItems = () => {
                 <EditorView content={item.description} />
                 <HorizontalRuler />
                 <p>{item.eventDate}</p>
-                <button>edit</button>
+                <Link
+                  // state={location && { background: location }}
+                  className="btn btn-sm"
+                  to={`/dashboard/edit-event/${item._id}`}
+                >
+                  Edit
+                </Link>
 
                 <DeleteOwnProductItem item={item} />
               </div>

@@ -11,6 +11,9 @@ export const getProviderProducts = (userId) => api.get(`/product/provider/${user
 export const getAllProviderProductItems = (userId) =>
   api.get(`/product/event-items/${userId}`);
 
+export const getSpecificProductItem = (productItemId) =>
+  api.get(`/product/event-item/${productItemId}`, authHeaders);
+
 // Already included in the event route service.
 //export const getProductDetails = (productId) => api.get(`/product/${productId}`);
 

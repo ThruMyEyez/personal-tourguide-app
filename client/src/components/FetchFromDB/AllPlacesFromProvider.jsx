@@ -18,23 +18,6 @@ const PlaceCard = ({ title, picture, description, children }) => {
   );
 };
 
-/*const card = () => {
-  return (
-    <div className="shadow-xl card w-96 bg-base-100 image-full">
-      <figure>
-        <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div className="justify-end card-actions">
-          <button className="btn btn-primary">Buy Now</button>
-        </div>
-      </div>
-    </div>
-  );
-};*/
-
 const AllPlacesFromProvider = () => {
   const [places, setPlaces] = useState([]);
 
@@ -70,7 +53,7 @@ const AllPlacesFromProvider = () => {
                     className="btn btn-sm"
                     to={`/dashboard/place/update/${place._id}`}
                   >
-                    Update
+                    Edit
                   </Link>
 
                   <DeletePlace curPlace={place} />

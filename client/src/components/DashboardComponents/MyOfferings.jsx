@@ -26,7 +26,7 @@ const MyOfferings = () => {
     <div className="w-full p-3 border border-sky-600">
       <CloseNavigateBtn navigateTo={-1} />
 
-      <h3>MyOfferings</h3>
+      <h3>Current Offers</h3>
       {errorMsg && <OnErrorAlert msg={errorMsg} />}
       {(offerings && (
         <div>
