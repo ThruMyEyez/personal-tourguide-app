@@ -21,7 +21,13 @@ import {
 const menuLinks = [
   {
     title: "Public Profile",
-    url: "/dashboard",
+    url: "/dashboard/profile",
+    Icon: ProviderUserIcon,
+    tooltip: "Profile",
+  },
+  {
+    title: "Edit Profile",
+    url: "/dashboard/profile/edit",
     Icon: ProviderUserIcon,
     tooltip: "Edit Profile",
   },
@@ -97,7 +103,9 @@ const DashSidebar = () => {
         src={chevronRight}
         alt="Control"
         className={`absolute cursor-pointer -right-3 top-9 w-7 border-gray-500 bg-gray-500
-   border-2 rounded-full transition duration-100 ease-linear ${!open && "rotate-180"}`}
+   border-2 rounded-full transition duration-100 ease-linear ${
+     !open && "rotate-180"
+   }`}
         onClick={() => setOpen(!open)}
       />
 
@@ -118,7 +126,11 @@ const DashSidebar = () => {
           <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full"></div>
         </div>
         {/* Menu Block */}
-        <SidebarMenublock sidebarOpenState={open} menuTitle="User Menu" links={menuLinks} />
+        <SidebarMenublock
+          sidebarOpenState={open}
+          menuTitle="User Menu"
+          links={menuLinks}
+        />
         {/* TODO: Make this viewable only for providers/Admins */}
         {/* Product handling menu */}
         <SidebarMenublock

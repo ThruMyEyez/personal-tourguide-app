@@ -13,7 +13,7 @@ const schema = new Schema(
       unique: true
     },
     providerType: {
-      type: [String],
+      type: String,
       enum: ['Tourguide', 'Host']
     },
     taxID: { type: String /*required: true*/, default: 'XX XXX XXX XXX' },

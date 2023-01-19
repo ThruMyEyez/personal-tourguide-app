@@ -1,6 +1,10 @@
 import { api, authHeaders } from "./api";
 
-export const getFullOwnUserDetails = () => api.get(`/user/`, authHeaders);
+export const getFullOwnUserDetails = () => {
+  return api.get(`/user/`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("AuthToken")}` },
+  });
+};
 
 export const getOwnUserPurchases = () =>
   api.get(`/user/purchases`, authHeaders);
@@ -11,9 +15,18 @@ export const getPurchaseDetails = (purchaseId) =>
 // get public user profile
 export const getFullUserDetails = (userId) => api.get(`/user/${userId}`);
 
+// Following a specific user. req.body.followee aIs the target user to be followed
+export const followedUser = (followee) =>
+  api
+    .get(`/user/followed/${followee}`, authHeaders)
+    .then((response) => response.data)
+    .catch((err) => console.log(err));
+
 // Following a specific user. req.body.followee Is the target user to be followed
-export const followUser = (data) =>
-  api.post(`/user/follow/`, data, authHeaders);
+export const followUser = (followee) =>
+  api
+    .post(`/user/follow/`, { followee }, authHeaders)
+    .then((response) => response.data);
 
 // Unfollowing a specific user. :id Is the targetUser to be unfollowed
 export const unfollowUser = (userId) =>
@@ -25,9 +38,18 @@ export const updateUserRole = (data, userId) =>
   api.put(`/user/update-role/${userId}`, data, authHeaders);
 
 // If the user.role is "provider" or "admin", user can create a provider profile
-export const createProviderProfile = (data) =>
-  api.post("/user/new-provider-profile", data, authHeaders);
+export const createProviderProfile = (data) => {
+  console.log(authHeaders);
+  return api.post("/user/new-provider-profile", data, authHeaders);
+};
 
 // If the user.role is "provider" or "admin", user can update his provider profile
 export const updateProviderProfile = (data) =>
   api.put(`/user/edit-profile/`, data, authHeaders);
+
+export const getUserRatings = (userId) =>
+  api.get(`/user/${userId}/ratings`, authHeaders);
+
+export const updateUser = (data) => {
+  api.put(`/user/update`, data, authHeaders);
+};

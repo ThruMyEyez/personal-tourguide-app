@@ -157,7 +157,10 @@ const HandleOffering = () => {
               process.env.REACT_APP_IMAGEKIT_AUTHENTICTION_ENDPOINT
             }
           >
-            <IKUpload onSuccess={onFileUploadSuccess} onError={onFileUploadError} />
+            <IKUpload
+              onSuccess={onFileUploadSuccess}
+              onError={onFileUploadError}
+            />
             {offerData.productThumbnail && (
               <IKImage
                 className="mx-auto"
