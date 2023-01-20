@@ -10,8 +10,10 @@ const PurchaseCanceled = () => {
             <div className="flex flex-row items-baseline  ">
               <h1 className="text-5xl font-bold">We are sorry</h1>
               <span className="text-9xl animate-[bounce_1s_infinite] ">.</span>
-              <span className=" text-9xl animate-bounce delay-100">.</span>
               <span className=" text-9xl animate-[bounce_2s_infinite]">.</span>
+              <span className=" text-9xl animate-[bounce_1.5s_infinite]">
+                .
+              </span>
             </div>
             <div className="alert alert-error shadow-lg">
               <div>
