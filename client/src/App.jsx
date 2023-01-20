@@ -31,6 +31,7 @@ import EditProfilePictureModal from "./components/Profile/EditProfilePictureModa
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
+import PurchaseCanceled from "./pages/PurchaseCanceled";
 
 const App = () => {
   const location = useLocation();
@@ -48,12 +49,17 @@ const App = () => {
           <Route path="/public-tours" element={<PublicTours />} />
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />
-          <Route path="/lost-password/:id/:token" element={<SetPassword />} exact />
+          <Route
+            path="/lost-password/:id/:token"
+            element={<SetPassword />}
+            exact
+          />
           <Route path="/provider/:id" element={<AllProviderProducts />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/purchase/:id" />
           <Route path="/purchase/success" element={<PurchaseSuccess />} />
+          <Route path="/purchase/cancel" element={<PurchaseCanceled />} />
 
           <Route path="/event/:id" element={<EventDetails />} />
           <Route
@@ -65,16 +71,45 @@ const App = () => {
             }
             exact
           >
-            <Route path="/dashboard/new-event" element={<HandleProductItem />} />
-            <Route path="/dashboard/edit-event/:id" element={<EditProductItem />} />
-            <Route path="/dashboard/my-events" element={<OwnProviderProductItems />} />
-            <Route path="/dashboard/new-offering" element={<HandleOffering />} />
-            <Route path="/dashboard/manage-offering/:id" element={<HandleOffering />} />
+            <Route
+              path="/dashboard/new-event"
+              element={<HandleProductItem />}
+            />
+            <Route
+              path="/dashboard/edit-event/:id"
+              element={<EditProductItem />}
+            />
+            <Route
+              path="/dashboard/my-events"
+              element={<OwnProviderProductItems />}
+            />
+            <Route
+              path="/dashboard/new-offering"
+              element={<HandleOffering />}
+            />
+            <Route
+              path="/dashboard/manage-offering/:id"
+              element={<HandleOffering />}
+            />
             <Route path="/dashboard/my-offerings" element={<MyOfferings />} />
-            <Route path="/dashboard/places" element={<AllPlacesFromProvider />} />
-            <Route path="/dashboard/place/create" element={<NewPlaceModal />} exact />
-            <Route path="/dashboard/place/update/:id" element={<EditPlaceModal />} exact />
-            <Route path="/dashboard/profile" element={<Profile self={true} />} />
+            <Route
+              path="/dashboard/places"
+              element={<AllPlacesFromProvider />}
+            />
+            <Route
+              path="/dashboard/place/create"
+              element={<NewPlaceModal />}
+              exact
+            />
+            <Route
+              path="/dashboard/place/update/:id"
+              element={<EditPlaceModal />}
+              exact
+            />
+            <Route
+              path="/dashboard/profile"
+              element={<Profile self={true} />}
+            />
             <Route path="/dashboard/profile/edit" element={<EditProfile />} />
           </Route>
         </Route>
@@ -119,8 +154,16 @@ const App = () => {
             }
             exact
           />
-          <Route path="/dashboard/place/update/:id" element={<EditPlaceModal />} exact />
-          <Route path="/profile/edit/picture" element={<EditProfilePictureModal />} exact />
+          <Route
+            path="/dashboard/place/update/:id"
+            element={<EditPlaceModal />}
+            exact
+          />
+          <Route
+            path="/profile/edit/picture"
+            element={<EditProfilePictureModal />}
+            exact
+          />
         </Routes>
       )}
     </div>
