@@ -23,30 +23,14 @@ import SubmitRating from "../components/Rating/SubmitRating";
 import IsProvider from "../components/AuthComponents/IsProvider";
 
 const Dashboard = (props) => {
-  const { isLoggedIn, isLoading, user, userFullDetails } =
-    useContext(AuthContext);
+  const { isLoggedIn, isLoading, user, userFullDetails } = useContext(AuthContext);
 
   // TEST & PROTOTYPE AREA
-  // Public Events => All Products
-  const handleGetAllEvents = (e) => {
-    e.preventDefault();
-    getAllEvents()
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
 
   // Events => New Event rating!
   const handleNewEventRating = (e) => {
     e.preventDefault();
-    newEventRating(
-      { stars: 4, comment: "It was exciting tour!" },
-      "63bcf64109a3aa67e2c7c668"
-    )
+    newEventRating({ stars: 4, comment: "It was exciting tour!" }, "63bcf64109a3aa67e2c7c668")
       .then((response) => {
         console.log(response.data);
       })
@@ -57,36 +41,9 @@ const Dashboard = (props) => {
   };
 
   // Some other test and prototype
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    getProviderProducts("63aa6b493595c079a80b7607")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
-
-  const handleFormUpdateProductItemSubmit = (e) => {
-    e.preventDefault();
-    updateEventItem(
-      { title: "MeowMeowTour" /*description: JSON.stringify(description) */ },
-      "63bce3755b49ac99a7dfbdd6"
-    )
-      .then((response) => {
-        console.log(response.data);
-        console.log("Updated ProductItem: ", response.data.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
 
   // USER SECTION OF TEST & PROTOTYPE
-  const handleFollow = (e) => {
+  /* const handleFollow = (e) => {
     e.preventDefault();
     followUser({ followee: "63a799015619650c6fd8e338" })
       .then((response) => {
@@ -108,9 +65,9 @@ const Dashboard = (props) => {
         console.error(error.response.data.error.message);
         console.log(error);
       });
-  };
+  };*/
 
-  const handleUpdateUserRole = (e) => {
+  /*const handleUpdateUserRole = (e) => {
     e.preventDefault();
     updateUserRole({ role: "provider" }, "63ad6b5acff822634ee090ff")
       .then((response) => {
@@ -120,39 +77,7 @@ const Dashboard = (props) => {
         console.error(error.response.data.error.message);
         console.log(error);
       });
-  };
-
-  const handleCreateProviderProfile = (e) => {
-    e.preventDefault();
-    createProviderProfile({
-      providerType: "Host",
-      taxID: "12 345 678 777",
-      gallery: [
-        "https://images.nordbayern.de/image/contentid/policy:1.4762035:1504305220/skatepark.jpg?f=4%3A3&h=450&m=FIT&w=600&$p$f$h$m$w=097dacd",
-      ],
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
-
-  const handleUpdateProviderProfile = (e) => {
-    e.preventDefault();
-    updateProviderProfile({
-      bio: "This is me, mySelf & I. Welcome to my Bio. I'm a tourguide from...",
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response.data.error.message);
-        console.log(error);
-      });
-  };
+  };*/
 
   // End of: TEST & PROTOTYPE AREA
   return (
@@ -168,47 +93,22 @@ const Dashboard = (props) => {
         <Outlet />
         <p>test & prototype</p>
         {/* <ProfileBox /> */}
-        <form onSubmit={handleGetAllEvents}>
-          <button className="btn-primary">
-            get All Events/Products from DB - alex
-          </button>
-        </form>
+
         <form onSubmit={handleNewEventRating}>
-          <button className="btn-primary">
-            make rating for Events/Products - alex
-          </button>
-        </form>
-        <form onSubmit={handleFormSubmit}>
-          <button className="btn-primary">
-            Get All Products for specific Provider "userId" - alex
-          </button>
+          <button className="btn-primary">make rating for Events/Products - alex</button>
         </form>
 
-        <form onSubmit={handleFormUpdateProductItemSubmit}>
-          <button className="btn-primary">
-            Update Provider productItem - artur
-          </button>
-        </form>
+        {/*
         <form onSubmit={handleFollow}>
           <button className="btn-primary">follow userId - joao </button>
-        </form>
-        {/* Follow/Unfollow could be achieved in one route / component */}
+        </form>*/}
+        {/* Follow/Unfollow could be achieved in one route / component 
         <form onSubmit={handleUnfollow}>
           <button className="btn-primary">unfollow userId - joao </button>
-        </form>
-        <form onSubmit={handleUpdateUserRole}>
+        </form>*/}
+        {/* <form onSubmit={handleUpdateUserRole}>
           <button className="btn-primary">Update user role - alex</button>
-        </form>
-        <form onSubmit={handleCreateProviderProfile}>
-          <button className="btn-primary">
-            Create Provider Profile - joao{" "}
-          </button>
-        </form>
-        <form onSubmit={handleUpdateProviderProfile}>
-          <button className="btn-primary">
-            Update Provider Profile - joao{" "}
-          </button>
-        </form>
+        </form>*/}
       </div>
     </div>
   );

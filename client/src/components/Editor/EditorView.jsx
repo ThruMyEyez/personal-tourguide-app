@@ -20,7 +20,7 @@ const EditorView = ({ content, editable }) => {
       // Editor Content ViewBox Tailwind Styling
       attributes: {
         class:
-          "prose bg-white min-h-10 prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none",
+          "prose md:w-[62%] px-6 md:mx-auto mx-6 bg-white min-h-10 prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none",
       },
     },
   });

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 /* example Data Model */
 const placesData = [
@@ -34,6 +34,7 @@ const placesData = [
 const TourMapContext = createContext();
 
 const TourMapProviderWrapper = ({ children }) => {
+  const wrapperRef = useRef(null);
   const [places, setPlaces] = useState(placesData);
   const [previewPlace, setPreviewPlace] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
@@ -49,6 +50,19 @@ const TourMapProviderWrapper = ({ children }) => {
 
   const togglePreview = (bool) => {
     setShowPreview(bool);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, false);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, false);
+    };
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+      closePreview();
+    }
   };
 
   useEffect(() => {
@@ -68,7 +82,7 @@ const TourMapProviderWrapper = ({ children }) => {
         setPlaces,
       }}
     >
-      {children}
+      <div ref={wrapperRef}>{children}</div>
     </TourMapContext.Provider>
   );
 };

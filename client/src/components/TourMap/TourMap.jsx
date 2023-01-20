@@ -37,7 +37,7 @@ const TourMap = ({ startPlace }) => {
       center={startPlace}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: "600px", width: "100%" }}
+      className="md:mx-auto mx-6 rounded-lg w-[100%]  md:w-[62%] h-[600px]"
       zoomControl={true}
     >
       <TileLayer
