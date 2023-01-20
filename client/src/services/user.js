@@ -1,4 +1,4 @@
-import { api, authHeaders } from "./api";
+import { api, authHeaders, getAuthHeaders } from "./api";
 
 export const getFullOwnUserDetails = () => {
   return api.get(`/user/`, {
@@ -40,18 +40,22 @@ export const updateUserRole = (data, userId) =>
 // If the user.role is "provider" or "admin", user can create a provider profile
 export const createProviderProfile = (data) => {
   console.log(authHeaders);
+  getAuthHeaders();
   return api.post("/user/new-provider-profile", data, {
     headers: { Authorization: `Bearer ${localStorage.getItem("AuthToken")}` },
   });
 };
 
 // If the user.role is "provider" or "admin", user can update his provider profile
-export const updateProviderProfile = (data) =>
-  api.put(`/user/edit-profile/`, data, authHeaders);
+export const updateProviderProfile = (data) => {
+  getAuthHeaders();
+  return api.put(`/user/edit-profile/`, data, authHeaders);
+};
 
 export const getUserRatings = (userId) =>
   api.get(`/user/${userId}/ratings`, authHeaders);
 
 export const updateUser = (data) => {
-  api.put(`/user/update`, data, authHeaders);
+  getAuthHeaders();
+  return api.put(`/user/update`, data, authHeaders);
 };
