@@ -40,7 +40,9 @@ export const updateUserRole = (data, userId) =>
 // If the user.role is "provider" or "admin", user can create a provider profile
 export const createProviderProfile = (data) => {
   console.log(authHeaders);
-  return api.post("/user/new-provider-profile", data, authHeaders);
+  return api.post("/user/new-provider-profile", data, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("AuthToken")}` },
+  });
 };
 
 // If the user.role is "provider" or "admin", user can update his provider profile

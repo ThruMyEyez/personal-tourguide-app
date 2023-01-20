@@ -115,6 +115,7 @@ const AuthProviderWrapper = ({ children }) => {
           logOutUser,
           userFullDetails,
           getUserDetails,
+          setUserFullDetails,
         }}
       >
         {children}

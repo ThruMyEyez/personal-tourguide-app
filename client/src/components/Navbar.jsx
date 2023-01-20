@@ -5,7 +5,7 @@ import { MdBackpack } from "react-icons/md";
 import SearchBar from "./SearchBar";
 
 const Navbar = () => {
-  const { isLoggedIn, user, logOutUser, userFullDetails } =
+  const { isLoggedIn, user, logOutUser, userFullDetails, setUserFullDetails } =
     useContext(AuthContext);
   const firstChar = isLoggedIn && user.name.charAt(0).toUpperCase();
   const location = useLocation();
@@ -52,7 +52,7 @@ const Navbar = () => {
                   <li>
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
-                  <li>
+                  <li onClick={() => setUserFullDetails(null)}>
                     <button onClick={logOutUser}>Logout</button>
                   </li>
                 </ul>
