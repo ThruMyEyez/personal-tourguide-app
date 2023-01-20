@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { searchProduct } from "../services/search";
+import { Link } from "react-router-dom";
 
 const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -34,7 +35,9 @@ const SearchResults = () => {
                   }
                 </figure>
                 <div className="card-body">
-                  <h2 className="text-black card-title">{product.title}</h2>
+                  <Link to={`/event/${product._id}`}>
+                    <h2 className="text-black card-title">{product.title}</h2>
+                  </Link>
                   <p>{product.tagline}</p>
                   <div className="justify-end card-actions">
                     <button className="btn btn-primary">Buy Now</button>
