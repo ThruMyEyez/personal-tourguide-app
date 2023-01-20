@@ -16,7 +16,7 @@ const SearchBar = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     const searchResults = await searchProduct(searchTerm);
-    console.log(searchResults.data.products);
+    console.log(searchResults.data);
     setSearchResults(searchResults.data.products);
   };
 

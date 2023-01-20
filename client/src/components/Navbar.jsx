@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex items-center justify-between w-full p-5 text-lg lg:p-3 lg:justify-around bg-clip-pink-violet">
-        <div className="link-logo">
+        <div className="link-logo flex justify-end">
           <ul className="flex m-0 list-none">
             <li className="font-bold">
               <Link to="/">GuideGo</Link>
