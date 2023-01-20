@@ -10,7 +10,12 @@ const schema = Schema(
     product: {
       type: String
     },
+
     productId: { type: Schema.Types.ObjectId, ref: 'product' },
+    session: {
+      type: String
+    },
+    sessionId: { type: String },
 
     status: {
       type: String,
