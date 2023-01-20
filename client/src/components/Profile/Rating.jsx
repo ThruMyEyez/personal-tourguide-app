@@ -40,7 +40,7 @@ const Rating = ({ id }) => {
   const emptyStarCount = 5 - fullStarCount;
 
   return (
-    <div className="text-xs  my-1 uppercase tracking-wider border px-2 text-yellow-600 border-yellow-600 hover:bg-yellow-600 hover:text-yellow-100 cursor-default">
+    <div className="btn btn-wider bg-white text-xl mr-2 my-1 uppercase  border px-2 text-yellow-600 border-yellow-600 hover:bg-yellow-600 hover:text-yellow-100 cursor-default">
       {"★".repeat(fullStarCount) + "☆".repeat(emptyStarCount)}
     </div>
   );

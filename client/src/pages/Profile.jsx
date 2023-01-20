@@ -47,9 +47,9 @@ const Profile = ({ self, children }) => {
   }, [id, userFullDetails, user]);
 
   return (
-    <div className="w-full ">
-      <div className="bg-white my-12 pb-6 w-full  justify-center items-center overflow-hidden rounded-lg shadow-sm mx-auto md:max-w-screen-md ">
-        <div className="relative h-40">
+    <div className="w-full  h-full  flex flex-col items-center ">
+      <div className="bg-white my-12 pb-6 w-full  justify-center items-center overflow-hidden rounded-lg shadow-xl mx-auto md:max-w-screen-md ">
+        <div className="relative w-full h-40">
           {/* //TODO: Create a modal to adda picture to the user */}
           <img
             className="absolute h-full w-full object-cover"
@@ -59,7 +59,7 @@ const Profile = ({ self, children }) => {
             alt=" "
           />
         </div>
-        {isOwnProfile && (
+        {(isOwnProfile && (
           <Link state={{ background: location }} to="/profile/edit/picture">
             <div className="relative shadow mx-auto h-24 w-24 -my-12 border-white rounded-full overflow-hidden border-4 bg-primary">
               {profileOwner.profilePicture && (
@@ -72,40 +72,32 @@ const Profile = ({ self, children }) => {
               )}
             </div>
           </Link>
+        )) || (
+          <div className="relative shadow mx-auto h-24 w-24 -my-12 border-white rounded-full overflow-hidden border-4 bg-primary">
+            {profileOwner.profilePicture && (
+              <img
+                referrerPolicy="no-referrer"
+                className="object-cover w-full h-full "
+                src={profileOwner.profilePicture}
+                alt=" "
+              />
+            )}
+          </div>
         )}
-
-        <div className="mt-16">
-          <h1 className="text-lg text-center font-semibold">
-            {(profileOwner.firstName || profileOwner.name) +
-              " " +
-              (profileOwner.lastName || "")}
-          </h1>
-          <p className="text-sm text-gray-600 text-center">
-            My id: {profileOwner._id} Or Profile Owner: {profileOwner._id}
-          </p>
-
-          <p className="text-sm text-gray-600 text-center">
-            {profileOwner.email}
-          </p>
-          <p className="text-sm text-gray-600 text-center">
-            Tax Id:
-            {profileOwner.providerProfile && profileOwner.providerProfile.taxID}
-          </p>
-
-          <p className="text-sm text-gray-600 text-center">
-            {"My Role: " + profileOwner.role}
-          </p>
-          <p className="text-sm text-gray-600 text-center">
-            Provider Type:
+        <div className="flex flex-col m-10 items-center justify-center">
+          <div className="flex items-center justify-center space-x-2 mt-2">
+            <p className="text-2xl">
+              {(profileOwner.firstName || profileOwner.name) +
+                " " +
+                (profileOwner.lastName || "")}
+            </p>
+          </div>
+          <p className="text-gray-700">
             {profileOwner.providerProfile &&
               profileOwner.providerProfile.providerType}
           </p>
-          <p className="text-sm text-gray-600 text-center">
-            {"Is my own profile: " + isOwnProfile}{" "}
-            {/* TODO: Remove after use */}
-          </p>
+          <p className="text-sm text-gray-500"> {profileOwner.email}</p>
         </div>
-
         <div className="mt-6 pt-3 flex flex-wrap justify-between mx-6 border-t">
           {
             (!isOwnProfile && id && <Follow profileId={id} />) || (
@@ -115,14 +107,69 @@ const Profile = ({ self, children }) => {
           {id && <Rating id={id} />}
           {/* TODO: Link to a real id */}
         </div>
-        <div className="">
-          {profileOwner && profileOwner.providerProfile && (
-            <Bio bio={profileOwner.providerProfile.bio}></Bio>
-          )}
+      </div>
+      {/* bg-white my-12 pb-6 w-full  justify-center items-center overflow-hidden rounded-lg shadow-xl mx-auto md:max-w-screen-md */}
+      <div class="items-center  bg-white my-12 pb-6 w-full  justify-center shadow-xl  overflow-hidden rounded-lg  mx-auto  flex-col  md:max-w-screen-md ">
+        <div class="w-full flex flex-col ">
+          <div class="flex-1 bg-white rounded-lg  p-8">
+            <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
+            <ul class="mt-2 text-gray-700">
+              <li class="flex border-y py-2">
+                <span class="font-bold w-24">Full name:</span>
+                <span class="text-gray-700">
+                  {" "}
+                  {(profileOwner.firstName || profileOwner.name) +
+                    " " +
+                    (profileOwner.lastName || "")}
+                </span>
+              </li>
+              {isOwnProfile && (
+                <li class="flex border-b py-2">
+                  <span class="font-bold w-24">Account Id:</span>
+                  <span class="text-gray-700">{profileOwner._id}</span>
+                </li>
+              )}
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Email:</span>
+                <span class="text-gray-700">{profileOwner.email}</span>
+              </li>
+              {isOwnProfile && (
+                <li class="flex border-b py-2">
+                  <span class="font-bold w-24">Financial Info:</span>
+                  <span class="text-gray-700">
+                    {" "}
+                    {profileOwner.providerProfile &&
+                      profileOwner.providerProfile.taxID}
+                  </span>
+                </li>
+              )}
 
-          {profileOwner._id && <ProductsCarousel id={profileOwner._id} />}
-          {profileOwner._id && <ProductsCarouselCopy id={profileOwner._id} />}
+              {isOwnProfile && (
+                <li class="flex border-b py-2">
+                  <span class="font-bold w-24">My Role :</span>
+                  <span class="text-gray-700">
+                    {profileOwner && profileOwner.role}
+                  </span>
+                </li>
+              )}
+              <li class="flex border-b py-2">
+                <span class="font-bold w-24">Provider Type:</span>
+                <span class="text-gray-700">
+                  {profileOwner.providerProfile &&
+                    profileOwner.providerProfile.providerType}
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+
+      <div className="">
+        {profileOwner && profileOwner.providerProfile && (
+          <Bio bio={profileOwner.providerProfile.bio}></Bio>
+        )}
+
+        {profileOwner._id && <ProductsCarousel id={profileOwner._id} />}
       </div>
     </div>
   );
