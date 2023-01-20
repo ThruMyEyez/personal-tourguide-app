@@ -83,12 +83,15 @@ body {
     @apply mt-1 text-sm text-gray-300 dark:text-gray-400;
   }
   .editorMenuBar {
-    @apply flex items-center justify-center w-full pb-5 bg-white;
+    @apply flex items-center justify-center w-auto py-[0.06em] space-x-0 rounded-t-lg bg-primary justify-items-stretch glass hover:bg-primary;
+  }
+  .editorIconGroup {
+    @apply flex px-3;
   }
   .editorIconActive {
-    @apply py-[2px] px-[6px]  bg-slate-400;
+    @apply py-[2px] px-[6px]  text-info glass ;
   }
   .editorIconInactive {
-    @apply py-[2px] px-[6px];
+    @apply py-[2px] px-[6px] hover:bg-zinc-300 hover:glass;
   }
 }

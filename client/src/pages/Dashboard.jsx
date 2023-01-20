@@ -85,7 +85,7 @@ const Dashboard = (props) => {
     <div className="flex h-full">
       <DashSidebar />
 
-      <div className="flex flex-col items-center w-full h-screen bg-slate-200">
+      <div className="flex flex-col items-center w-full h-screen bg-zinc-300">
         {/* <SubmitRating /> */}
 
         <CreateProviderForm />

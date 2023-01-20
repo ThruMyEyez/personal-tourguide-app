@@ -18,7 +18,6 @@ const Editor = ({ setDescription, content }) => {
       }), */
       StarterKit,
       Underline,
-
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -27,7 +26,7 @@ const Editor = ({ setDescription, content }) => {
       // Editor Content ViewBox Tailwind Styling
       attributes: {
         class:
-          "prose min-h-10 prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none",
+          "prose min-h-10 p-3 prose-sm sm:prose lg:prose-lg xl:prose-2xl focus:outline-none ",
       },
     },
     //setContent(content),
@@ -40,7 +39,7 @@ const Editor = ({ setDescription, content }) => {
   //editor.commands.setContent(content);
 
   return (
-    <div className="border border-sky-500 wysiwyg-editor">
+    <div className="rounded-lg shadow-md hover:shadow-lg glass bg-zinc-300 hover:bg-zinc-400 wysiwyg-editor">
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
       {/*<EditorView className="" content={editor} /> */}
