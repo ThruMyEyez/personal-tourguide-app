@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import SidebarMenublock from "./SidebarMenublock";
 import chevronRight from "../../assets/right-thin-chevron-svgrepo-com.svg";
+import { AuthContext } from "../../context/authentication";
 
 import {
   IconMapLocationDot,
@@ -87,6 +88,8 @@ const DashSidebar = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();
 
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     // BUG: It gets always only /dashboard/ as location
     // To get the current location for the Modal component background
@@ -102,13 +105,10 @@ const DashSidebar = () => {
       <img
         src={chevronRight}
         alt="Control"
-        className={`absolute cursor-pointer -right-3 top-9 w-7 border-gray-500 bg-gray-500
-   border-2 rounded-full transition duration-100 ease-linear ${
-     !open && "rotate-180"
-   }`}
+        className={`absolute cursor-pointer -right-3 top-9 w-7 border-zinc-500 bg-indigo-500 hover:bg-indigo-200
+   border-2 rounded-full transition duration-100 ease-linear ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       />
-
       <div className="flex flex-col items-center justify-center gap-x-4">
         <div className="relative flex items-center justify-center w-12 h-12 text-xl text-white uppercase bg-blue-500 rounded-full">
           <svg
@@ -126,11 +126,7 @@ const DashSidebar = () => {
           <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full"></div>
         </div>
         {/* Menu Block */}
-        <SidebarMenublock
-          sidebarOpenState={open}
-          menuTitle="User Menu"
-          links={menuLinks}
-        />
+        <SidebarMenublock sidebarOpenState={open} menuTitle="User Menu" links={menuLinks} />
         {/* TODO: Make this viewable only for providers/Admins */}
         {/* Product handling menu */}
         <SidebarMenublock

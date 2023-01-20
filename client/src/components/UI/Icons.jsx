@@ -1,4 +1,19 @@
 import {
+  TextBolder,
+  TextItalic,
+  TextUnderline,
+  TextStrikethrough,
+  TextHOne,
+  TextHTwo,
+  ListBullets,
+  ListNumbers,
+  TextAlignLeft,
+  TextAlignCenter,
+  TextAlignRight,
+  TextAlignJustify,
+  Quotes,
+  ArrowCounterClockwise,
+  ArrowClockwise,
   MapTrifold,
   LineSegments,
   Storefront,
@@ -50,6 +65,127 @@ function IconBxBold(props) {
     </svg>
   );
 }
+
+// Editor Icons from Phosphor icons
+const IconEditorBold = () => {
+  return (
+    <>
+      <TextBolder size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorItalic = () => {
+  return (
+    <>
+      <TextItalic size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorUnderline = () => {
+  return (
+    <>
+      <TextUnderline size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorStrikethrough = () => {
+  return (
+    <>
+      <TextStrikethrough size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorHOne = () => {
+  return (
+    <>
+      <TextHOne size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorHTwo = () => {
+  return (
+    <>
+      <TextHTwo size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorUList = () => {
+  return (
+    <>
+      <ListBullets size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorOList = () => {
+  return (
+    <>
+      <ListNumbers size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorTextLeft = () => {
+  return (
+    <>
+      <TextAlignLeft size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorTextCenter = () => {
+  return (
+    <>
+      <TextAlignCenter size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorTextRight = () => {
+  return (
+    <>
+      <TextAlignRight size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorTextJustify = () => {
+  return (
+    <>
+      <TextAlignJustify size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorQuote = () => {
+  return (
+    <>
+      <Quotes size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorUndo = () => {
+  return (
+    <>
+      <ArrowCounterClockwise size={24} weight="duotone" />
+    </>
+  );
+};
+
+const IconEditorRedo = () => {
+  return (
+    <>
+      <ArrowClockwise size={24} weight="duotone" />
+    </>
+  );
+};
 
 function IconFormatItalic(props) {
   return (
@@ -298,4 +434,20 @@ export {
   OfferTagIcon,
   TourEventIcon,
   MoneyIcon,
+  //editor icons
+  IconEditorBold,
+  IconEditorItalic,
+  IconEditorUnderline,
+  IconEditorStrikethrough,
+  IconEditorHOne,
+  IconEditorHTwo,
+  IconEditorUList,
+  IconEditorOList,
+  IconEditorTextLeft,
+  IconEditorTextCenter,
+  IconEditorTextRight,
+  IconEditorTextJustify,
+  IconEditorQuote,
+  IconEditorUndo,
+  IconEditorRedo,
 };

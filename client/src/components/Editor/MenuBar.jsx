@@ -1,15 +1,19 @@
 import {
-  IconUndo,
-  IconRedo,
-  IconBxBold,
-  IconFormatItalic,
-  IconBxStrikethrough,
-  IconBxUnderline,
-  IconTextCenter,
-  IconTextRight,
-  IconTextLeft,
-  IconOrderedList,
-  IconList,
+  IconEditorBold,
+  IconEditorItalic,
+  IconEditorUnderline,
+  IconEditorStrikethrough,
+  IconEditorHOne,
+  IconEditorHTwo,
+  IconEditorUList,
+  IconEditorOList,
+  IconEditorTextLeft,
+  IconEditorTextCenter,
+  IconEditorTextRight,
+  IconEditorTextJustify,
+  IconEditorQuote,
+  IconEditorUndo,
+  IconEditorRedo,
 } from "../UI/Icons";
 
 const MenuBar = ({ editor }) => {
@@ -18,32 +22,35 @@ const MenuBar = ({ editor }) => {
   }
 
   return (
-    <div className="editorMenuBar">
-      <div className="flex">
+    <div className="divide-x editorMenuBar">
+      <div className="editorIconGroup">
         <div
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "editorIconActive" : "editorIconInactive"}
         >
-          <IconBxBold />
+          <IconEditorBold />
         </div>
         <div
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={editor.isActive("italic") ? "editorIconActive" : "editorIconInactive"}
         >
-          <IconFormatItalic />
+          <IconEditorItalic />
         </div>
         <div
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={editor.isActive("underline") ? "editorIconActive" : "editorIconInactive"}
         >
-          <IconBxUnderline />
+          <IconEditorUnderline />
         </div>
         <div
           onClick={() => editor.chain().focus().toggleStrike().run()}
           className={editor.isActive("strike") ? "editorIconActive" : "editorIconInactive"}
         >
-          <IconBxStrikethrough />
+          <IconEditorStrikethrough />
         </div>
+      </div>
+
+      <div className="editorIconGroup">
         <div
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           className={
@@ -52,7 +59,7 @@ const MenuBar = ({ editor }) => {
               : "editorIconInactive"
           }
         >
-          H1
+          <IconEditorHOne />
         </div>
         <div
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
@@ -62,13 +69,16 @@ const MenuBar = ({ editor }) => {
               : "editorIconInactive"
           }
         >
-          h2
+          <IconEditorHTwo />
         </div>
+      </div>
+
+      <div className="editorIconGroup">
         <div
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={editor.isActive("bulletList") ? "editorIconActive" : "editorIconInactive"}
         >
-          <IconList />
+          <IconEditorUList />
         </div>
         <div
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -76,15 +86,18 @@ const MenuBar = ({ editor }) => {
             editor.isActive("orderedList") ? "editorIconActive" : "editorIconInactive"
           }
         >
-          <IconOrderedList />
+          <IconEditorOList />
         </div>
+      </div>
+
+      <div className="editorIconGroup">
         <div
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={
             editor.isActive({ textAlign: "left" }) ? "editorIconActive" : "editorIconInactive"
           }
         >
-          <IconTextLeft />
+          <IconEditorTextLeft />
         </div>
         <div
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
@@ -94,7 +107,7 @@ const MenuBar = ({ editor }) => {
               : "editorIconInactive"
           }
         >
-          <IconTextCenter />
+          <IconEditorTextCenter />
         </div>
         <div
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
@@ -102,7 +115,7 @@ const MenuBar = ({ editor }) => {
             editor.isActive({ textAlign: "right" }) ? "editorIconActive" : "editorIconInactive"
           }
         >
-          <IconTextRight />
+          <IconEditorTextRight />
         </div>
         <div
           onClick={() => editor.chain().focus().setTextAlign("justify").run()}
@@ -112,21 +125,25 @@ const MenuBar = ({ editor }) => {
               : "editorIconInactive"
           }
         >
-          justify
+          <IconEditorTextJustify />
         </div>
+      </div>
+
+      <div className="editorIconGroup">
         <div
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={editor.isActive("blockquote") ? "editorIconActive" : "editorIconInactive"}
         >
-          Quote
+          <IconEditorQuote />
         </div>
       </div>
-      <div>
+
+      <div className="editorIconGroup">
         <div onClick={() => editor.chain().focus().undo().run()}>
-          <IconUndo />
+          <IconEditorUndo />
         </div>
         <div onClick={() => editor.chain().focus().redo().run()}>
-          <IconRedo />
+          <IconEditorRedo />
         </div>
       </div>
     </div>
