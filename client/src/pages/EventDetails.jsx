@@ -49,7 +49,9 @@ const PublicTours = () => {
             <div className="w-full my-2 ml-6 shadow-xl stats bg-primary text-primary-content glass hover:bg-primary">
               <div className="w-full stat">
                 <div className="stat-title">Book now!</div>
-                <div className="m-3 stat-value">{product.priceInCents / 100} €</div>
+                <div className="m-3 stat-value">
+                  {product.priceInCents / 100} €
+                </div>
                 <div className="stat-actions">
                   <button
                     className="z-50 self-start w-full shadow-xl hover:shadow-indigo-300 btn btn-primary text-zinc-100 tooltip tooltip-info tooltip-right"
@@ -90,7 +92,9 @@ const PublicTours = () => {
                     className="m-1 bg-orange-400 mask mask-star-2"
                   />
                 </div>
-                <div className="stat-actions">Read customer ratings down below "click"</div>
+                <div className="stat-actions">
+                  Read customer ratings down below "click"
+                </div>
               </div>
             </div>
           </div>
