@@ -6,8 +6,9 @@ export const getFullOwnUserDetails = () => {
   });
 };
 
-export const getOwnUserPurchases = () =>
-  api.get(`/user/purchases`, authHeaders);
+export const getOwnUserPurchases = () => api.get(`/user/purchases`, authHeaders);
+
+export const getAllUsers = () => api.get("/user/all");
 
 export const getPurchaseDetails = (purchaseId) =>
   api.get(`/user/purchases/${purchaseId}`, authHeaders);
@@ -24,13 +25,10 @@ export const followedUser = (followee) =>
 
 // Following a specific user. req.body.followee Is the target user to be followed
 export const followUser = (followee) =>
-  api
-    .post(`/user/follow/`, { followee }, authHeaders)
-    .then((response) => response.data);
+  api.post(`/user/follow/`, { followee }, authHeaders).then((response) => response.data);
 
 // Unfollowing a specific user. :id Is the targetUser to be unfollowed
-export const unfollowUser = (userId) =>
-  api.delete(`/user/unfollow/${userId}`, authHeaders);
+export const unfollowUser = (userId) => api.delete(`/user/unfollow/${userId}`, authHeaders);
 
 // data should contain string of new targetRole >> see backend
 // "admin" role required for this route to work
@@ -52,8 +50,7 @@ export const updateProviderProfile = (data) => {
   return api.put(`/user/edit-profile/`, data, authHeaders);
 };
 
-export const getUserRatings = (userId) =>
-  api.get(`/user/${userId}/ratings`, authHeaders);
+export const getUserRatings = (userId) => api.get(`/user/${userId}/ratings`, authHeaders);
 
 export const updateUser = (data) => {
   getAuthHeaders();
