@@ -31,9 +31,9 @@ const Login = () => {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
+        getUserDetails();
 
         navigate("/dashboard");
-        getUserDetails();
       })
       .catch((error) => {
         setErrorMsg(error.response.data.message);
@@ -44,8 +44,8 @@ const Login = () => {
     loginGoogle(response.credential).then((response) => {
       storeToken(response.data.authToken);
       authenticateUser();
-      navigate("/dashboard");
       getUserDetails();
+      navigate("/dashboard");
     });
   };
 

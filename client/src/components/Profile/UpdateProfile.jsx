@@ -22,9 +22,10 @@ const UpdateProfile = ({ children }) => {
   };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const response = await updateUser(formData);
-    console.log("Edited the user Profile", response);
-    getUserDetails();
+    updateUser(formData).then((response) => {
+      console.log("Edited the user Profile", response);
+      getUserDetails();
+    });
   };
 
   const handleInput = (e) => {

@@ -198,6 +198,7 @@ router.post('/login', (req, res, next) => {
       !passwordCorrect &&
         res.status(401).json({ message: 'Password incorrect.' });
       const payload = {
+        _id: user?._id,
         email: user?.email,
         name: user?.name,
         profilePicture: user?.profilePicture,

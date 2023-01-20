@@ -11,6 +11,11 @@ export const stripeHeaders = {
   },
 };
 
-export const authHeaders = {
+export let authHeaders = {
   headers: { Authorization: `Bearer ${localStorage.getItem("AuthToken")}` },
 }; // for server side security
+export const getAuthHeaders = () => {
+  authHeaders = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("AuthToken")}` },
+  };
+};
