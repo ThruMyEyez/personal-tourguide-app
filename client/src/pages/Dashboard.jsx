@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authentication";
 import DashSidebar from "../components/UI/DashSidebar";
+import AllUsersFromDatabase from "../components/FetchFromDB/AllUsersFromDatabase";
 import Profile from "./Profile";
 import Follow from "../components/Profile/Follow";
 import { IKContext, IKUpload } from "imagekitio-react";
@@ -28,7 +29,7 @@ const Dashboard = (props) => {
   // TEST & PROTOTYPE AREA
 
   // Events => New Event rating!
-  const handleNewEventRating = (e) => {
+  /* const handleNewEventRating = (e) => {
     e.preventDefault();
     newEventRating({ stars: 4, comment: "It was exciting tour!" }, "63bcf64109a3aa67e2c7c668")
       .then((response) => {
@@ -43,7 +44,7 @@ const Dashboard = (props) => {
   // Some other test and prototype
 
   // USER SECTION OF TEST & PROTOTYPE
-  /* const handleFollow = (e) => {
+ const handleFollow = (e) => {
     e.preventDefault();
     followUser({ followee: "63a799015619650c6fd8e338" })
       .then((response) => {
@@ -90,15 +91,16 @@ const Dashboard = (props) => {
         <CreateProviderForm />
 
         <h1 className="p-3">Dashboard</h1>
+
         <Outlet />
-        <p>test & prototype</p>
         {/* <ProfileBox /> */}
 
+        {/*
+        <p>test & prototype</p>
         <form onSubmit={handleNewEventRating}>
           <button className="btn-primary">make rating for Events/Products - alex</button>
         </form>
 
-        {/*
         <form onSubmit={handleFollow}>
           <button className="btn-primary">follow userId - joao </button>
         </form>*/}

@@ -67,7 +67,7 @@ body {
 
 @layer components {
   .fullscreen-modal-container {
-    @apply absolute top-0 flex items-center justify-center w-full h-full bg-gray-900/20 backdrop-blur-sm;
+    @apply absolute z-[1001] top-0 flex items-center justify-center w-full h-full bg-gray-900/20 backdrop-blur-sm;
   }
   .btn-primary {
     @apply px-4 py-2 my-4 font-bold text-white bg-blue-500 rounded;

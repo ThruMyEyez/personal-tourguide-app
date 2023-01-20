@@ -48,6 +48,21 @@ router.get('/', routeGuard, async (req, res, next) => {
     });
 });
 
+// Get all users from DB
+router.get('/all/', async (req, res, next) => {
+  try {
+    const allUser = await User.find({});
+    console.log(allUser);
+    allUser &&
+      res.status(200).json({
+        message: `${allUser.length} Providers fetched from DB`,
+        data: allUser
+      });
+  } catch (error) {
+    next(error);
+  }
+});
+
 //WIP
 router.get('/purchases', routeGuard, (req, res, next) => {
   const { _id } = req.payload;
