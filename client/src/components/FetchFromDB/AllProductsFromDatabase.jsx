@@ -20,6 +20,7 @@ const ProductsFromDatabase = () => {
   const handlePurchase = async (productId) => {
     const purchase = await createPurchase(productId);
     window.location = purchase.data.session.url;
+    console.log("Window", window.location);
   };
 
   return (
