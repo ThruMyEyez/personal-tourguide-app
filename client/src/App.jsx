@@ -30,6 +30,7 @@ import { EditProductItem, OwnProviderProductItems } from "./components/Product";
 import EditProfilePictureModal from "./components/Profile/EditProfilePictureModal";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import PurchaseSuccess from "./pages/PurchaseSuccess";
 
 const App = () => {
   const location = useLocation();
@@ -52,6 +53,8 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/purchase/:id" />
+          <Route path="/purchase/success" element={<PurchaseSuccess />} />
+
           <Route path="/event/:id" element={<EventDetails />} />
           <Route
             path="/dashboard"
