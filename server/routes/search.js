@@ -6,7 +6,7 @@ const Product = require('../models/product');
 router.get('/:searchTerm', (req, res, next) => {
   const { searchTerm } = req.params;
 
-  ProductItem.find({
+  Product.find({
     title: { $regex: searchTerm, $options: 'i' }
   })
     .then((products) => {

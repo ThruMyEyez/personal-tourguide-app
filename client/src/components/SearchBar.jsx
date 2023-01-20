@@ -1,5 +1,5 @@
-import { MagnifyingGlass } from "phosphor-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import SearchResults from "../pages/SearchResults";
 import { searchProduct } from "../services/search";
 
 const SearchBar = () => {
@@ -18,6 +18,7 @@ const SearchBar = () => {
     const searchResults = await searchProduct(searchTerm);
     console.log(searchResults.data);
     setSearchResults(searchResults.data.products);
+    window.location = `/search/${searchTerm}`;
   };
 
   return (
@@ -40,28 +41,7 @@ const SearchBar = () => {
 
       {searchResults &&
         searchResults.map((product) => {
-          return (
-            <div className="" key={product._id}>
-              <div className="mb-5 shadow-xl card w-128 bg-base-100">
-                <figure>
-                  {
-                    <img
-                      src={product.productThumbnail}
-                      alt={product.title}
-                      className="w-96 card-image"
-                    />
-                  }
-                </figure>
-                <div className="card-body">
-                  <h2 className="text-black card-title">{product.title}</h2>
-                  <p>{product.tagline}</p>
-                  <div className="justify-end card-actions">
-                    <button className="btn btn-primary">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
+          return <SearchResults />;
         })}
     </div>
   );

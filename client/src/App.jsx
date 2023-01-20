@@ -32,6 +32,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
 import PurchaseCanceled from "./pages/PurchaseCanceled";
+import SearchResults from "./pages/SearchResults";
 
 const App = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/public-tours" element={<PublicTours />} />
           <Route path="/private-tours" element={<PrivateTours />} />
           <Route path="/individual-program" element={<IndividualProgram />} />
+          <Route path="/search/:searchTerm" element={<SearchResults />} />
           <Route
             path="/lost-password/:id/:token"
             element={<SetPassword />}
