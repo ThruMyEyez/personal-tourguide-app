@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/authentication";
 import { MdBackpack } from "react-icons/md";
 import SearchBar from "./SearchBar";
+import ThemeButton from "./UI/ThemeButton";
 
 const Navbar = () => {
   const { isLoggedIn, user, logOutUser, userFullDetails, setUserFullDetails } =
@@ -25,7 +26,7 @@ const Navbar = () => {
         <div className="flex items-center">
           {isLoggedIn && (
             <>
-              <div className="dropdown dropdown-end w-40">
+              <div className="dropdown dropdown-end  w-36">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-8 mask mask-hexagon ">
                     {/* hexagon as alternative to rounded-full */}
@@ -78,6 +79,7 @@ const Navbar = () => {
               </Link>
             </>
           )}
+          <ThemeButton className="items-start" />
         </div>
       </nav>
       <Outlet />

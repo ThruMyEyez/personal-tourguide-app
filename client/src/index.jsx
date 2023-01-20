@@ -6,14 +6,17 @@ import { AuthProviderWrapper } from "./context/authentication";
 //import "../styles/index.scss";
 import "./styles/index.css";
 import App from "./App";
+import { ThemeProviderWrapper } from "./context/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <AuthProviderWrapper>
-        <App />
-      </AuthProviderWrapper>
+      <ThemeProviderWrapper>
+        <AuthProviderWrapper>
+          <App />
+        </AuthProviderWrapper>
+      </ThemeProviderWrapper>
     </Router>
   </React.StrictMode>
 );

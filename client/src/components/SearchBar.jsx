@@ -31,7 +31,7 @@ const SearchBar = () => {
             Search
           </label>
           <input
-            className="text-black input input-bordered w-64 search-bar"
+            className="text-black input input-bordered w-96 search-bar"
             type="text"
             name="search"
             value={searchTerm}
