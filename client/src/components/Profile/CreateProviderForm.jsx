@@ -12,7 +12,7 @@ const CreateProviderForm = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [hasProfile, setHasProfile] = useState(false);
   const [formData, setFormData] = useState({
-    providerType: "",
+    providerType: "Host",
     taxID: "",
     bio: "",
   });
