@@ -4,12 +4,12 @@ import UpdateProviderForm from "../components/Profile/UpdateProviderForm";
 
 const EditProfile = () => {
   return (
-    <div>
-      <div>
+    <div className="">
+      <div className="text-white">
         Edit Profile
         <UpdateProfile />
       </div>
-      <div>
+      <div className="text-white">
         Edit Provider Info
         <UpdateProviderForm />
       </div>

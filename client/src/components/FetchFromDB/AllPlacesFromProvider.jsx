@@ -35,7 +35,9 @@ const AllPlacesFromProvider = () => {
 
   return (
     <div className="flex flex-col">
-      <h4 className="mx-3 font-semibold">My Curated List of Places</h4>
+      <h4 className="mx-3 font-semibold text-white">
+        My Curated List of Places
+      </h4>
       <div className="flex flex-wrap">
         {places &&
           places.map((place) => {

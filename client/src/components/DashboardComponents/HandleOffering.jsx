@@ -126,32 +126,33 @@ const HandleOffering = () => {
   };
 
   return (
-    <div className="w-3/4 px-6 m-3">
+    <div className="w-3/4 px-6 m-3 text-white">
       <h3>{(id && "Update this Offer") || "Create new Offer"}</h3>
       <div>
-        <form className="form-control" onSubmit={handleSubmit}>
+        <form className="form-control " onSubmit={handleSubmit}>
           {/* Product title */}
           <label className="block" htmlFor="input-title">
-            <span className="form-label">Set Offer Title</span>
+            <span className="form-label text-white">Set offer title</span>
           </label>
           <input
             className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             id="input-title"
             type="text"
             name="title"
-            placeholder="Chose a "
+            placeholder="Choose a name..."
             value={offerData.title}
             onChange={handleInput}
           />
           {/* Product tagline */}
           <label className="block" htmlFor="input-tagline">
-            <span className="form-label">Set Tagline Description</span>
+            <span className="form-label text-white">Set a tagline</span>
           </label>
           <input
             className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             id="input-title"
             type="text"
             name="tagline"
+            placeholder="Choose a tagline..."
             value={offerData.tagline}
             onChange={handleInput}
             maxLength={180}
@@ -186,7 +187,7 @@ const HandleOffering = () => {
 
           {/* Product price */}
           <label className="block" htmlFor="input-price">
-            <span className="form-label">Set a Price</span>
+            <span className="form-label text-white">Set a Price</span>
           </label>
           <input
             className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -199,7 +200,9 @@ const HandleOffering = () => {
 
           {/* productType selector */}
           <label className="block" htmlFor="input-price">
-            <span className="form-label">Is it a Tour or Event?</span>
+            <span className="form-label text-white">
+              Is it a Tour or Event?
+            </span>
           </label>
 
           {/*<Selector
@@ -212,17 +215,17 @@ const HandleOffering = () => {
             value={""}
           /> */}
           <div className="input-group">
-            <span className="text-sm font-bold rounded-none">
+            <span className="text-sm font-bold rounded-none text-black">
               {offerData.productType.toLocaleUpperCase()}
             </span>
             <select
               value={offerData.productType}
               onChange={handleTypeSelect}
-              className="rounded select select-bordered"
+              className="rounded select select-bordered "
             >
               <option disabled>Select format</option>
-              <option>tour</option>
-              <option>event</option>
+              <option>Tour</option>
+              <option>Event</option>
             </select>
           </div>
 
@@ -230,7 +233,9 @@ const HandleOffering = () => {
 
           {/* productItem selector */}
           <label className="block">
-            <span className="form-label">Select your Event or Tour</span>
+            <span className="form-label text-white">
+              Select your Event or Tour
+            </span>
           </label>
           <Selector
             loading={isProductItemsLoading}

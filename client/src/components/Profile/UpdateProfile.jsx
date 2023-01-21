@@ -40,7 +40,7 @@ const UpdateProfile = ({ children }) => {
         {(formData.firstName && (
           <>
             <label className="block" htmlFor="firstName">
-              <span className="form-label">First Name</span>
+              <span className="form-label text-white">First Name</span>
             </label>
             <input
               className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -54,7 +54,7 @@ const UpdateProfile = ({ children }) => {
         )) || (
           <>
             <label className="block" htmlFor="name">
-              <span className="form-label">Name</span>
+              <span className="form-label ">Name</span>
             </label>
             <input
               className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -69,7 +69,7 @@ const UpdateProfile = ({ children }) => {
         {formData.lastName && (
           <>
             <label className="block" htmlFor="lastName">
-              <span className="form-label">Last Name</span>
+              <span className="form-label text-white">Last Name</span>
             </label>
             <input
               className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -82,7 +82,7 @@ const UpdateProfile = ({ children }) => {
           </>
         )}
         <label className="block" htmlFor="profilePicture">
-          <span className="form-label">ProfilePicture</span>
+          <span className="form-label text-white">Profile Picture</span>
         </label>
         <IKContext
           urlEndpoint={process.env.REACT_APP_IMAGEKIT_URL}
