@@ -21,7 +21,7 @@ const DeleteOwnProductItem = ({ item }) => {
     <>
       <div
         onClick={() => setShowDeleteModal(true)}
-        className="px-4 py-2 mx-3 my-5 btn btn-sm btn-outline tooltip tooltip-warning"
+        className="px-4 py-2 my-5 text-zinc-300 btn btn-sm btn-outline tooltip tooltip-warning"
         data-tip={`Delete "${item.title}"`}
       >
         Delete

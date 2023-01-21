@@ -13,7 +13,7 @@ const Main = () => {
         />
       </div>
       <div className="w-full mt-5">
-        <h1 className="dark:text-white text-5xl font-semibold text-center text-black">
+        <h1 className="text-5xl font-semibold text-center text-black dark:text-white">
           Check out these new events!
         </h1>
       </div>
@@ -21,8 +21,8 @@ const Main = () => {
         <ProductsFromDatabase />
       </div>
 
-      <div className="mt-5 ml-6 ">
-        <h4 className="ml-6 text-5xl font-semibold dark:text-white text-black">
+      <div className="mx-auto mt-5 w-[62%] shadow-lg text-center">
+        <h4 className="ml-6 text-5xl font-semibold text-black dark:text-white">
           Our Tourguides & Hosts
         </h4>
         <AllUsersFromDatabase />

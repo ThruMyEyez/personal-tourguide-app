@@ -40,7 +40,7 @@ const PublicTours = () => {
     <div>
       {product && (
         <>
-          <h2 className="w-3/4 px-6 py-3 mx-auto mt-3 font-bold border rounded-lg glass border-primary text-zinc-500">
+          <h2 className="w-3/4 px-6 py-3 mx-auto mt-3 font-bold border rounded-lg glass border-primary text-zinc-400 ">
             {product.productType.toUpperCase()} for the {date}
           </h2>
 
