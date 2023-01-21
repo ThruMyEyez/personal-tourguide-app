@@ -88,7 +88,7 @@ const SignUp = () => {
             onChange={handleInput}
           />
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            We’ll never share your details. Read our{" "}
+            We will never share your details. Read our{" "}
             <Link
               to="/"
               className="font-medium text-blue-600 hover:underline dark:text-blue-500"
@@ -121,7 +121,7 @@ const SignUp = () => {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <p>Already have account?</p>
-        <Link to={"/login"}> Login</Link>
+        <Link to={"/login"}>Login</Link>
       </div>
     </div>
   );

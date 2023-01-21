@@ -52,7 +52,7 @@ const CreateProviderForm = () => {
     <div>
       {(!hasProfile && (
         <>
-          <h1>You Need To Make Your Provider Profile </h1>
+          <h1>Start creating your provider profile.</h1>
 
           <form onSubmit={handleFormSubmit}>
             <label className="block" htmlFor="provider-type">
@@ -69,7 +69,7 @@ const CreateProviderForm = () => {
               <option value={"Tourguide"}>Tourguide</option>
             </select>
             <label className="block" htmlFor="tax-id">
-              <span className="form-label">Tax Id</span>
+              <span className="form-label">Tax ID</span>
             </label>
             <input
               className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -103,7 +103,7 @@ const CreateProviderForm = () => {
               value={formData.bio}
               onChange={handleInput}
             ></textarea>
-            <p className="mt-5">Write somthing to address ypur potentials clients</p>
+            <p className="mt-5">Tell your customers more about you</p>
             <button className="btn-primary">Save</button>
           </form>
           {errorMsg && <OnErrorAlert msg={errorMsg} />}

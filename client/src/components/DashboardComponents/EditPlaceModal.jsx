@@ -23,7 +23,7 @@ const EditPlaceModal = () => {
         <CloseNavigateBtn navigateTo={-1} />
         {place && (
           <>
-            <h2 className="">Update selected Place</h2>
+            <h2>Update selected place</h2>
             <HandlePlace place={place} />
           </>
         )}

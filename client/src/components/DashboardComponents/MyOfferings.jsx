@@ -44,7 +44,7 @@ const MyOfferings = () => {
             );
           })}
         </div>
-      )) || <h4>... Loading Content ...</h4>}
+      )) || <h4>...Loading Content...</h4>}
     </div>
   );
 };

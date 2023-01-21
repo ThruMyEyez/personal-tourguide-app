@@ -22,12 +22,12 @@ const Purchases = ({ id }) => {
       {purchases.map((purchase) => (
         <div key={purchase._id}>
           <h1 className="text-lg text-center font-semibold">
-            You Bought this product
+            You bought this product
           </h1>
 
-          <p>Purchase id :{purchase._id}</p>
-          <p>Purchase status :{purchase.status}</p>
-          <p>Purchase product :{purchase.product.rating}</p>
+          <p>Purchase ID:{purchase._id}</p>
+          <p>Purchase status:{purchase.status}</p>
+          <p>Purchase product:{purchase.product.rating}</p>
         </div>
       ))}
     </div>

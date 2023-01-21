@@ -39,7 +39,8 @@ const HandleOffering = () => {
         .then((response) => {
           setSelectedProductItem(response.data.data);
           console.log(response.data.data.priceInCents);
-          response.data.data.priceInCents = response.data.data.priceInCents / 100;
+          response.data.data.priceInCents =
+            response.data.data.priceInCents / 100;
           setOfferData(response.data.data);
         })
         .catch((error) => {
@@ -144,7 +145,7 @@ const HandleOffering = () => {
           />
           {/* Product tagline */}
           <label className="block" htmlFor="input-tagline">
-            <span className="form-label">Set Tagline description</span>
+            <span className="form-label">Set Tagline Description</span>
           </label>
           <input
             className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -198,7 +199,7 @@ const HandleOffering = () => {
 
           {/* productType selector */}
           <label className="block" htmlFor="input-price">
-            <span className="form-label">... is it a Tour or Event?</span>
+            <span className="form-label">Is it a Tour or Event?</span>
           </label>
 
           {/*<Selector
@@ -239,7 +240,9 @@ const HandleOffering = () => {
             placeholder="Search & select your places for the tour or event."
           />
 
-          {(id && <button className="shadow-md glass btn btn-primary">Update</button>) || (
+          {(id && (
+            <button className="shadow-md glass btn btn-primary">Update</button>
+          )) || (
             <button className="shadow-md btn glass btn-primary">Create</button>
           )}
         </form>

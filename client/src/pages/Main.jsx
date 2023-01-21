@@ -13,7 +13,7 @@ const Main = () => {
         />
       </div>
       <div className="w-full mt-5">
-        <h1 className="text-5xl font-semibold text-center text-black">
+        <h1 className="dark:text-white text-5xl font-semibold text-center text-black">
           Check out these new events!
         </h1>
       </div>

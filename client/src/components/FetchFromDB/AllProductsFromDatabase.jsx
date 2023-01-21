@@ -36,7 +36,7 @@ const ProductsFromDatabase = () => {
                     <img
                       src={product.productThumbnail}
                       alt={product.title}
-                      className="w-96 card-image"
+                      className="w-96 card-image h-48 object-cover"
                     />
                   }
                 </figure>
@@ -44,7 +44,9 @@ const ProductsFromDatabase = () => {
                   <Link to={`event/${product._id}`}>
                     <h2 className="text-black card-title">{product.title}</h2>
                   </Link>
-                  <p className="w-[10em] text-break">{product.tagline}</p>
+                  <p className="w-[20rem] h-36 overflow-hidden text-break">
+                    {product.tagline}
+                  </p>
                   <div className="justify-end card-actions">
                     <button
                       className="btn btn-primary"

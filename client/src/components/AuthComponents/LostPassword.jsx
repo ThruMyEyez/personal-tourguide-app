@@ -34,7 +34,7 @@ const LostPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <FormHelper str="Enter your email address" />
-        <button className="btn-primary">get reset link</button>
+        <button className="btn-primary">Get reset link</button>
       </form>
       <button onClick={() => navigate(-2)}>Close</button>
       {errorMsg && <OnErrorAlert msg={errorMsg} />}

@@ -96,7 +96,7 @@ const Login = () => {
               to={"/lost-password"}
               state={{ background: "/" }}
             >
-              forgot password
+              Forgot Password?
             </Link>
           </div>
         </form>

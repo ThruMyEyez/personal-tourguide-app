@@ -39,10 +39,10 @@ const EditProfilePictureModal = () => {
     <div className="z-50 fullscreen-modal-container">
       <div className="absolute w-2/3 p-2 mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-200 rounded-lg shadow-xl h-2/3 top-1/2 left-1/2">
         <CloseNavigateBtn navigateTo={-1} />
-        <h1>Edit Your Profile Picture</h1>
+        <h1>Edit your profile picture</h1>
         <form onSubmit={handleFormSubmit}>
           <label className="block" htmlFor="profilePicture">
-            <span className="form-label">Choose Your profile Picture</span>
+            <span className="form-label">Choose your profile picture</span>
           </label>
           <IKContext
             urlEndpoint={process.env.REACT_APP_IMAGEKIT_URL}

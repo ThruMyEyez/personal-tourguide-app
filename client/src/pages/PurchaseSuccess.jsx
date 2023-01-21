@@ -34,8 +34,7 @@ const PurchaseSuccess = () => {
             />
             <div>
               <h1 className="text-5xl font-bold">
-                Great News! Get Ready to your {session.product.productType}{" "}
-                GoGuide at
+                Great News! You're going to {session.product.productType}{" "}
                 {session.product.productItem.places.map((place) => {
                   return (
                     <span key={place._id} className="">
@@ -62,7 +61,8 @@ const PurchaseSuccess = () => {
                     />
                   </svg>
                   <span>
-                    Your purchase has been confirmed! Will take place on
+                    Your purchase has been confirmed! Your event will take place
+                    on
                     {session.product.productItem.eventDate}
                   </span>
                 </div>
