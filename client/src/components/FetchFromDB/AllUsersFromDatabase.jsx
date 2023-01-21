@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllUsers } from "../../services/user";
+import Rating from "../Profile/Rating";
 
 const AllUsersFromDatabase = () => {
   const [users, setUsers] = useState(null);
@@ -33,43 +34,48 @@ const AllUsersFromDatabase = () => {
         </thead>
         <tbody>
           {users &&
-            users.map(({ _id, name, firstName, lastName, profilePicture, role }) => {
-              return (
-                <tr key={_id}>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="w-12 h-12 mask mask-squircle">
-                          <img
-                            referrerPolicy="no-referrer"
-                            src={profilePicture}
-                            alt="Avatar"
-                          />
+            users.map(
+              ({ _id, name, firstName, lastName, profilePicture, role }) => {
+                return (
+                  <tr key={_id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="w-12 h-12 mask mask-squircle">
+                            <img
+                              referrerPolicy="no-referrer"
+                              src={profilePicture}
+                              alt="Avatar"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">
+                            {(firstName && firstName) || "firstName"}{" "}
+                            {(lastName && lastName) || "lastName"} - {name}
+                          </div>
+                          <div className="text-sm opacity-50">Germany</div>
                         </div>
                       </div>
-                      <div>
-                        <div className="font-bold">
-                          {(firstName && firstName) || "firstName"}{" "}
-                          {(lastName && lastName) || "lastName"} - {name}
-                        </div>
-                        <div className="text-sm opacity-50">Germany</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    Company Name or Bio?
-                    <br />
-                    <span className="badge badge-ghost badge-sm">{role}</span>
-                  </td>
-                  <td>Number</td>
-                  <th>
-                    <Link to={`/profile/${_id}`} className="btn btn-ghost btn-xs">
-                      details
-                    </Link>
-                  </th>
-                </tr>
-              );
-            })}
+                    </td>
+                    <td>
+                      Company Name or Bio?
+                      <br />
+                      <span className="badge badge-ghost badge-sm">{role}</span>
+                    </td>
+                    <td>Number</td>
+                    <th>
+                      <Link
+                        to={`/profile/${_id}`}
+                        className="btn btn-ghost btn-xs"
+                      >
+                        details
+                      </Link>
+                    </th>
+                  </tr>
+                );
+              }
+            )}
         </tbody>
         {/* foot */}
         <tfoot>

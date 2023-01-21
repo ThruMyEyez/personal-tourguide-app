@@ -105,7 +105,7 @@ const Profile = ({ self, children }) => {
                 <></>
               ) /* TODO: CHANGE TO IS NOT OWN PROFILE*/
             }
-            {id && <Rating id={id} />}
+            {id && <Rating value={"user"} id={id} />}
             {/* TODO: Link to a real id */}
           </div>
         </div>

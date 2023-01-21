@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { getProviderProducts } from "../../services/product";
 import { AuthContext } from "../../context/authentication";
 import { Link } from "react-router-dom";
+import Rating from "./Rating";
 
 const ProductsCarousel = ({ id }) => {
   const [productItems, setProductItems] = useState([]);
@@ -82,6 +83,7 @@ const ProductsCarousel = ({ id }) => {
                   </div>
                   <p>{product.tagline}</p>
                   <p>This product is: {product.productType}</p>
+                  <Rating value={"product"} id={product._id} />
                   <Link to={`/event/${product._id}`}>
                     <div className="card-actions justify-end">
                       <button className="btn btn-info hover:animate-pulse">
