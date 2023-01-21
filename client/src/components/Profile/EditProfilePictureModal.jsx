@@ -29,8 +29,8 @@ const EditProfilePictureModal = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const response = await updateUser(formData);
-
     console.log("Edited the user Profile", response);
+
     getUserDetails();
     navigate(-1);
   };
@@ -55,6 +55,7 @@ const EditProfilePictureModal = () => {
             <IKUpload
               type="file"
               className="my-2 block file-input file-input-bordered w-full max-w-xs"
+              onSuccess={onFileUploadSuccess}
               onError={onFileUploadError}
             />
             {formData.profilePicture && (
