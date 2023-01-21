@@ -22,7 +22,11 @@ const EditProductItem = () => {
     console.log("eventItem:", eventItem);
   }, [eventItem]);
 
-  return <div>{eventItem && <HandleProductItem productItem={eventItem} />}</div>;
+  return (
+    <div className="text-black">
+      {eventItem && <HandleProductItem productItem={eventItem} />}
+    </div>
+  );
 };
 
 export default EditProductItem;

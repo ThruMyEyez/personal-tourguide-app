@@ -36,14 +36,14 @@ const UpdateProfile = ({ children }) => {
   // Create a new provider profile
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="text-black" onSubmit={handleFormSubmit}>
         {(formData.firstName && (
           <>
             <label className="block" htmlFor="firstName">
               <span className="form-label text-white">First Name</span>
             </label>
             <input
-              className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              className="block w-full mt-1 border  border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               id="firstName"
               type="text"
               name="firstName"

@@ -129,7 +129,7 @@ const HandleOffering = () => {
     <div className="w-3/4 px-6 m-3 text-white">
       <h3>{(id && "Update this Offer") || "Create new Offer"}</h3>
       <div>
-        <form className="form-control " onSubmit={handleSubmit}>
+        <form className="form-control text-black" onSubmit={handleSubmit}>
           {/* Product title */}
           <label className="block" htmlFor="input-title">
             <span className="form-label text-white">Set offer title</span>

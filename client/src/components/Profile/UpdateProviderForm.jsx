@@ -38,7 +38,7 @@ const UpdateProviderForm = () => {
   // Create a new provider profile
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
+      <form className="text-black" onSubmit={handleFormSubmit}>
         <label className="block" htmlFor="provider-type">
           <span className="form-label text-white">Type of provider</span>
         </label>

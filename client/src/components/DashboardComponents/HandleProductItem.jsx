@@ -113,7 +113,7 @@ const HandleProductItem = ({ productItem }) => {
         {errorMsg && <OnErrorAlert msg={errorMsg} />}
 
         {/* Input productItem Title */}
-        <form onSubmit={handleFormSubmit}>
+        <form className="text-black" onSubmit={handleFormSubmit}>
           <label className="block" htmlFor="input-title">
             <span className="form-label text-white">Event or Tour title</span>
           </label>
