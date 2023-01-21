@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IKContext, IKUpload, IKImage } from "imagekitio-react";
-import {
-  MapContainer,
-  TileLayer,
-  useMapEvents,
-  Marker,
-  Popup,
-} from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvents, Marker, Popup } from "react-leaflet";
 import { saveNewPlace, editPlace } from "../../services/place";
 
 import "leaflet/dist/leaflet.css";
@@ -79,8 +73,7 @@ const HandlePlace = ({ place }) => {
           console.log(response.data.message);
         })
         .catch((error) => {
-          if (error.response.status === 409)
-            console.log(error.response.data.error.message);
+          if (error.response.status === 409) console.log(error.response.data.error.message);
           console.log(error.response.data.error.message);
         });
     }
@@ -93,13 +86,13 @@ const HandlePlace = ({ place }) => {
     iconUrl: "https://unpkg.com/leaflet@1.7/dist/images/marker-icon.png",
     shadowUrl: "https://unpkg.com/leaflet@1.7/dist/images/marker-shadow.png",
   });
+
   useEffect(() => {
     !place && setFreezePosition(false);
   }, []);
 
   useEffect(() => {
-    (!freezePosition && null) ||
-      setFormData({ ...formData, position: position });
+    (!freezePosition && null) || setFormData({ ...formData, position: position });
   }, [position]);
 
   return (
@@ -129,10 +122,7 @@ const HandlePlace = ({ place }) => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <NewPosition
-          setNewPosition={setPosition}
-          frozenPosition={freezePosition}
-        />
+        <NewPosition setNewPosition={setPosition} frozenPosition={freezePosition} />
         {position && (
           <Marker position={position} icon={icon}>
             <Popup minWidth="400" closeButton={true} closeOnClick={true}>

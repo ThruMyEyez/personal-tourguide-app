@@ -23,7 +23,10 @@ const TourMap = ({ startPlace }) => {
   //Adding a custom marker
   const locationIcon = new Icon({
     iconUrl: LocationIco,
-    iconSize: [52, 52],
+    iconSize: [50, 50],
+    iconAnchor: [25, 41],
+    popupAnchor: [2, -40],
+    shadowUrl: "https://unpkg.com/leaflet@1.7/dist/images/marker-shadow.png",
   });
 
   const showPreview = (place) => {
