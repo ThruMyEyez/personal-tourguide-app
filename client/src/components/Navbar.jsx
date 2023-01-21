@@ -89,7 +89,7 @@ const Navbar = () => {
                 Sign up
               </Link>
               <Link
-                className="px-3 pt-2 pb-2 mr-3 text-indigo-500 border-2 border-indigo-500 rounded-lg dark:text-pink-500 dark:border-pink-500 login-btn hover:bg-gradient-to-r from:pink-500 to:violet-500 hover:text-black hover:dark:text-white"
+                className="px-3 pt-2 pb-2 mr-3 text-indigo-500 border-2 border-indigo-500 rounded-lg dark:text-pink-500 dark:border-pink-500 login-btn hover:bg-gradient-to-r dark:hover:bg-gradient-to-l from:indigo-500 to:pink-500 hover:text-white hover:dark:text-white"
                 to="/login"
                 state={{ background: location }}
               >
