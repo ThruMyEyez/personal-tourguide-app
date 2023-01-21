@@ -14,7 +14,7 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <>
+    <div className="flex flex-col w-full h-screen">
       <nav className="sticky top-0 z-30 flex items-center justify-between w-full p-5 text-lg text-indigo-500 shadow-md backdrop-blur-sm lg:p-3 lg:justify-around bg-clip-pink-violet">
         <div className="flex justify-end link-logo">
           <ul className="flex m-0 list-none">
