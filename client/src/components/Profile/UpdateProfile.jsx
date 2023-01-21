@@ -39,7 +39,6 @@ const UpdateProfile = ({ children }) => {
   // Create a new provider profile
   return (
     <div>
-      Update Your Profile Information{" "}
       <form onSubmit={handleFormSubmit}>
         {(formData.firstName && (
           <>

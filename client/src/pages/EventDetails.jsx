@@ -5,6 +5,7 @@ import { TourMapProviderWrapper } from "../context/tourmapping";
 import { EditorView } from "../components/Editor";
 import RenderEventItem from "../components/RenderEventItem";
 import { createPurchase } from "../services/purchase";
+import Rating from "../components/Profile/Rating";
 
 const PublicTours = () => {
   const [product, setProduct] = useState(null);
@@ -63,6 +64,7 @@ const PublicTours = () => {
                   </button>
                 </div>
               </div>
+              {id && <Rating value={"product"} id={id} />}
               <div className="w-full stat">
                 <div className="stat-title">Avarage of 42! Ratings</div>
                 <div className="mx-auto rating rating-md">
