@@ -18,7 +18,7 @@ const { sendEmail } = require('../utils/sendEmail');
 //Login by Google account
 router.post('/google/login', (req, res, next) => {
   if (!req.body.googleAccessToken) {
-    res.status(203).json({ message: 'Could not recive Google Auth Token' });
+    res.status(203).json({ message: 'Could not receive Google Auth Token' });
   }
   let payload;
   verifyGoogleToken(req.body.googleAccessToken)
@@ -160,7 +160,7 @@ router.post('/signup', (req, res, next) => {
   User.findOne({ email })
     .then((user) => {
       if (user) {
-        res.status(400).json({ message: 'This Email is already registrated' });
+        res.status(400).json({ message: 'This Email is already registered' });
         return;
       }
       const salt = bcryptjs.genSaltSync(10);
