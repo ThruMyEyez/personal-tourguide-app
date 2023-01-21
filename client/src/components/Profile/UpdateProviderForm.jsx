@@ -68,6 +68,18 @@ const UpdateProviderForm = () => {
           value={formData.taxID}
           onChange={handleInput}
         />
+        <label className="block" htmlFor="company">
+          <span className="form-label">Company Name</span>
+        </label>
+        <input
+          className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          id="company"
+          type="text"
+          maxLength="60"
+          name="company"
+          value={formData.company}
+          onChange={handleInput}
+        />
         <label className="block" htmlFor="provider-type">
           <span className="form-label">Biography</span>
         </label>
@@ -81,9 +93,7 @@ const UpdateProviderForm = () => {
           value={formData.bio}
           onChange={handleInput}
         ></textarea>
-        <p className="mt-5">
-          Write somthing to address ypur potentials clients
-        </p>
+        <p className="mt-5">Say a few words about yourself</p>
         <button className="btn-primary">Edit Your Provider Info </button>
       </form>
       {errorMsg && <OnErrorAlert msg={errorMsg} />}

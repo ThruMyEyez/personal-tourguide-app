@@ -15,6 +15,7 @@ const CreateProviderForm = () => {
     providerType: "Host",
     taxID: "",
     bio: "",
+    company: "",
   });
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const CreateProviderForm = () => {
     console.log(name, value);
     setFormData({ ...formData, [name]: value });
   };
+
   return (
     // Do I have already have a provider profile?
     // Create a new provider profile
@@ -77,6 +79,17 @@ const CreateProviderForm = () => {
               value={formData.taxID}
               onChange={handleInput}
             />
+            <label className="block" htmlFor="company">
+              <span className="form-label">Company Name</span>
+            </label>
+            <input
+              className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              id="company"
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleInput}
+            />
             <label className="block" htmlFor="bio">
               <span className="form-label">Biography</span>
             </label>
@@ -90,9 +103,7 @@ const CreateProviderForm = () => {
               value={formData.bio}
               onChange={handleInput}
             ></textarea>
-            <p className="mt-5">
-              Write somthing to address ypur potentials clients
-            </p>
+            <p className="mt-5">Write somthing to address ypur potentials clients</p>
             <button className="btn-primary">Save</button>
           </form>
           {errorMsg && <OnErrorAlert msg={errorMsg} />}

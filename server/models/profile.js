@@ -17,6 +17,11 @@ const schema = new Schema(
       enum: ['Tourguide', 'Host']
     },
     taxID: { type: String /*required: true*/, default: 'XX XXX XXX XXX' },
+    company: {
+      type: String,
+      maxLength: [60, 'Title can have max 60 characters, got {VALUE}'],
+      default: 'No company set'
+    },
     bio: {
       type: String,
       default: `A short "Bio" or "About Me". Describe yourself!`
