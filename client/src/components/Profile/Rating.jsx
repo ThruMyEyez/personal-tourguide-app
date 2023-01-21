@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authentication";
+import { getSingleEvent } from "../../services/event";
 import { getProviderProducts } from "../../services/product";
-import { getUserRatings } from "../../services/user";
 
-const Rating = ({ id }) => {
+const Rating = ({ id, value }) => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [products, setProducts] = useState([]);
-
-  useEffect(() => {
+  const getUserRating = () => {
     getProviderProducts(id).then((products) => {
       setProducts(products);
       const divider = products.data.data
@@ -32,9 +31,32 @@ const Rating = ({ id }) => {
         .reduce((acc, rating) => {
           return acc + Number(rating);
         }, 0);
-      setRating(ratingsAverage / divider.shift());
+      setRating(ratingsAverage / divider.shift() || 0);
     });
-  }, [id]);
+  };
+
+  const getProductRatings = () => {
+    getSingleEvent(id).then((product) => {
+      const divider = product.data.data.rating.length;
+      const ratingsAverage = product.data.data.rating
+        .map((rating) => {
+          return rating.stars;
+        })
+        .reduce((acc, rating) => {
+          return acc + Number(rating);
+        }, 0);
+      setRating(ratingsAverage / divider || 0);
+    });
+  };
+
+  useEffect(() => {
+    if (value === "user") {
+      getUserRating();
+    }
+    if (value === "product") {
+      getProductRatings();
+    }
+  }, [value, id]);
 
   const fullStarCount = Math.round(Number(rating || 0));
   const emptyStarCount = 5 - fullStarCount;

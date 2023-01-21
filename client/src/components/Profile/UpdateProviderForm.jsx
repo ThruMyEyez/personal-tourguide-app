@@ -33,14 +33,11 @@ const UpdateProviderForm = () => {
 
   const handleInput = (e) => {
     const { value, name } = e.target;
-    console.log(name, value);
     setFormData({ ...formData, [name]: value });
   };
-  console.log("FormData", formData);
   // Create a new provider profile
   return (
     <div>
-      UpdateProviderForm{" "}
       <form onSubmit={handleFormSubmit}>
         <label className="block" htmlFor="provider-type">
           <span className="form-label">Type of provider </span>

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const ProductsCarouselCopy = ({ id }) => {
   const [productItems, setProductItems] = useState([]);
   const [index, setIndex] = useState(0);
-  console.log(productItems);
 
   const { isLoading } = useContext(AuthContext);
   const fetchProductItems = async () => {

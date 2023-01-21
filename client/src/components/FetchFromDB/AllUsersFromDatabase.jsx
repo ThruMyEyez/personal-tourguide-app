@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllUsers, getFullUserDetails } from "../../services/user";
 import { getProviderProducts } from "../../services/product";
+import Rating from "../Profile/Rating";
 
 const AllUsersFromDatabase = () => {
   const [users, setUsers] = useState(null);

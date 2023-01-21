@@ -3,18 +3,17 @@ import { useState, useEffect, useContext } from "react";
 import { getProviderProducts } from "../../services/product";
 import { AuthContext } from "../../context/authentication";
 import { Link } from "react-router-dom";
+import Rating from "./Rating";
 
 const ProductsCarousel = ({ id }) => {
   const [productItems, setProductItems] = useState([]);
   const [ind, setInd] = useState(0);
-  console.log(productItems);
 
   const { isLoading } = useContext(AuthContext);
   const fetchProductItems = async () => {
     if (!isLoading) {
       const allOwnProviderItems = await getProviderProducts(id);
       setProductItems([...allOwnProviderItems.data.data]);
-      console.log("Products", allOwnProviderItems.data.data);
     }
   };
 
@@ -30,7 +29,6 @@ const ProductsCarousel = ({ id }) => {
     } else {
       const newIndex = ind + 1;
       setInd(newIndex);
-      console.log("Index", ind);
     }
   };
 
@@ -82,6 +80,7 @@ const ProductsCarousel = ({ id }) => {
                   </div>
                   <p>{product.tagline}</p>
                   <p>This product is: {product.productType}</p>
+                  <Rating value={"product"} id={product._id} />
                   <Link to={`/event/${product._id}`}>
                     <div className="card-actions justify-end">
                       <button className="btn btn-info hover:animate-pulse">

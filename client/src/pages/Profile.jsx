@@ -34,7 +34,6 @@ const Profile = ({ self, children }) => {
 
   //Sets Own Profile or Another Profile
   useEffect(() => {
-    console.log("UserIn id to string", user);
     if (user && user._id.toString() === id) {
       setIsOwnProfile(true);
       if (userFullDetails) {
@@ -105,7 +104,7 @@ const Profile = ({ self, children }) => {
                 <></>
               ) /* TODO: CHANGE TO IS NOT OWN PROFILE*/
             }
-            {id && <Rating id={id} />}
+            {id && <Rating value={"user"} id={id} />}
             {/* TODO: Link to a real id */}
           </div>
         </div>
