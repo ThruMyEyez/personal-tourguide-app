@@ -17,8 +17,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser, getUserDetails } =
-    useContext(AuthContext);
+  const { storeToken, authenticateUser, getUserDetails } = useContext(AuthContext);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -33,7 +32,7 @@ const Login = () => {
         authenticateUser();
         getUserDetails();
 
-        navigate("/dashboard");
+        navigate(-1);
       })
       .catch((error) => {
         setErrorMsg(error.response.data.message);
@@ -45,15 +44,15 @@ const Login = () => {
       storeToken(response.data.authToken);
       authenticateUser();
       getUserDetails();
-      navigate("/dashboard");
+      navigate(-1);
     });
   };
 
   return (
     <div className="fullscreen-modal-container">
-      <div className="absolute mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 sm:max-w-sm top-1/2 left-1/2 bg-white p-10 shadow-sm rounded-lg">
+      <div className="absolute p-10 mx-auto space-y-4 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-sm sm:max-w-sm top-1/2 left-1/2">
         <button
-          className="bg-black text-white px-3 py-1 rounded-md"
+          className="px-3 py-1 text-white bg-black rounded-md"
           onClick={() => navigate(-1)}
         >
           X

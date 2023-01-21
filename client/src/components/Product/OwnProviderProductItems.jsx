@@ -24,18 +24,18 @@ const OwnProviderProductItems = () => {
   }, []);
 
   return (
-    <div>
-      <h4>Manage your Events</h4>
+    <div className="w-3/4">
+      <h4 className=" text-zinc-300">Manage your Events</h4>
       <div>
         {productItems &&
           productItems.map((item) => {
             return (
               <div className="flex flex-col" key={item._id}>
-                <h5>{item.title}</h5>
+                <h5 className="font-bold text-zinc-300 ">{item.title}</h5>
                 <HorizontalTextRuler str="description" />
                 <EditorView content={item.description} />
                 <HorizontalRuler />
-                <p>{item.eventDate}</p>
+                <p className="text-zinc-300"> {item.eventDate}</p>
                 <Link
                   // state={location && { background: location }}
                   className="btn btn-sm"
