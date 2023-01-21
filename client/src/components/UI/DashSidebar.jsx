@@ -1,8 +1,15 @@
 import { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import SidebarMenublock from "./SidebarMenublock";
-import chevronRight from "../../assets/right-thin-chevron-svgrepo-com.svg";
+import chevronRight from "../../assets/rightarrow2_120620.svg";
 import { AuthContext } from "../../context/authentication";
+import {
+  HorizontalRuler,
+  HorizontalSidebarTextRuler,
+  HorizontalSidebarRuler,
+  HorizontalTextRuler,
+} from "./UIHelper";
+import { MdBackpack } from "react-icons/md";
 
 import {
   IconMapLocationDot,
@@ -91,7 +98,6 @@ const DashSidebar = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    // BUG: It gets always only /dashboard/ as location
     // To get the current location for the Modal component background
     placesLinks[1].location = location;
   }, []);
@@ -100,12 +106,21 @@ const DashSidebar = () => {
     <div
       className={`${
         open ? "w-72" : "w-26"
-      }  pt-8 relative  bg-gradient-to-bl from-indigo-300 via-indigo-300 to-violet-100`}
+      }  pt-8 relative  bg-gradient-to-bl from-indigo-300 via-indigo-300 to-violet-100 border-r-4 border-zinc-500`}
     >
+      {" "}
+      <div className="font-bold text-center">
+        Dash Menu
+        <MdBackpack className="inline-flex my-auto text-pink-500 h-100" />
+      </div>
+      <hr className="w-3/4 mx-auto border border-zinc-500" />
+      <hr className="w-2/4 mx-auto border border-zinc-500" />
+      <hr className="w-3/4 mx-auto border border-zinc-500" />
+      <HorizontalSidebarTextRuler str={user.name} />
       <img
         src={chevronRight}
         alt="Control"
-        className={`absolute cursor-pointer -right-3 top-9 w-7 border-zinc-500 bg-indigo-500 hover:bg-indigo-200
+        className={`absolute cursor-pointer -right-4 top-9 w-7 border-zinc-500 bg-indigo-500 hover:bg-indigo-200
    border-2 rounded-full transition duration-100 ease-linear ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       />
@@ -125,9 +140,10 @@ const DashSidebar = () => {
           </svg>
           <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full"></div>
         </div>
+        <hr className="w-3/4 mx-auto mt-5 border border-zinc-500" />
+        <hr className="w-2/4 mx-auto border border-zinc-500" />
         {/* Menu Block */}
         <SidebarMenublock sidebarOpenState={open} menuTitle="User Menu" links={menuLinks} />
-        {/* TODO: Make this viewable only for providers/Admins */}
         {/* Product handling menu */}
         <SidebarMenublock
           sidebarOpenState={open}

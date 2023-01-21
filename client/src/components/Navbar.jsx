@@ -4,6 +4,8 @@ import { AuthContext } from "../context/authentication";
 import { MdBackpack } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import ThemeButton from "./UI/ThemeButton";
+import { HorizontalTextRuler, HorizontalRuler } from "./UI/UIHelper";
+import { SignOut, User, Chalkboard } from "phosphor-react";
 
 const Navbar = () => {
   const { isLoggedIn, user, logOutUser, userFullDetails, setUserFullDetails } =
@@ -50,11 +52,27 @@ const Navbar = () => {
                   tabIndex={0}
                   className="p-2 mt-3 text-black shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                 >
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                  <li className="hover:border-l-4 hover:border-primary">
+                    <Link to="/dashboard">
+                      <Chalkboard size={20} weight="duotone" />
+                      Dashboard
+                    </Link>
                   </li>
-                  <li onClick={() => setUserFullDetails(null)}>
-                    <button onClick={logOutUser}>Logout</button>
+                  <li className="hover:border-l-4 hover:border-primary">
+                    <Link to={`/profile/${user._id}`}>
+                      <User size={20} weight="duotone" />
+                      My Public Profile
+                    </Link>
+                  </li>
+                  <HorizontalRuler />
+                  <li
+                    onClick={() => setUserFullDetails(null)}
+                    className="hover:text-red-500 hover:border-l-4 hover:border-primary"
+                  >
+                    <button onClick={logOutUser}>
+                      <SignOut size={20} weight="duotone" />
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>

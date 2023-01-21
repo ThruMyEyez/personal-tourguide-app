@@ -76,7 +76,9 @@ const Dashboard = (props) => {
 
         <CreateProviderForm />
 
-        <h1 className="p-3">Dashboard</h1>
+        <h1 className="p-6 mx-3 my-5 glass text-[2em] font-semibold shadow-xl badge badge-info badge-outline">
+          Dashboard
+        </h1>
 
         <Outlet />
 
