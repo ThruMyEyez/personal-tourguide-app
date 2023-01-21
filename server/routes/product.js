@@ -100,7 +100,6 @@ router.get('/event-item/:id', routeGuard, (req, res, next) => {
       model: Place
     })
     .then((foundProductItem) => {
-      console.log(foundProductItem);
       res.status(200).json({
         message: `Found ${foundProductItem.length} product items.`,
         data: foundProductItem

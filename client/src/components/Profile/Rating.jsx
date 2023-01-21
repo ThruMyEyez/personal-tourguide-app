@@ -6,7 +6,6 @@ import { getProviderProducts } from "../../services/product";
 
 const Rating = ({ id, value }) => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  console.log(value);
   const [rating, setRating] = useState(0);
   const [products, setProducts] = useState([]);
   const getUserRating = () => {

@@ -8,14 +8,12 @@ import Rating from "./Rating";
 const ProductsCarousel = ({ id }) => {
   const [productItems, setProductItems] = useState([]);
   const [ind, setInd] = useState(0);
-  console.log(productItems);
 
   const { isLoading } = useContext(AuthContext);
   const fetchProductItems = async () => {
     if (!isLoading) {
       const allOwnProviderItems = await getProviderProducts(id);
       setProductItems([...allOwnProviderItems.data.data]);
-      console.log("Products", allOwnProviderItems.data.data);
     }
   };
 
@@ -31,7 +29,6 @@ const ProductsCarousel = ({ id }) => {
     } else {
       const newIndex = ind + 1;
       setInd(newIndex);
-      console.log("Index", ind);
     }
   };
 
