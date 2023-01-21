@@ -4,7 +4,7 @@ import { AuthContext } from "../context/authentication";
 import { MdBackpack } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import ThemeButton from "./UI/ThemeButton";
-import { HorizontalTextRuler, HorizontalRuler } from "./UI/UIHelper";
+import { HorizontalRuler } from "./UI/UIHelper";
 import { SignOut, User, Chalkboard } from "phosphor-react";
 
 const Navbar = () => {
@@ -14,8 +14,8 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <>
-      <nav className="sticky top-0 z-30 flex items-center justify-between w-full p-5 text-lg shadow-xl backdrop-blur-sm lg:p-3 lg:justify-around bg-clip-pink-violet">
+    <div className="min-h-screen ">
+      <nav className="sticky top-0 z-[1001] flex items-center justify-between w-full p-5 text-lg shadow-xl backdrop-blur-sm lg:p-3 lg:justify-around bg-clip-pink-violet">
         <div className="flex justify-end link-logo">
           <ul className="flex m-0 list-none">
             <li className="font-bold">
@@ -97,7 +97,7 @@ const Navbar = () => {
         </div>
       </nav>
       <Outlet />
-    </>
+    </div>
   );
 };
 

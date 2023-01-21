@@ -1,5 +1,4 @@
 'use strict';
-
 const express = require('express');
 const router = express.Router();
 const Purchase = require('../models/purchase');
@@ -13,6 +12,7 @@ const {
   modelValidationErrorHelper
 } = require('../utils/ErrorHelper');
 const mongoose = require('mongoose');
+const dayjs = require('dayjs');
 
 // - GET -> router.get('/', (req, res, next) => {}) (get all the events from the DB)
 router.get('/', (req, res, next) => {
@@ -68,9 +68,14 @@ router.get('/:id', (req, res, next) => {
       if (!event) {
         next(new ErrorResponse(`Event not found!`, 404));
       }
+      const formatedDate = dayjs(`${event.productItem.eventDate}`)
+        .toDate()
+        .toLocaleDateString('en-GB');
+      console.log('eventON: ', formatedDate);
       res.status(200).json({
         message: `Event ${event.title} found`,
-        data: event
+        data: event,
+        date: formatedDate
       });
     })
     .catch((err) => {

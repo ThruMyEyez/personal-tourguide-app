@@ -9,10 +9,13 @@ import Rating from "../components/Profile/Rating";
 
 const PublicTours = () => {
   const [product, setProduct] = useState(null);
+  const [date, setDate] = useState(null);
   const { id } = useParams();
 
   const fetchProduct = async () => {
     const specificProduct = await getSingleEvent(id);
+    console.log(specificProduct.data.date);
+    setDate(specificProduct.data.date);
     setProduct(specificProduct.data.data);
   };
 
@@ -30,16 +33,18 @@ const PublicTours = () => {
     //console.log(product);
   }, [product]);
 
+  //const { eventDate } = product?.productItem;
+  //const date = new Date(eventDate);
+
   return (
     <div>
       {product && (
         <>
-          <h2 className="p-3 mx-auto">
-            Type: {product.productType.toUpperCase()}, on the
-            {product.productItem.eventDate}'
+          <h2 className="w-3/4 px-6 py-3 mx-auto mt-3 font-bold border rounded-lg glass border-primary text-zinc-500">
+            {product.productType.toUpperCase()} for the {date}
           </h2>
 
-          <div className="w-full">
+          <div className="w-full border border-blue-400">
             <EditorView content={product.productItem.description} />
             <TourMapProviderWrapper>
               {/* single tour/event place's rendering */}
@@ -50,9 +55,7 @@ const PublicTours = () => {
             <div className="w-full my-2 ml-6 shadow-xl stats bg-primary text-primary-content glass hover:bg-primary">
               <div className="w-full stat">
                 <div className="stat-title">Book now!</div>
-                <div className="m-3 stat-value">
-                  {product.priceInCents / 100} €
-                </div>
+                <div className="m-3 stat-value">{product.priceInCents / 100} €</div>
                 <div className="stat-actions">
                   <button
                     className="z-50 self-start w-full shadow-xl hover:shadow-indigo-300 btn btn-primary text-zinc-100 tooltip tooltip-info tooltip-right"
@@ -65,7 +68,7 @@ const PublicTours = () => {
                 </div>
               </div>
               {id && <Rating value={"product"} id={id} />}
-              <div className="w-full stat">
+              <div className=" stat">
                 <div className="stat-title">Avarage of 42! Ratings</div>
                 <div className="mx-auto rating rating-md">
                   <input
@@ -94,9 +97,7 @@ const PublicTours = () => {
                     className="m-1 bg-orange-400 mask mask-star-2"
                   />
                 </div>
-                <div className="stat-actions">
-                  Read customer ratings down below "click"
-                </div>
+                <div className="stat-actions">Read customer ratings down below "click"</div>
               </div>
             </div>
           </div>

@@ -49,8 +49,8 @@ const AllUsersFromDatabase = () => {
   };
 
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="table w-full">
+    <div className="w-full mt-3 mb-6 overflow-x-auto">
+      <table className="table w-[62%]">
         {/* head */}
         <thead>
           <tr>
