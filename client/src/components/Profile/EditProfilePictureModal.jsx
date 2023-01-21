@@ -55,6 +55,7 @@ const EditProfilePictureModal = () => {
             <IKUpload
               type="file"
               className="my-2 block file-input file-input-bordered w-full max-w-xs"
+              onSuccess={onFileUploadSuccess}
               onError={onFileUploadError}
             />
             {formData.profilePicture && (
