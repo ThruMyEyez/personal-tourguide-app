@@ -6,7 +6,8 @@ import DashSidebar from "../components/UI/DashSidebar";
 import CreateProviderForm from "../components/Profile/CreateProviderForm";
 
 const Dashboard = (props) => {
-  const { isLoggedIn, isLoading, user, userFullDetails } = useContext(AuthContext);
+  const { isLoggedIn, isLoading, user, userFullDetails } =
+    useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
 
   // TEST & PROTOTYPE AREA
@@ -77,7 +78,7 @@ const Dashboard = (props) => {
         <CreateProviderForm />
 
         <h1 className="p-6 mx-3 my-5 glass text-[2em] font-semibold shadow-xl badge badge-info badge-outline">
-          Dashboard
+          Your Dashboard
         </h1>
 
         <Outlet />

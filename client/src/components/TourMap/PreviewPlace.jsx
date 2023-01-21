@@ -4,7 +4,11 @@ import { TourMapContext } from "../../context/tourmapping";
 import "./PreviewPlace.css";
 
 const PreviewPlace = () => {
-  const { closePreview, showPreview, previewPlace: place } = useContext(TourMapContext);
+  const {
+    closePreview,
+    showPreview,
+    previewPlace: place,
+  } = useContext(TourMapContext);
 
   return (
     <div
@@ -40,7 +44,7 @@ const PreviewPlace = () => {
           target="_blank"
           rel="noreferrer"
         >
-          read more
+          Read More
         </a>
       </div>
     </div>

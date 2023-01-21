@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { verifyPasswordReset, newPassword } from "../../services/authentication";
+import {
+  verifyPasswordReset,
+  newPassword,
+} from "../../services/authentication";
 import { OnSuccessAlert, OnErrorAlert } from "../UI/Alerts";
 
 const SetPassword = () => {
@@ -41,9 +44,9 @@ const SetPassword = () => {
       {msg && <OnSuccessAlert msg={msg} />}
       {validToken && (
         <div className="">
-          <h2>Set new Password</h2>
+          <h2>Choose a new Password</h2>
           <form onSubmit={handleSubmit}>
-            <h3>Set a new Password</h3>
+            <h3>Choose a new Password</h3>
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}

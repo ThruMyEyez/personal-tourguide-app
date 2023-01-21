@@ -143,7 +143,7 @@ const HandleProductItem = ({ productItem }) => {
           {/* DatePicker */}
           <label className="">
             <span className="form-label">
-              When your Tour or Event takes place?
+              When does your Tour or Event take place?
             </span>
           </label>
           <DatePicker
@@ -163,9 +163,7 @@ const HandleProductItem = ({ productItem }) => {
             setDescription={setDescription}
           />
 
-          <button className="btn-primary">
-            Save Tour or Event in Database
-          </button>
+          <button className="btn-primary">Create your Tour or Event</button>
         </form>
       </div>
     </div>

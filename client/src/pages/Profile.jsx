@@ -128,7 +128,7 @@ const Profile = ({ self, children }) => {
                 </li>
                 {isOwnProfile && (
                   <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Account Id:</span>
+                    <span className="font-bold w-24">Account ID:</span>
                     <span className="text-gray-700">{profileOwner._id}</span>
                   </li>
                 )}
@@ -149,7 +149,7 @@ const Profile = ({ self, children }) => {
 
                 {isOwnProfile && (
                   <li className="flex border-b py-2">
-                    <span className="font-bold w-24">My Role :</span>
+                    <span className="font-bold w-24">My Role:</span>
                     <span className="text-gray-700">
                       {profileOwner && profileOwner.role}
                     </span>

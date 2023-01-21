@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/authentication";
 const IsAnon = ({ children }) => {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
 
-  if (isLoading) return <p>Loading ...</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   if (isLoggedIn) {
     return <Navigate to="/" />;

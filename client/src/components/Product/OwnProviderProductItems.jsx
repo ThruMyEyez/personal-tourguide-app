@@ -25,7 +25,7 @@ const OwnProviderProductItems = () => {
 
   return (
     <div>
-      <h4>Manage your Event's & Tours</h4>
+      <h4>Manage your Events</h4>
       <div>
         {productItems &&
           productItems.map((item) => {

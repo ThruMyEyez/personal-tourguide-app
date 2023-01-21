@@ -112,7 +112,7 @@ const UpdateProfile = ({ children }) => {
         </IKContext>
 
         {children}
-        <button className="btn-primary">Edit Profile Info</button>
+        <button className="btn-primary">Edit profile info</button>
       </form>
       {/* {errorMsg && <OnErrorAlert msg={errorMsg} />} */}
     </div>

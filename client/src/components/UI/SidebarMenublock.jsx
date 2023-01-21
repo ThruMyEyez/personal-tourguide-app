@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links }) => {
+const SidebarMenublock = ({
+  sidebarOpenState,
+  menuTitle,
+  MenuTitleIcon,
+  links,
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,10 +32,12 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links })
               </svg>
             )) || <MenuTitleIcon />}
           </span>
-          {sidebarOpenState && <span className="mx-3 leading-none">{menuTitle}</span>}
+          {sidebarOpenState && (
+            <span className="mx-3 leading-none">{menuTitle}</span>
+          )}
           <span
-            className={`transition duration-150 ease-in transform ${
-              open ? "rotate-0" : "rotate-180"
+            className={`rotate-360 transition duration-150 ease-in transform ${
+              open ? "-rotate-180" : "rotate-0"
             }`}
           >
             <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
@@ -65,7 +72,9 @@ const SidebarMenublock = ({ sidebarOpenState, menuTitle, MenuTitleIcon, links })
                       <Icon />
                     </span>
                   )}
-                  {sidebarOpenState && <span className="p-3 leading-none">{title}</span>}
+                  {sidebarOpenState && (
+                    <span className="p-3 leading-none">{title}</span>
+                  )}
                 </Link>
               </div>
             );

@@ -40,7 +40,7 @@ const UpdateProviderForm = () => {
     <div>
       <form onSubmit={handleFormSubmit}>
         <label className="block" htmlFor="provider-type">
-          <span className="form-label">Type of provider </span>
+          <span className="form-label">Type of provider</span>
         </label>
         <select
           className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -91,7 +91,7 @@ const UpdateProviderForm = () => {
           onChange={handleInput}
         ></textarea>
         <p className="mt-5">Say a few words about yourself</p>
-        <button className="btn-primary">Edit Your Provider Info </button>
+        <button className="btn-primary">Edit your provider info</button>
       </form>
       {errorMsg && <OnErrorAlert msg={errorMsg} />}
     </div>

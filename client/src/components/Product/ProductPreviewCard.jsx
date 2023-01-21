@@ -2,7 +2,13 @@
 import { Link } from "react-router-dom";
 import DeleteOwnProduct from "./DeleteOwnProduct";
 
-const ProductPreviewCard = ({ product, provider, isOwn, offers, setOffers }) => {
+const ProductPreviewCard = ({
+  product,
+  provider,
+  isOwn,
+  offers,
+  setOffers,
+}) => {
   //const formatedDate = product.productItem.eventDate.toLocaleDateString("en-GB");
 
   return (
@@ -47,7 +53,9 @@ const ProductPreviewCard = ({ product, provider, isOwn, offers, setOffers }) => 
 
       <dl className="flex mt-5 [text-shadow:#000_1px_1px_1px]">
         <div className="flex flex-col">
-          <dt className="text-xs capitalize text-slate-100">{product.productType} on:</dt>
+          <dt className="text-xs capitalize text-slate-100">
+            {product.productType} on:
+          </dt>
           <dd className="text-sm font-medium text-slate-200">
             {product.productItem?.eventDate}
           </dd>

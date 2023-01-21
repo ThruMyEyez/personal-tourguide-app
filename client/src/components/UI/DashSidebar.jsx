@@ -106,7 +106,7 @@ const DashSidebar = () => {
     <div
       className={`${
         open ? "w-72" : "w-26"
-      }  pt-8 relative  bg-gradient-to-bl from-indigo-300 via-indigo-300 to-violet-100 border-r-4 border-zinc-500`}
+      }  pt-8 relative bg-indigo-300 border-r-4 border-zinc-500`}
     >
       {" "}
       <div className="font-bold text-center">
@@ -120,8 +120,10 @@ const DashSidebar = () => {
       <img
         src={chevronRight}
         alt="Control"
-        className={`absolute cursor-pointer -right-4 top-9 w-7 border-zinc-500 bg-indigo-500 hover:bg-indigo-200
-   border-2 rounded-full transition duration-100 ease-linear ${!open && "rotate-180"}`}
+        className={`rotate-180 absolute cursor-pointer -right-4 top-9 w-7 border-zinc-500 bg-indigo-500 hover:bg-indigo-200
+   border-2 rounded-full transition duration-100 ease-linear ${
+     !open && "rotate-0"
+   }`}
         onClick={() => setOpen(!open)}
       />
       <div className="flex flex-col items-center justify-center gap-x-4">
@@ -143,7 +145,11 @@ const DashSidebar = () => {
         <hr className="w-3/4 mx-auto mt-5 border border-zinc-500" />
         <hr className="w-2/4 mx-auto border border-zinc-500" />
         {/* Menu Block */}
-        <SidebarMenublock sidebarOpenState={open} menuTitle="User Menu" links={menuLinks} />
+        <SidebarMenublock
+          sidebarOpenState={open}
+          menuTitle="User Menu"
+          links={menuLinks}
+        />
         {/* Product handling menu */}
         <SidebarMenublock
           sidebarOpenState={open}

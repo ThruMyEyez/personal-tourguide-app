@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/authentication";
 const IsProvider = ({ user, children }) => {
   const { isLoading, userFullDetails } = useContext(AuthContext);
 
-  if (isLoading) return <p>Loading ...</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   if (user && !user.providerProfile) {
   } else {
