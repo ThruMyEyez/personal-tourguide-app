@@ -22,7 +22,7 @@ const Main = () => {
       </div>
 
       <div className="mt-5 ml-6 ">
-        <h4 className="ml-6 text-5xl font-semibold text-black">
+        <h4 className="ml-6 text-5xl font-semibold dark:text-white text-black">
           Our Tourguides & Hosts
         </h4>
         <AllUsersFromDatabase />
