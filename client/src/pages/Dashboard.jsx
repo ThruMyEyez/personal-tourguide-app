@@ -66,11 +66,11 @@ const Dashboard = (props) => {
   // End of: TEST & PROTOTYPE AREA
   return (
     <div className="flex h-full">
-      <DashSidebar />
+      <DashSidebar className="" />
 
       <div
         className={
-          "flex flex-col items-center w-full h-screen  bg-[url('https://mini.codingcodax.dev/images/dark-beams.jpg')] "
+          "overflow-scroll flex flex-col items-center w-full h-screen  bg-[url('https://mini.codingcodax.dev/images/dark-beams.jpg')] "
         }
       >
         {/* <SubmitRating /> */}

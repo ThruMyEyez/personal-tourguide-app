@@ -31,7 +31,7 @@ const SearchBar = () => {
             Search
           </label>
           <input
-            className="text-black dark:border-pink-500 input input-bordered w-96 search-bar"
+            className="text-black shadow-md dark:hover:focus:border-pink-500 hover:focus:border-indigo-500 dark:border-pink-500 input input-bordered w-96 search-bar"
             type="text"
             name="search"
             value={searchTerm}
@@ -42,7 +42,7 @@ const SearchBar = () => {
             <Link to={`/search/${searchTerm}`}>
               <MagnifyingGlass
                 size={46}
-                className="mag-glass dark:text-white hover:text-black text-black p-2 hover:p-1.5 hover:bg-gradient-to-r from:pink-500 to:violet-500 relative ml-3 border border-indigo-500 dark:border-pink-500 rounded-full cursor-pointer "
+                className="mag-glass shadow-md text-indigo-500 dark:text-pink-500 dark:hover:text-white hover:text-black p-2 hover:p-1.5 hover:bg-gradient-to-r from:pink-500 to:violet-500 relative ml-3 border border-indigo-500 dark:border-pink-500 rounded-full cursor-pointer "
               />
             </Link>
           )}

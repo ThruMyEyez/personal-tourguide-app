@@ -106,7 +106,7 @@ const DashSidebar = () => {
     <div
       className={`${
         open ? "w-72" : "w-26"
-      }  pt-8 relative bg-indigo-300 border-r-4 border-zinc-500`}
+      } pt-8 relative bg-indigo-300 border-r-4 border-white `}
     >
       {" "}
       <div className="font-bold text-center">
@@ -120,7 +120,7 @@ const DashSidebar = () => {
       <img
         src={chevronRight}
         alt="Control"
-        className={`rotate-180 absolute cursor-pointer -right-4 top-9 w-7 border-zinc-500 bg-indigo-500 hover:bg-indigo-200
+        className={`rotate-180 absolute cursor-pointer -right-4 top-9 w-7 border-white bg-indigo-500 hover:bg-indigo-200
    border-2 rounded-full transition duration-100 ease-linear ${
      !open && "rotate-0"
    }`}

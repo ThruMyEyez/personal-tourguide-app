@@ -62,61 +62,58 @@ const AllUsersFromDatabase = () => {
         </thead>
         <tbody>
           {users &&
-            users.map(({ _id, name, firstName, lastName, profilePicture, role }) => {
-              return (
-                <tr key={_id}>
-                  <td>
-                    <div className="flex space-x-3">
-                      <div className=" avatar mask mask-squircle">
-                        {(profilePicture && (
-                          <div className="w-12 h-12 shadow-lg">
-                            <img
-                              referrerPolicy="no-referrer"
-                              src={profilePicture}
-                              alt="Avatar"
-                            />
-                          </div>
-                        )) || (
-                          <div className="h-12 py-2 text-2xl font-bold text-center uppercase bg-indigo-500 hover:bg-indigo-500 glass text-zinc-200">
-                            {name.charAt(0).toUpperCase()}
-                          </div>
-                        )}
-                      </div>
-                      <div>
-                        <div className="font-bold">
-                          {(firstName && firstName) || "firstName"}{" "}
-                          {(lastName && lastName) || "lastName"} - {name}
+            users.map(
+              ({ _id, name, firstName, lastName, profilePicture, role }) => {
+                return (
+                  <tr key={_id}>
+                    <td>
+                      <div className="flex space-x-3">
+                        <div className=" avatar mask mask-squircle">
+                          {(profilePicture && (
+                            <div className="w-12 h-12 shadow-lg">
+                              <img
+                                referrerPolicy="no-referrer"
+                                src={profilePicture}
+                                alt="Avatar"
+                              />
+                            </div>
+                          )) || (
+                            <div className="h-12 py-2 text-2xl font-bold text-center uppercase bg-indigo-500 hover:bg-indigo-500 glass text-zinc-200">
+                              {name.charAt(0).toUpperCase()}
+                            </div>
+                          )}
                         </div>
-                        <div className="text-sm opacity-50"> - REGION </div>
+                        <div>
+                          <div className="font-bold">
+                            {(firstName && firstName) || "firstName"}{" "}
+                            {(lastName && lastName) || "lastName"} - {name}
+                          </div>
+                          <div className="text-sm opacity-50"> - REGION </div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td>
-                    <GetCompanyName userId={_id} />
-                    <br />
-                    <span className="badge badge-ghost badge-sm">{role}</span>
-                  </td>
-                  <td>
-                    <GetOfferingsAmount userId={_id} />
-                  </td>
-                  <th>
-                    <Link to={`/profile/${_id}`} className="btn btn-ghost btn-xs">
-                      details
-                    </Link>
-                  </th>
-                </tr>
-              );
-            })}
+                    </td>
+                    <td>
+                      <GetCompanyName userId={_id} />
+                      <br />
+                      <span className="badge badge-ghost badge-sm">{role}</span>
+                    </td>
+                    <td>
+                      <GetOfferingsAmount userId={_id} />
+                    </td>
+                    <th>
+                      <Link
+                        to={`/profile/${_id}`}
+                        className="btn btn-ghost btn-xs"
+                      >
+                        details
+                      </Link>
+                    </th>
+                  </tr>
+                );
+              }
+            )}
         </tbody>
         {/* foot */}
-        <tfoot>
-          <tr>
-            <th>Name</th>
-            <th>Provider Type</th>
-            <th>Offerings</th>
-            <th>Profile</th>
-          </tr>
-        </tfoot>
       </table>
     </div>
   );
