@@ -83,13 +83,12 @@ body::before {
 }
 
 .search-bar {
-  border: 2px solid rgb(255, 220, 240);
+  border: 2px solid rgb(99 102 241);
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 20rem;
   margin-left: 2rem;
 }
-
 
 /* .login-btn:hover {
   /* ease in transition and ease out transition of .3 seconds
@@ -125,5 +124,4 @@ body::before {
   .editorIconInactive {
     @apply py-[2px] px-[6px] hover:bg-zinc-300 hover:glass;
   }
-  
 }

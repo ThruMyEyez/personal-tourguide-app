@@ -12,13 +12,13 @@ const HeroTextInterval = ({ title, strings }) => {
 
   return (
     <div className="flex flex-col items-center font-extrabold whitespace-pre sm:text-2xl w-full">
-      <div className="bg-[url('../assets/topography.svg')] bg-cover text-black text-center w-full p-10">
+      <div className="bg-[url('../assets/topography.svg')] bg-cover dark:text-white text-black text-center w-full p-10">
         <p className="text-md">{title}</p>
         {strings.map((string, idx) => {
           return (
             <span key={string} className="relative block text-center">
               <span
-                className={`text-6xl md:text-7xl lg:text-8xl absolute transition duration-1000 text-black ${
+                className={`text-6xl md:text-7xl lg:text-8xl absolute transition duration-1000 dark:text-white text-black ${
                   currentString !== idx ? "opacity-100" : "opacity-0"
                 }`}
               >

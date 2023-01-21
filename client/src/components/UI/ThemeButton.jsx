@@ -7,9 +7,9 @@ const ThemeButton = () => {
   return (
     <button className="text-3xl text-black" onClick={toggleTheme}>
       {theme === "light" ? (
-        <MoonStars className="text-indigo-500" />
+        <MoonStars className="text-indigo-500 hover:rotate-12" />
       ) : (
-        <Sun className="text-pink-500" />
+        <Sun className="text-pink-500 hover:rotate-12" />
       )}
     </button>
   );

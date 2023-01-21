@@ -15,13 +15,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-30 flex items-center justify-between w-full p-5 text-lg shadow-xl backdrop-blur-sm lg:p-3 lg:justify-around bg-clip-pink-violet">
+      <nav className="sticky top-0 z-30 flex items-center text-indigo-500 justify-between w-full p-5 text-lg shadow-md backdrop-blur-sm lg:p-3 lg:justify-around dark:bg-clip-pink-violet">
         <div className="flex justify-end link-logo">
           <ul className="flex m-0 list-none">
             <li className="font-bold">
               <Link to="/">GuideGo</Link>
             </li>
-            <MdBackpack className="inline-flex my-auto text-pink-500 h-100" />
+            <MdBackpack className="inline-flex my-auto dark:text-pink-500 h-100" />
           </ul>
         </div>
         <SearchBar />
@@ -81,11 +81,15 @@ const Navbar = () => {
           {!isLoggedIn && (
             <>
               {/* set the background state for the modals with current router location as background backdrop */}
-              <Link className="pr-3" to="/signup" state={{ background: location }}>
+              <Link
+                className="pr-3 dark:text-pink-500 text-indigo-500"
+                to="/signup"
+                state={{ background: location }}
+              >
                 Sign up
               </Link>
               <Link
-                className="px-3 pt-2 pb-2 mr-3 border-2 border-pink-100 rounded-lg login-btn hover:bg-gradient-to-r from:pink-500 to:violet-500 hover:text-white"
+                className="dark:text-pink-500 dark:border-pink-500 text-indigo-500 px-3 pt-2 pb-2 mr-3 border-2 border-indigo-500 rounded-lg login-btn hover:bg-gradient-to-r from:pink-500 to:violet-500 hover:text-black hover:dark:text-white"
                 to="/login"
                 state={{ background: location }}
               >
