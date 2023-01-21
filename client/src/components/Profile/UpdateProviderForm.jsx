@@ -40,7 +40,7 @@ const UpdateProviderForm = () => {
     <div>
       <form onSubmit={handleFormSubmit}>
         <label className="block" htmlFor="provider-type">
-          <span className="form-label">Type of provider</span>
+          <span className="form-label text-white">Type of provider</span>
         </label>
         <select
           className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -55,7 +55,7 @@ const UpdateProviderForm = () => {
           <option value={"Tourguide"}>Tourguide</option>
         </select>
         <label className="block" htmlFor="tax-id">
-          <span className="form-label">Tax Id</span>
+          <span className="form-label text-white">Tax ID</span>
         </label>
         <input
           className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -66,7 +66,7 @@ const UpdateProviderForm = () => {
           onChange={handleInput}
         />
         <label className="block" htmlFor="company">
-          <span className="form-label">Company Name</span>
+          <span className="form-label text-white">Company Name</span>
         </label>
         <input
           className="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -78,7 +78,7 @@ const UpdateProviderForm = () => {
           onChange={handleInput}
         />
         <label className="block" htmlFor="provider-type">
-          <span className="form-label">Biography</span>
+          <span className="form-label text-white">Biography</span>
         </label>
 
         <textarea
@@ -90,7 +90,6 @@ const UpdateProviderForm = () => {
           value={formData.bio}
           onChange={handleInput}
         ></textarea>
-        <p className="mt-5">Say a few words about yourself</p>
         <button className="btn-primary">Edit your provider info</button>
       </form>
       {errorMsg && <OnErrorAlert msg={errorMsg} />}

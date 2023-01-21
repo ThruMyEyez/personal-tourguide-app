@@ -104,7 +104,7 @@ const HandleProductItem = ({ productItem }) => {
 
   return (
     <div className="w-full p-3 border border-sky-600">
-      <div className="mx-auto space-y-4">
+      <div className="mx-auto space-y-4 text-white">
         <CloseNavigateBtn navigateTo={"/dashboard/"} />
         {(!productItem && <h2>Create a new Tour or Event</h2>) || (
           <h2>Edit "{productItem.title}" Data</h2>
@@ -115,7 +115,7 @@ const HandleProductItem = ({ productItem }) => {
         {/* Input productItem Title */}
         <form onSubmit={handleFormSubmit}>
           <label className="block" htmlFor="input-title">
-            <span className="form-label">Event or Tour title</span>
+            <span className="form-label text-white">Event or Tour title</span>
           </label>
           <input
             className="block w-full my-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -127,7 +127,7 @@ const HandleProductItem = ({ productItem }) => {
           />
           {/* Select Multiple Places */}
           <label className="">
-            <span className="form-label">
+            <span className="form-label text-white">
               Set the Places for the Tour or Event
             </span>
           </label>
@@ -142,7 +142,7 @@ const HandleProductItem = ({ productItem }) => {
 
           {/* DatePicker */}
           <label className="">
-            <span className="form-label">
+            <span className="form-label text-white">
               When does your Tour or Event take place?
             </span>
           </label>
@@ -153,7 +153,7 @@ const HandleProductItem = ({ productItem }) => {
           />
           {/* WYSIWYG Editor Input */}
           <label className="">
-            <span className="form-label">
+            <span className="form-label text-white">
               Create a detailed Tour or Event description
             </span>
           </label>
