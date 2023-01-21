@@ -44,7 +44,7 @@ const PublicTours = () => {
             {product.productType.toUpperCase()} for the {date}
           </h2>
 
-          <div className="w-full border border-blue-400">
+          <div className="w-full text-center">
             <EditorView content={product.productItem.description} />
             <TourMapProviderWrapper>
               {/* single tour/event place's rendering */}
@@ -52,7 +52,7 @@ const PublicTours = () => {
               {/* single tour/event place's rendering */}
             </TourMapProviderWrapper>
             {/*className="flex items-center justify-center"*/}
-            <div className="w-full my-2 shadow-xl stats bg-primary text-primary-content glass hover:bg-primary">
+            <div className="w-[62%]  my-6 shadow-xl stats bg-primary text-primary-content glass hover:bg-primary">
               <div className="w-full stat">
                 <div className="m-3 stat-value">Price: {product.priceInCents / 100} €</div>
                 <div className="stat-actions">
