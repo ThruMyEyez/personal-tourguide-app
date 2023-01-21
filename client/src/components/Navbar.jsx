@@ -13,8 +13,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between w-full p-5 text-lg lg:p-3 lg:justify-around bg-clip-pink-violet">
-        <div className="link-logo flex justify-end">
+      <nav className="sticky top-0 z-30 flex items-center justify-between w-full p-5 text-lg shadow-xl backdrop-blur-sm lg:p-3 lg:justify-around bg-clip-pink-violet">
+        <div className="flex justify-end link-logo">
           <ul className="flex m-0 list-none">
             <li className="font-bold">
               <Link to="/">GuideGo</Link>
@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="flex items-center">
           {isLoggedIn && (
             <>
-              <div className="dropdown dropdown-end  w-36">
+              <div className="dropdown dropdown-end w-36">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-8 mask mask-hexagon ">
                     {/* hexagon as alternative to rounded-full */}
@@ -63,11 +63,7 @@ const Navbar = () => {
           {!isLoggedIn && (
             <>
               {/* set the background state for the modals with current router location as background backdrop */}
-              <Link
-                className="pr-3"
-                to="/signup"
-                state={{ background: location }}
-              >
+              <Link className="pr-3" to="/signup" state={{ background: location }}>
                 Sign up
               </Link>
               <Link

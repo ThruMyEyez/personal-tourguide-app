@@ -46,6 +46,9 @@
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
   }
+  .dark {
+    @apply bg-zinc-900 bg-[url('https://mini.codingcodax.dev/images/dark-beams.jpg')];
+  }
 }
 
 body {
@@ -54,6 +57,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  width: 100vw;
+  height: 10px;
+  position: fixed;
+  top: -10px;
+  left: 0;
+  box-shadow: 2px 0 10px #000000e0;
+  z-index: 1002;
 }
 
 .link-logo {
@@ -75,6 +89,7 @@ body {
   width: 20rem;
   margin-left: 2rem;
 }
+
 
 /* .login-btn:hover {
   /* ease in transition and ease out transition of .3 seconds
@@ -110,4 +125,5 @@ body {
   .editorIconInactive {
     @apply py-[2px] px-[6px] hover:bg-zinc-300 hover:glass;
   }
+  
 }
