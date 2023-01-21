@@ -29,8 +29,8 @@ const EditProfilePictureModal = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const response = await updateUser(formData);
-
     console.log("Edited the user Profile", response);
+
     getUserDetails();
     navigate(-1);
   };
