@@ -30,7 +30,7 @@ const ProductsFromDatabase = () => {
           console.log(product);
           return (
             <div className="" key={product._id}>
-              <div className="mb-5 shadow-xl card w-128 bg-base-100">
+              <div className="mb-5 shadow-xl card w-128 bg-base-200">
                 <figure>
                   {
                     <img
@@ -44,13 +44,13 @@ const ProductsFromDatabase = () => {
                   <Link to={`event/${product._id}`}>
                     <h2 className="text-black card-title">{product.title}</h2>
                   </Link>
-                  <p>{product.tagline}</p>
+                  <p className="w-[10em] text-break">{product.tagline}</p>
                   <div className="justify-end card-actions">
                     <button
                       className="btn btn-primary"
                       onClick={() => handlePurchase(product._id)}
                     >
-                      Buy Now
+                      Book Now
                     </button>
                   </div>
                 </div>

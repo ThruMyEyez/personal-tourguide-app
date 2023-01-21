@@ -153,6 +153,7 @@ const HandleOffering = () => {
             name="tagline"
             value={offerData.tagline}
             onChange={handleInput}
+            maxLength={180}
           />
 
           <IKContext
