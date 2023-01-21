@@ -29,6 +29,7 @@ const HandleOffering = () => {
   const [productItems, setProductItems] = useState([]);
   const [selectedType, setSelectedType] = useState([]);
   const [selectedProductItem, setSelectedProductItem] = useState(null);
+  const [price, setPrice] = useState(0);
   const { isLoading, user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ const HandleOffering = () => {
       getSingleEvent(id)
         .then((response) => {
           setSelectedProductItem(response.data.data);
+          console.log(response.data.data.priceInCents);
+          response.data.data.priceInCents = response.data.data.priceInCents / 100;
           setOfferData(response.data.data);
         })
         .catch((error) => {
@@ -69,12 +72,14 @@ const HandleOffering = () => {
 
   const handleInput = (e) => {
     const { name, value, valueAsNumber } = e.target;
+    setPrice(valueAsNumber.toFixed(2) * 100 || price);
     setOfferData({ ...offerData, [name]: valueAsNumber || value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     delete offerData.__v;
+    offerData.priceInCents = price;
     if (id) {
       //On Update
       updateProduct(offerData, id)
@@ -105,7 +110,8 @@ const HandleOffering = () => {
   };
 
   const handleTypeSelect = (data) => {
-    setOfferData({ ...offerData, productType: data.value });
+    console.log("select data:", data.target.value);
+    setOfferData({ ...offerData, productType: data.target.value });
     //setSelectedType(data);
   };
 
@@ -119,10 +125,10 @@ const HandleOffering = () => {
   };
 
   return (
-    <div className="w-full px-6 my-3">
+    <div className="w-3/4 px-6 m-3">
       <h3>{(id && "Update this Offer") || "Create new Offer"}</h3>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form className="form-control" onSubmit={handleSubmit}>
           {/* Product title */}
           <label className="block" htmlFor="input-title">
             <span className="form-label">Set Offer Title</span>
@@ -158,16 +164,17 @@ const HandleOffering = () => {
             }
           >
             <IKUpload
+              className="w-full mx-auto my-2 text-sm shadow-md file-input file-input-bordered file-input-primary"
               onSuccess={onFileUploadSuccess}
               onError={onFileUploadError}
             />
             {offerData.productThumbnail && (
               <IKImage
-                className="mx-auto"
+                className="mx-auto rounded-md shadow-md"
                 src={offerData.productThumbnail}
                 transformation={[
                   {
-                    height: "150",
+                    height: "256",
                     width: "auto",
                   },
                 ]}
@@ -192,17 +199,31 @@ const HandleOffering = () => {
           <label className="block" htmlFor="input-price">
             <span className="form-label">... is it a Tour or Event?</span>
           </label>
-          <Selector
-            placeholder="Select your Offering type ..."
+
+          {/*<Selector
+            placeholder="Select your format ..."
             options={[
               { value: "tour", label: "Tour" },
               { value: "event", label: "Event" },
             ]}
             handleChange={handleTypeSelect}
             value={""}
-          />
+          /> */}
+          <div className="input-group">
+            <span className="text-sm font-bold rounded-none">
+              {offerData.productType.toLocaleUpperCase()}
+            </span>
+            <select
+              value={offerData.productType}
+              onChange={handleTypeSelect}
+              className="rounded select select-bordered"
+            >
+              <option disabled>Select format</option>
+              <option>tour</option>
+              <option>event</option>
+            </select>
+          </div>
 
-          {offerData.productType}
           <p>{selectedType}</p>
 
           {/* productItem selector */}
@@ -217,8 +238,8 @@ const HandleOffering = () => {
             placeholder="Search & select your places for the tour or event."
           />
 
-          {(id && <button className="btn-primary">Update</button>) || (
-            <button className="btn-primary">Create</button>
+          {(id && <button className="shadow-md glass btn btn-primary">Update</button>) || (
+            <button className="shadow-md btn glass btn-primary">Create</button>
           )}
         </form>
       </div>
